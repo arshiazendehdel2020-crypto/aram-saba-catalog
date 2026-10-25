@@ -77,7 +77,7 @@
                 <p class="text-[10px] uppercase tracking-[0.4em] text-gray-400 mb-8 font-sans">Exquisite Office Architecture</p>
             </div>
             
-            <button type="button" onclick="enterCatalog()" class="w-full py-4 px-8 bg-gradient-to-r from-brandBronze via-[#c5a059] to-brandGold text-brandDark font-semibold text-xs rounded-xl shadow-[0_10px_30px_rgba(212,175,55,0.15)] hover:shadow-[0_15px_40px_rgba(212,175,55,0.25)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-500 ease-out cursor-pointer">
+            <button type="button" id="enterBtn" class="w-full py-4 px-8 bg-gradient-to-r from-brandBronze via-[#c5a059] to-brandGold text-brandDark font-semibold text-xs rounded-xl shadow-[0_10px_30px_rgba(212,175,55,0.15)] hover:shadow-[0_15px_40px_rgba(212,175,55,0.25)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-500 ease-out cursor-pointer">
                 ورود به کاتالوگ دیجیتال <i class="fa-solid fa-arrow-left mr-2 text-brandDark"></i>
             </button>
         </div>
@@ -96,7 +96,7 @@
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <button type="button" onclick="toggleAdminModal()" class="px-3.5 py-2 bg-brandNavy hover:bg-gray-800 text-brandGold rounded-xl text-xs font-medium border border-brandGold/30 hover:scale-[1.03] active:scale-[0.98] transition-all duration-500 ease-out shadow-lg group cursor-pointer">
+                <button type="button" id="adminBtn" class="px-3.5 py-2 bg-brandNavy hover:bg-gray-800 text-brandGold rounded-xl text-xs font-medium border border-brandGold/30 hover:scale-[1.03] active:scale-[0.98] transition-all duration-500 ease-out shadow-lg group cursor-pointer">
                     <i class="fa-solid fa-terminal ml-1.5 text-[11px] group-hover:text-white transition-colors duration-500"></i> <span class="hidden sm:inline">ترمینال مدیریت</span>
                 </button>
             </div>
@@ -115,7 +115,7 @@
                 <div class="flex items-center bg-brandNavy/90 border border-brandGold/30 rounded-2xl overflow-hidden shadow-2xl focus-within:border-brandGold focus-within:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all duration-500 ease-out">
                     <span class="pr-4 pl-2 text-brandGold text-sm"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
                     <input type="text" id="searchInput" oninput="filterProducts()" placeholder="جستجو در کاتالوگ (مثال: صندلی چرمی)..." class="w-full bg-transparent px-4 py-3.5 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none transition-colors duration-500">
-                    <button type="button" onclick="askGeminiAI()" class="bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3.5 text-[11px] font-bold hover:brightness-110 active:opacity-90 transition-all duration-500 ease-out shrink-0 cursor-pointer">
+                    <button type="button" id="aiBtn" class="bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3.5 text-[11px] font-bold hover:brightness-110 active:opacity-90 transition-all duration-500 ease-out shrink-0 cursor-pointer">
                         مشاوره هوشمند
                     </button>
                 </div>
@@ -153,7 +153,7 @@
                     <i class="fa-solid fa-terminal text-brandGold"></i>
                     <h3 class="font-bold text-white text-sm">ترمینال مدیریت سیستم (متصل به کلود)</h3>
                 </div>
-                <button type="button" onclick="toggleAdminModal()" class="text-gray-400 hover:text-white p-1.5 rounded-lg bg-gray-800/50 transition-colors duration-300 cursor-pointer"><i class="fa-solid fa-xmark text-xs"></i></button>
+                <button type="button" id="closeAdminBtn" class="text-gray-400 hover:text-white p-1.5 rounded-lg bg-gray-800/50 transition-colors duration-300 cursor-pointer"><i class="fa-solid fa-xmark text-xs"></i></button>
             </div>
 
             <div class="p-6 overflow-y-auto space-y-6 flex-1 text-right">
@@ -161,14 +161,14 @@
                     <h4 class="text-xs font-bold text-brandGold mb-4"><i class="fa-solid fa-tags ml-1.5"></i> مدیریت دسته‌بندی‌ها</h4>
                     <div class="flex gap-2 mb-4">
                         <input type="text" id="newCategoryName" placeholder="نام دسته‌بندی جدید..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none transition-colors duration-300">
-                        <button type="button" onclick="addCategory()" class="px-5 py-2.5 bg-brandGold hover:brightness-110 text-brandDark font-semibold text-xs rounded-xl transition-all duration-300 shadow-lg hover:scale-[1.03] active:scale-[0.98] shrink-0 cursor-pointer">افزودن دسته</button>
+                        <button type="button" id="addCatBtn" class="px-5 py-2.5 bg-brandGold hover:brightness-110 text-brandDark font-semibold text-xs rounded-xl transition-all duration-300 shadow-lg hover:scale-[1.03] active:scale-[0.98] shrink-0 cursor-pointer">افزودن دسته</button>
                     </div>
                     <div id="adminCategoryList" class="flex flex-wrap gap-2"></div>
                 </div>
 
                 <div class="bg-brandSurface p-5 rounded-2xl border border-brandGold/20 shadow-inner">
                     <h4 id="formTitle" class="text-xs font-bold text-brandGold mb-4"><i class="fa-solid fa-plus-circle ml-1.5"></i> ثبت محصول جدید</h4>
-                    <form id="productForm" onsubmit="handleProductSubmit(event)" class="space-y-4">
+                    <form id="productForm" class="space-y-4">
                         <input type="hidden" id="editId" value="">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
@@ -189,124 +189,3 @@
                             <textarea id="prodInfo" rows="2" required placeholder="روکش چوب گردوی اروپایی..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none transition-colors duration-300 leading-relaxed"></textarea>
                         </div>
                         <div class="flex justify-start gap-2.5 pt-2">
-                            <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark font-bold text-xs rounded-xl hover:brightness-110 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-lg cursor-pointer">ذخیره در کلود</button>
-                            <button type="button" onclick="resetForm()" class="px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs rounded-xl hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 font-medium cursor-pointer">انصراف</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div>
-                    <h4 class="text-[10px] font-bold text-gray-400 mb-3">مدیریت موجودی کاتالوگ</h4>
-                    <div id="adminProductList" class="space-y-2.5 max-h-60 overflow-y-auto pl-1"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-6 left-6 z-50 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3 rounded-2xl text-xs font-bold shadow-2xl transform translate-y-20 opacity-0 transition-all duration-500 ease-out border border-white/20"></div>
-
-    <!-- SUPABASE & APP LOGIC -->
-    <script>
-        // --- SUPABASE CONFIGURATION ---
-        const SUPABASE_URL = 'https://gsefloewufawbrwlwoij.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_IjINafPfpd1BkY57hWcvwA_sQ0uYslh';
-
-        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        let categories = [];
-        let products = [];
-        let currentCategory = 'all';
-
-        // Load data on startup
-        document.addEventListener("DOMContentLoaded", async () => {
-            await fetchAppData();
-        });
-
-        async function fetchAppData() {
-            try {
-                const { data: catData, error: catError } = await supabaseClient.from('categories').select('*');
-                if (!catError && catData) {
-                    categories = catData.map(c => c.name);
-                }
-
-                const { data: prodData, error: prodError } = await supabaseClient.from('products').select('*');
-                if (!prodError && prodData) {
-                    products = prodData;
-                }
-            } catch (err) {
-                console.error("Database connection error:", err);
-            }
-            renderCategories();
-            renderProducts();
-        }
-
-        function enterCatalog() {
-            const splash = document.getElementById('splashScreen');
-            const main = document.getElementById('mainApp');
-            splash.style.pointerEvents = 'none';
-            splash.style.opacity = '0';
-            setTimeout(() => {
-                splash.style.display = 'none';
-                main.style.opacity = '1';
-                renderProducts();
-            }, 1000);
-        }
-
-        function renderCategories() {
-            const container = document.getElementById('categoryTabsContainer');
-            if (container) {
-                let html = `<button type="button" onclick="setCategory('all')" class="cat-btn px-5 py-2.5 rounded-xl text-xs transition-all duration-500 ease-out whitespace-nowrap cursor-pointer ${currentCategory === 'all' ? 'font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark shadow-md scale-[1.03]' : 'font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 hover:scale-[1.03] active:scale-[0.98]'}">تمامی کلکسیون‌ها</button>`;
-                
-                categories.forEach(cat => {
-                    html += `<button type="button" onclick="setCategory('${cat}')" class="cat-btn px-5 py-2.5 rounded-xl text-xs transition-all duration-500 ease-out whitespace-nowrap cursor-pointer ${currentCategory === cat ? 'font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark shadow-md scale-[1.03]' : 'font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 hover:scale-[1.03] active:scale-[0.98]'}">${cat}</button>`;
-                });
-                container.innerHTML = html;
-            }
-
-            const select = document.getElementById('prodCategory');
-            if (select) {
-                const currentVal = select.value;
-                let optionsHtml = '';
-                categories.forEach(cat => {
-                    optionsHtml += `<option value="${cat}">${cat}</option>`;
-                });
-                select.innerHTML = optionsHtml;
-                if (categories.includes(currentVal)) select.value = currentVal;
-            }
-
-            const adminCatList = document.getElementById('adminCategoryList');
-            if (adminCatList) {
-                let adminHtml = '';
-                categories.forEach(cat => {
-                    adminHtml += `
-                    <div class="flex items-center gap-2 bg-brandSurface border border-brandGold/30 px-3 py-1.5 rounded-lg text-xs text-brandGold shadow-sm transition-colors duration-300 hover:bg-brandNavy">
-                        <span>${cat}</span>
-                        <button type="button" onclick="deleteCategory('${cat}')" class="text-red-400 hover:text-red-300 hover:scale-110 transition-all duration-300 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-                    `;
-                });
-                adminCatList.innerHTML = adminHtml;
-            }
-        }
-
-        function setCategory(cat) {
-            currentCategory = cat;
-            renderCategories();
-            renderProducts();
-        }
-
-        async function addCategory() {
-            const input = document.getElementById('newCategoryName');
-            const val = input.value.trim();
-            if (val && !categories.includes(val)) {
-                const { error } = await supabaseClient.from('categories').insert([{ name: val }]);
-                if (!error) {
-                    categories.push(val);
-                    input.value = '';
-                    renderCategories();
-                    showToast("دسته‌بندی در کلود ثبت شد.");
-                } else {
-                    showToast("خطا در ثبت دسته‌بندی.");
-                }
-            } else if (categories.includes(val
