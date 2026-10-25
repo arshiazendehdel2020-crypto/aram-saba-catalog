@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="fa" dir="rtl" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aram Saba Sanat Iranian - Luxury Office Furniture</title>
+    <title>آرام صبا صنعت ایرانیان - مبلمان اداری لوکس</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Playfair Display & Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Vazirmatn & Playfair Display & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -22,16 +22,16 @@
                         brandDark: '#06090f'
                     },
                     fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['Inter', 'sans-serif']
+                        sans: ['Vazirmatn', 'Inter', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'Vazirmatn', 'serif']
                     }
                 }
             }
         }
     </script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #06090f; color: #e5e7eb; }
-        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Vazirmatn', 'Inter', sans-serif; background-color: #06090f; color: #e5e7eb; }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', 'Vazirmatn', serif; }
         .glass-panel {
             background: rgba(15, 24, 38, 0.9);
             backdrop-filter: blur(16px);
@@ -52,25 +52,25 @@
 </head>
 <body class="h-full flex flex-col selection:bg-brandGold selection:text-brandDark">
 
-    <!-- SPLASH SCREEN -->
+    <!-- SPLASH SCREEN (LOGO UNTOUCHED) -->
     <div id="splashScreen" class="fixed inset-0 z-50 bg-brandDark flex flex-col items-center justify-center p-6 transition-opacity duration-1000">
         <div class="text-center animate-fade-in max-w-lg w-full p-8 rounded-3xl glass-panel shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brandGold to-transparent"></div>
             
             <!-- Classy Editorial Monogram AS -->
-            <div class="flex justify-center items-baseline gap-1 mb-6">
+            <div class="flex justify-center items-baseline gap-1 mb-6" dir="ltr">
                 <span class="text-6xl font-serif font-light text-gray-100 tracking-tighter">A</span>
                 <span class="text-6xl font-serif font-light italic bg-gradient-to-r from-[#d4af37] via-[#f3e5ab] to-[#a2825e] bg-clip-text text-transparent tracking-tighter">S</span>
             </div>
 
             <!-- Company Name -->
-            <h1 class="text-2xl sm:text-3xl font-serif tracking-[0.25em] gold-gradient-text mb-1 uppercase font-semibold">ARAM SABA</h1>
-            <h2 class="text-sm sm:text-base font-serif tracking-[0.3em] text-brandBronze mb-5 uppercase font-medium">SANAT IRANIAN</h2>
+            <h1 class="text-2xl sm:text-3xl font-serif tracking-[0.25em] gold-gradient-text mb-1 uppercase font-semibold" dir="ltr">ARAM SABA</h1>
+            <h2 class="text-sm sm:text-base font-serif tracking-[0.3em] text-brandBronze mb-5 uppercase font-medium" dir="ltr">SANAT IRANIAN</h2>
             <div class="w-20 h-[1px] bg-brandGold/40 mx-auto mb-4"></div>
-            <p class="text-[10px] uppercase tracking-[0.4em] text-gray-400 mb-8 font-sans">Exquisite Office Architecture</p>
+            <p class="text-[10px] uppercase tracking-[0.4em] text-gray-400 mb-8 font-sans" dir="ltr">Exquisite Office Architecture</p>
             
-            <button onclick="enterCatalog()" class="w-full py-4 px-8 bg-gradient-to-r from-brandBronze via-[#c5a059] to-brandGold text-brandDark font-semibold uppercase tracking-[0.2em] text-xs rounded-xl shadow-2xl hover:brightness-110 transition transform active:scale-95 border border-brandGold/40 cursor-pointer">
-                Enter Digital Catalog <i class="fa-solid fa-arrow-right ml-2 text-brandDark"></i>
+            <button onclick="enterCatalog()" class="w-full py-4 px-8 bg-gradient-to-r from-brandBronze via-[#c5a059] to-brandGold text-brandDark font-semibold tracking-wider text-xs rounded-xl shadow-2xl hover:brightness-110 transition transform active:scale-95 border border-brandGold/40 cursor-pointer">
+                ورود به کاتالوگ دیجیتال <i class="fa-solid fa-arrow-left mr-2 text-brandDark"></i>
             </button>
         </div>
     </div>
@@ -83,13 +83,13 @@
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brandBronze to-brandGold text-brandDark font-serif font-bold flex items-center justify-center text-lg shadow-lg border border-brandGold/30">AS</div>
                 <div>
-                    <h2 class="text-xs sm:text-sm font-serif font-bold tracking-[0.15em] text-white">ARAM SABA SANAT</h2>
-                    <p class="text-[9px] uppercase tracking-[0.25em] text-brandGold">Iranian Executive Collection</p>
+                    <h2 class="text-xs sm:text-sm font-serif font-bold tracking-wider text-white">آرام صبا صنعت ایرانیان</h2>
+                    <p class="text-[9px] uppercase tracking-widest text-brandGold">مجموعه اداری اجرایی</p>
                 </div>
             </div>
             <div class="flex items-center gap-2">
                 <button onclick="toggleAdminModal()" class="px-3.5 py-2 bg-brandNavy hover:bg-gray-800 text-brandGold rounded-xl text-xs font-medium border border-brandGold/30 transition flex items-center gap-2 shadow-lg">
-                    <i class="fa-solid fa-terminal text-[11px]"></i> <span class="hidden sm:inline tracking-wider">Admin Terminal</span>
+                    <i class="fa-solid fa-terminal text-[11px]"></i> <span class="hidden sm:inline">ترمینال مدیریت</span>
                 </button>
             </div>
         </header>
@@ -97,30 +97,30 @@
         <!-- HERO & SEARCH SECTION -->
         <section class="p-6 sm:p-10 bg-gradient-to-b from-brandNavy/80 via-brandSurface to-brandSurface">
             <div class="text-center mb-8">
-                <span class="text-[10px] uppercase tracking-[0.3em] text-brandGold block mb-2 font-medium">Mastercrafted Workspace Solutions</span>
-                <h3 class="text-2xl sm:text-4xl font-serif text-white mb-3 tracking-wide">Elite Office Environments</h3>
-                <p class="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto font-light leading-relaxed">Discover uncompromising ergonomics, European walnut finishes, and bespoke executive configurations.</p>
+                <span class="text-[10px] uppercase tracking-[0.3em] text-brandGold block mb-2 font-medium">راهکارهای تخصصی فضای کار</span>
+                <h3 class="text-2xl sm:text-4xl font-serif text-white mb-3 tracking-wide">معماری دفاتر و فضاهای مدیریتی</h3>
+                <p class="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto font-light leading-relaxed">طراحی‌شده با اصول ارگونومی پیشرفته، چوب طبیعی گردوی اروپایی و استانداردهای بی‌نظیر برای دفاتر اجرایی.</p>
             </div>
 
             <!-- SEARCH & GEMINI AI BAR -->
             <div class="relative max-w-2xl mx-auto">
                 <div class="flex items-center bg-brandNavy/90 border border-brandGold/30 rounded-2xl overflow-hidden shadow-2xl focus-within:border-brandGold transition">
-                    <span class="pl-4 text-brandGold text-sm"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
-                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Ask AI or search executive collection (e.g., 'leather chair')..." class="w-full bg-transparent px-4 py-3.5 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none">
-                    <button onclick="askGeminiAI()" class="bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3.5 text-[11px] font-semibold uppercase tracking-widest hover:brightness-110 transition">
-                        Consult AI
+                    <button onclick="askGeminiAI()" class="bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3.5 text-[11px] font-semibold tracking-wider hover:brightness-110 transition shrink-0">
+                        مشاور هوش مصنوعی
                     </button>
+                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="جستجو در محصولات یا پرسش از هوش مصنوعی (مثلا صندلی چرمی)..." class="w-full bg-transparent px-4 py-3.5 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none text-right">
+                    <span class="pr-4 text-brandGold text-sm"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
                 </div>
-                <div id="aiResponseBox" class="hidden mt-3 p-4 bg-brandNavy border border-brandGold/40 rounded-2xl text-xs text-gray-200 leading-relaxed shadow-xl"></div>
+                <div id="aiResponseBox" class="hidden mt-3 p-4 bg-brandNavy border border-brandGold/40 rounded-2xl text-xs text-gray-200 leading-relaxed shadow-xl text-right"></div>
             </div>
 
             <!-- CATEGORY TABS -->
             <div class="flex gap-2 overflow-x-auto pb-2 mt-8 no-scrollbar justify-start sm:justify-center">
-                <button onclick="setCategory('all')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-gradient-to-r from-brandBronze to-brandGold text-brandDark transition whitespace-nowrap shadow-md tracking-wider">All Collections</button>
-                <button onclick="setCategory('Desks')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap tracking-wider">Managerial Desks</button>
-                <button onclick="setCategory('Chairs')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap tracking-wider">Ergonomic Chairs</button>
-                <button onclick="setCategory('Conference')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap tracking-wider">Conference Tables</button>
-                <button onclick="setCategory('Storage')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap tracking-wider">Storage & Credenzas</button>
+                <button onclick="setCategory('all')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-gradient-to-r from-brandBronze to-brandGold text-brandDark transition whitespace-nowrap shadow-md">همه مجموعه‌ها</button>
+                <button onclick="setCategory('Desks')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap">میزهای مدیریت</button>
+                <button onclick="setCategory('Chairs')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap">صندلی‌های ارگونومیک</button>
+                <button onclick="setCategory('Conference')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap">میزهای کنفرانس</button>
+                <button onclick="setCategory('Storage')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap">کتابخانه و بوفه</button>
             </div>
         </section>
 
@@ -135,9 +135,9 @@
         <footer class="bg-brandNavy border-t border-brandGold/20 py-8 px-6 text-center text-xs text-gray-400 mt-auto">
             <div class="flex justify-center items-center gap-3 mb-2">
                 <span class="font-serif font-bold text-white tracking-widest text-sm">AS</span>
-                <span class="tracking-[0.25em] uppercase font-serif text-brandGold text-xs">Aram Saba Sanat Iranian</span>
+                <span class="tracking-wider uppercase font-serif text-brandGold text-xs">آرام صبا صنعت ایرانیان</span>
             </div>
-            <p class="text-[10px] text-gray-500 uppercase tracking-widest">© 2026 All Rights Reserved. Luxury Office Furniture Catalog.</p>
+            <p class="text-[10px] text-gray-500 uppercase tracking-widest">© ۲۰۲۶ تمامی حقوق محفوظ است. کاتالوگ لوکس مبلمان اداری.</p>
         </footer>
     </div>
 
@@ -145,85 +145,85 @@
     <div id="adminModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
         <div class="bg-brandNavy border border-brandGold/50 rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl animate-fade-in overflow-hidden">
             <div class="p-5 border-b border-gray-800 flex justify-between items-center bg-brandSurface">
-                <div class="flex items-center gap-2.5">
-                    <i class="fa-solid fa-terminal text-brandGold"></i>
-                    <h3 class="font-serif font-bold text-white text-sm tracking-wider uppercase">Admin Management Terminal</h3>
-                </div>
                 <button onclick="toggleAdminModal()" class="text-gray-400 hover:text-white p-1.5 rounded-lg bg-gray-800/50"><i class="fa-solid fa-xmark text-xs"></i></button>
+                <div class="flex items-center gap-2.5">
+                    <h3 class="font-serif font-bold text-white text-sm tracking-wider uppercase">ترمینال مدیریت کاتالوگ</h3>
+                    <i class="fa-solid fa-terminal text-brandGold"></i>
+                </div>
             </div>
 
-            <div class="p-6 overflow-y-auto space-y-6 flex-1">
+            <div class="p-6 overflow-y-auto space-y-6 flex-1 text-right">
                 <div class="bg-brandSurface p-5 rounded-2xl border border-brandGold/20 shadow-inner">
-                    <h4 id="formTitle" class="text-[11px] font-semibold uppercase tracking-[0.2em] text-brandGold mb-4"><i class="fa-solid fa-plus-circle mr-1.5"></i> Add New Product</h4>
+                    <h4 id="formTitle" class="text-[11px] font-semibold tracking-wider text-brandGold mb-4"><i class="fa-solid fa-plus-circle ml-1.5"></i> افزودن محصول جدید</h4>
                     <form id="productForm" onsubmit="handleProductSubmit(event)" class="space-y-4">
                         <input type="hidden" id="editIndex" value="-1">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1.5">Product Name</label>
-                                <input type="text" id="prodName" required placeholder="e.g. Imperial Executive Desk" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none">
+                                <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1.5">نام محصول</label>
+                                <input type="text" id="prodName" required placeholder="مثال: میز مدیریت امپریال" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none text-right">
                             </div>
                             <div>
-                                <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1.5">Category</label>
-                                <select id="prodCategory" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none">
-                                    <option value="Desks">Managerial Desks</option>
-                                    <option value="Chairs">Ergonomic Chairs</option>
-                                    <option value="Conference">Conference Tables</option>
-                                    <option value="Storage">Storage & Credenzas</option>
+                                <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1.5">دسته‌بندی</label>
+                                <select id="prodCategory" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none text-right">
+                                    <option value="Desks">میزهای مدیریت</option>
+                                    <option value="Chairs">صندلی‌های ارگونومیک</option>
+                                    <option value="Conference">میزهای کنفرانس</option>
+                                    <option value="Storage">کتابخانه و بوفه</option>
                                 </select>
                             </div>
                         </div>
                         <div>
-                            <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1.5">Image URL</label>
-                            <input type="url" id="prodImage" required placeholder="https://images.unsplash.com/..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none">
+                            <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1.5">لینک تصویر (URL)</label>
+                            <input type="url" id="prodImage" required placeholder="https://images.unsplash.com/..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none text-left" dir="ltr">
                         </div>
                         <div>
-                            <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1.5">Product Specifications & Info</label>
-                            <textarea id="prodInfo" rows="2" required placeholder="Aged European Walnut veneer, genuine leather..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none"></textarea>
+                            <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1.5">مشخصات و ویژگی‌های محصول</label>
+                            <textarea id="prodInfo" rows="2" required placeholder="روکش چوب گردوی اروپایی، چرم طبیعی..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none text-right"></textarea>
                         </div>
-                        <div class="flex justify-end gap-2.5 pt-2">
-                            <button type="button" onclick="resetForm()" class="px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs rounded-xl transition">Cancel</button>
-                            <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark font-semibold text-xs rounded-xl hover:brightness-110 transition shadow-lg">Save Product</button>
+                        <div class="flex justify-start gap-2.5 pt-2">
+                            <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark font-semibold text-xs rounded-xl hover:brightness-110 transition shadow-lg">ذخیره محصول</button>
+                            <button type="button" onclick="resetForm()" class="px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs rounded-xl transition">انصراف</button>
                         </div>
                     </form>
                 </div>
 
                 <div>
-                    <h4 class="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400 mb-3">Manage Catalog Inventory</h4>
-                    <div id="adminProductList" class="space-y-2.5 max-h-60 overflow-y-auto pr-1"></div>
+                    <h4 class="text-[10px] font-semibold tracking-wider text-gray-400 mb-3">مدیریت موجودی محصولات</h4>
+                    <div id="adminProductList" class="space-y-2.5 max-h-60 overflow-y-auto pl-1"></div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3 rounded-2xl text-xs font-semibold shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 border border-white/20"></div>
+    <div id="toast" class="fixed bottom-6 left-6 z-50 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3 rounded-2xl text-xs font-semibold shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 border border-white/20"></div>
 
     <!-- SCRIPT LOGIC -->
     <script>
         let products = [
             {
-                name: "Vanguard Executive Managerial Desk",
+                name: "میز مدیریت اجرایی ونگارد",
                 category: "Desks",
                 image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=800&q=80",
-                info: "Crafted from premium aged European Walnut with hand-stitched Italian leather inlay and concealed smart cable management ports."
+                info: "ساخته شده از چوب مرغوب گردوی اروپایی با روکش چرم طبیعی ایتالیایی و سیستم مدیریت کابل مخفی و هوشمند."
             },
             {
-                name: "Aegis Ergonomic High-Back Chair",
+                name: "صندلی ارگونومیک پشتی بلند اجیس",
                 category: "Chairs",
                 image: "https://images.unsplash.com/photo-1580481077494-e3299acae5e7?auto=format&fit=crop&w=800&q=80",
-                info: "Synchronized multi-tilt mechanism, breathable mesh backing, adjustable 4D armrests, and dynamic lumbar support system."
+                info: "مکانیزم تنظیم شیب همگام‌سازی‌شده، پشتی مش تنفس‌پذیر، دسته‌های قابل تنظیم ۴ بعدی و سیستم حمایت از کمر پویا."
             },
             {
-                name: "Diplomat Boardroom Conference Table",
+                name: "میز کنفرانس اتاق جلسات دیپلمات",
                 category: "Conference",
                 image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
-                info: "Modular 12-seater executive meeting table featuring integrated pop-up power modules, HDMI/USB connectivity, and brushed bronze trim."
+                info: "میز جلسات ماژولار ۱۲ نفره مجهز به ماژول‌های برق پاپ‌آپ، پورت‌های ارتباطی USB/HDMI و نوارهای تزئینی برنزی."
             },
             {
-                name: "Kian Architectural Credenza & Storage",
+                name: "کنسول و بوفه معماری کیان",
                 category: "Storage",
                 image: "https://images.unsplash.com/photo-1595515106967-1ce2e16d41f0?auto=format&fit=crop&w=800&q=80",
-                info: "Soft-close matte lacquer doors, tempered smoked glass display shelves, and integrated security lock system."
+                info: "درهای آرام‌بند با پوشش مات، طبقات شیشه‌ای دودی سکوریت و سیستم قفل امنیتیپارچه‌سازی شده."
             }
         ];
 
@@ -243,9 +243,9 @@
         function setCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.className = "cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap tracking-wider";
+                btn.className = "cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap";
             });
-            event.target.className = "cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-gradient-to-r from-brandBronze to-brandGold text-brandDark transition whitespace-nowrap shadow-md tracking-wider";
+            event.target.className = "cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-gradient-to-r from-brandBronze to-brandGold text-brandDark transition whitespace-nowrap shadow-md";
             renderProducts();
         }
 
@@ -261,158 +261,10 @@
             });
 
             if (filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-16 text-gray-500 text-xs tracking-wider">No luxury items found matching your criteria.</div>`;
+                grid.innerHTML = `<div class="col-span-full text-center py-16 text-gray-500 text-xs tracking-wider">هیچ محصولی با معیارهای جستجوی شما مطابقت ندارد.</div>`;
                 return;
             }
 
-            filtered.forEach((p, idx) => {
-                const card = document.createElement('div');
-                card.className = "bg-brandNavy border border-gray-800/80 rounded-3xl overflow-hidden flex flex-col shadow-2xl hover:border-brandGold/50 transition duration-300 group";
-                card.innerHTML = `
-                    <div class="relative h-56 overflow-hidden bg-gray-900">
-                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-90 group-hover:opacity-100">
-                        <span class="absolute top-3.5 left-3.5 bg-brandNavy/90 backdrop-blur-md text-brandGold text-[10px] px-3 py-1 rounded-full uppercase tracking-[0.2em] font-medium border border-brandGold/30 shadow-lg">${p.category}</span>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <h4 class="font-serif font-bold text-white text-base mb-2.5 tracking-wide group-hover:text-brandGold transition">${p.name}</h4>
-                        <p class="text-xs text-gray-400 font-light leading-relaxed mb-6 flex-1">${p.info}</p>
-                        <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between">
-                            <span class="text-[10px] text-brandGold uppercase tracking-[0.2em] font-medium flex items-center"><i class="fa-solid fa-gem mr-1.5 text-[9px]"></i> Bespoke Ready</span>
-                            <button onclick="shareProduct('${p.name}', '${p.info}')" class="px-3.5 py-2 bg-brandSurface hover:bg-gray-800 text-gray-200 text-xs rounded-xl transition flex items-center gap-2 border border-gray-700/60 shadow">
-                                <i class="fa-solid fa-share-nodes text-[10px]"></i> Share
-                            </button>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        function filterProducts() { renderProducts(); }
-
-        function toggleAdminModal() {
-            const modal = document.getElementById('adminModal');
-            if (modal.classList.contains('hidden')) {
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                renderAdminList();
-            } else {
-                modal.classList.remove('flex');
-                modal.classList.add('hidden');
-                resetForm();
-            }
-        }
-
-        function renderAdminList() {
-            const list = document.getElementById('adminProductList');
-            list.innerHTML = '';
-            products.forEach((p, idx) => {
-                const item = document.createElement('div');
-                item.className = "flex items-center justify-between bg-brandNavy p-3 rounded-xl border border-gray-800 text-xs shadow-sm";
-                item.innerHTML = `
-                    <div class="flex items-center gap-3 truncate">
-                        <img src="${p.image}" class="w-10 h-10 object-cover rounded-lg border border-gray-700">
-                        <div class="truncate">
-                            <p class="font-medium text-white truncate tracking-wide">${p.name}</p>
-                            <p class="text-[10px] text-brandGold uppercase tracking-wider">${p.category}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2 shrink-0">
-                        <button onclick="editProduct(${idx})" class="p-2 bg-gray-800 hover:bg-gray-700 text-brandGold rounded-lg transition"><i class="fa-solid fa-pen text-xs"></i></button>
-                        <button onclick="deleteProduct(${idx})" class="p-2 bg-red-950/40 hover:bg-red-900 text-red-300 rounded-lg transition"><i class="fa-solid fa-trash text-xs"></i></button>
-                    </div>
-                `;
-                list.appendChild(item);
-            });
-        }
-
-        function handleProductSubmit(e) {
-            e.preventDefault();
-            const editIndex = parseInt(document.getElementById('editIndex').value);
-            const name = document.getElementById('prodName').value;
-            const category = document.getElementById('prodCategory').value;
-            const image = document.getElementById('prodImage').value;
-            const info = document.getElementById('prodInfo').value;
-
-            const newProd = { name, category, image, info };
-
-            if (editIndex === -1) {
-                products.unshift(newProd);
-                showToast("Product successfully added!");
-            } else {
-                products[editIndex] = newProd;
-                showToast("Product successfully updated!");
-                resetForm();
-            }
-
-            renderProducts();
-            renderAdminList();
-            document.getElementById('productForm').reset();
-        }
-
-        function editProduct(idx) {
-            const p = products[idx];
-            document.getElementById('editIndex').value = idx;
-            document.getElementById('prodName').value = p.name;
-            document.getElementById('prodCategory').value = p.category;
-            document.getElementById('prodImage').value = p.image;
-            document.getElementById('prodInfo').value = p.info;
-            document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-pen mr-1.5"></i> Edit Product: ${p.name}`;
-        }
-
-        function deleteProduct(idx) {
-            if (confirm("Are you sure you want to delete this product?")) {
-                products.splice(idx, 1);
-                renderProducts();
-                renderAdminList();
-                showToast("Product removed.");
-            }
-        }
-
-        function resetForm() {
-            document.getElementById('editIndex').value = -1;
-            document.getElementById('productForm').reset();
-            document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-plus-circle mr-1.5"></i> Add New Product`;
-        }
-
-        function shareProduct(name, info) {
-            const shareText = `Aram Saba Sanat Iranian - ${name}\n${info}`;
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(shareText).then(() => {
-                    showToast("Product details copied to clipboard!");
-                }).catch(() => {
-                    showToast(shareText);
-                });
-            } else {
-                showToast(shareText);
-            }
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.innerText = msg;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
-        }
-
-        async function askGeminiAI() {
-            const query = document.getElementById('searchInput').value.trim();
-            const box = document.getElementById('aiResponseBox');
-            if (!query) {
-                box.classList.remove('hidden');
-                box.innerHTML = "Please enter an inquiry regarding executive office requirements.";
-                return;
-            }
-
-            box.classList.remove('hidden');
-            box.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2 text-brandGold"></i> Gemini AI is curating executive workspace recommendations...`;
-
-            setTimeout(() => {
-                box.innerHTML = `<strong>Gemini AI Consultant:</strong><br>For your executive workspace query ("${query}"), we recommend pairing our European walnut managerial desks with ergonomic mesh seating to achieve optimal prestige and physical comfort.`;
-            }, 1200);
-        }
-    </script>
-</body>
-</html>
+            const catMap = {
+                'Desks': 'میز مدیریت',
+                'Chairs': 'ص
