@@ -19,7 +19,7 @@
                         brandSurface: '#0f1826',
                         brandBronze: '#a2825e',
                         brandGold: '#d4af37',
-                        brandDark: '#06090f'
+                        brandDark: '#04060a'
                     },
                     fontFamily: {
                         serif: ['"Playfair Display"', 'serif'],
@@ -30,12 +30,12 @@
         }
     </script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #06090f; color: #e5e7eb; }
+        body { font-family: 'Inter', sans-serif; background-color: #04060a; color: #e5e7eb; }
         h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
-        .luxury-card {
-            background: #f8f6f2;
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.85);
+        .luxury-plaque {
+            background: linear-gradient(145deg, #0f1826 0%, #070c14 100%);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), inset 0 0 30px rgba(212, 175, 55, 0.05);
         }
         html { scroll-behavior: smooth; }
         @keyframes fadeInScale {
@@ -47,18 +47,28 @@
 </head>
 <body class="h-full flex flex-col selection:bg-brandGold selection:text-brandDark">
 
-    <!-- SPLASH SCREEN WITH LUXURY CARD & ORIGINAL LOGO -->
+    <!-- SPLASH SCREEN WITH ELITE LUXURY PLAQUE & CODED TYPOGRAPHY LOGO -->
     <div id="splashScreen" class="fixed inset-0 z-50 bg-brandDark flex flex-col items-center justify-center p-6 transition-opacity duration-1000">
-        <div class="text-center animate-fade-in max-w-sm w-full p-6 sm:p-8 rounded-3xl luxury-card relative">
+        <div class="text-center animate-fade-in max-w-md w-full p-8 sm:p-10 rounded-3xl luxury-plaque relative overflow-hidden">
+            <!-- Inner Gold Border Frame -->
+            <div class="absolute inset-3 border border-brandGold/20 rounded-2xl pointer-events-none"></div>
             
-            <!-- Original Logo Image Seamlessly Blending with the Card Background -->
-            <div class="mb-6 overflow-hidden rounded-2xl shadow-inner">
-                <img src="aram-v2-logo.jpg" alt="Aram Saba Sanat Iranian Logo" class="w-full h-auto mx-auto object-contain">
+            <!-- High-End Monogram AS -->
+            <div class="flex justify-center items-center gap-3 mb-6">
+                <span class="text-6xl font-serif font-bold text-gray-100 drop-shadow-md">A</span>
+                <span class="text-6xl font-serif font-bold bg-gradient-to-r from-[#c5a059] to-[#dfc17b] bg-clip-text text-transparent drop-shadow-md">S</span>
             </div>
 
+            <!-- Company Name & Typography Lockup -->
+            <h1 class="text-xl sm:text-2xl font-serif tracking-[0.3em] text-white uppercase font-semibold mb-1">ARAM SABA</h1>
+            <h2 class="text-xs sm:text-sm font-serif tracking-[0.35em] text-brandGold uppercase font-medium mb-4">SANAT IRANIAN</h2>
+            
+            <div class="w-24 h-[1px] bg-gradient-to-r from-transparent via-brandGold to-transparent mx-auto mb-4"></div>
+            <p class="text-[9px] uppercase tracking-[0.4em] text-gray-400 mb-8 font-sans">OFFICE FURNITURE</p>
+            
             <!-- Enter Button -->
-            <button onclick="enterCatalog()" class="w-full py-4 px-6 bg-gradient-to-r from-brandNavy via-[#132238] to-brandNavy text-brandGold font-semibold uppercase tracking-[0.2em] text-xs rounded-xl shadow-2xl hover:brightness-125 transition transform active:scale-95 border border-brandGold/40">
-                Enter Digital Catalog <i class="fa-solid fa-arrow-right ml-2"></i>
+            <button onclick="enterCatalog()" class="w-full py-4 px-8 bg-gradient-to-r from-brandBronze via-[#c5a059] to-brandGold text-brandDark font-semibold uppercase tracking-[0.2em] text-xs rounded-xl shadow-2xl hover:brightness-110 transition transform active:scale-95 border border-brandGold/50">
+                ENTER DIGITAL CATALOG <i class="fa-solid fa-arrow-right ml-2 text-brandDark"></i>
             </button>
         </div>
     </div>
@@ -69,7 +79,7 @@
         <!-- HEADER -->
         <header class="sticky top-0 z-30 bg-brandNavy/95 backdrop-blur-xl border-b border-brandGold/20 px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="aram-v2-logo.jpg" alt="Logo" class="w-10 h-10 object-cover rounded-xl shadow-md border border-brandGold/30">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brandNavy to-brandSurface text-brandGold font-serif font-bold flex items-center justify-center text-sm shadow-md border border-brandGold/40">AS</div>
                 <div>
                     <h2 class="text-xs sm:text-sm font-serif font-bold tracking-[0.15em] text-white">ARAM SABA SANAT</h2>
                     <p class="text-[9px] uppercase tracking-[0.25em] text-brandGold">Iranian Executive Collection</p>
@@ -85,16 +95,4 @@
         <!-- HERO & SEARCH SECTION -->
         <section class="p-6 sm:p-10 bg-gradient-to-b from-brandNavy/80 via-brandSurface to-brandSurface">
             <div class="text-center mb-8">
-                <span class="text-[10px] uppercase tracking-[0.3em] text-brandGold block mb-2 font-medium">Mastercrafted Workspace Solutions</span>
-                <h3 class="text-2xl sm:text-4xl font-serif text-white mb-3 tracking-wide">Elite Office Environments</h3>
-                <p class="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto font-light leading-relaxed">Discover uncompromising ergonomics, European walnut finishes, and bespoke executive configurations.</p>
-            </div>
-
-            <!-- SEARCH & GEMINI AI BAR -->
-            <div class="relative max-w-2xl mx-auto">
-                <div class="flex items-center bg-brandNavy/90 border border-brandGold/30 rounded-2xl overflow-hidden shadow-2xl focus-within:border-brandGold transition">
-                    <span class="pl-4 text-brandGold text-sm"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
-                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Ask AI or search executive collection (e.g., 'leather chair')..." class="w-full bg-transparent px-4 py-3.5 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none">
-                    <button onclick="askGeminiAI()" class="bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3.5 text-[11px] font-semibold uppercase tracking-widest hover:brightness-110 transition">
-                        Consult AI
-                    </button>
+                <span class="text-
