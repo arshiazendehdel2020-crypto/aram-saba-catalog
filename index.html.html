@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" class="h-full">
+<html lang="fa" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts: Vazirmatn & Playfair Display & Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -42,7 +42,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        html { scroll-behavior: smooth; }
         @keyframes fadeInScale {
             0% { opacity: 0; transform: scale(0.97); }
             100% { opacity: 1; transform: scale(1); }
@@ -50,4 +49,219 @@
         .animate-fade-in { animation: fadeInScale 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     </style>
 </head>
-<body class="h-full flex flex-col selection:bg-brandGold selection
+<body class="min-h-screen flex flex-col selection:bg-brandGold selection:text-brandDark">
+
+    <!-- SPLASH SCREEN -->
+    <div id="splashScreen" class="fixed inset-0 z-50 bg-brandDark flex flex-col items-center justify-center p-6 transition-opacity duration-1000">
+        <div class="text-center animate-fade-in max-w-lg w-full p-8 rounded-3xl glass-panel shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brandGold to-transparent"></div>
+            
+            <!-- Classy Editorial Monogram AS (Kept Exact & LTR for perfect design) -->
+            <div dir="ltr">
+                <div class="flex justify-center items-baseline gap-1 mb-6">
+                    <span class="text-6xl font-serif font-light text-gray-100 tracking-tighter">A</span>
+                    <span class="text-6xl font-serif font-light italic bg-gradient-to-r from-[#d4af37] via-[#f3e5ab] to-[#a2825e] bg-clip-text text-transparent tracking-tighter">S</span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-serif tracking-[0.25em] gold-gradient-text mb-1 uppercase font-semibold">ARAM SABA</h1>
+                <h2 class="text-sm sm:text-base font-serif tracking-[0.3em] text-brandBronze mb-5 uppercase font-medium">SANAT IRANIAN</h2>
+                <div class="w-20 h-[1px] bg-brandGold/40 mx-auto mb-4"></div>
+                <p class="text-[10px] uppercase tracking-[0.4em] text-gray-400 mb-8 font-sans">Exquisite Office Architecture</p>
+            </div>
+            
+            <!-- Safe Enter Button -->
+            <button onclick="enterCatalog()" class="w-full py-4 px-8 bg-gradient-to-r from-brandBronze via-[#c5a059] to-brandGold text-brandDark font-bold text-sm rounded-xl shadow-2xl hover:brightness-110 transition transform active:scale-95 border border-brandGold/40">
+                ورود به کاتالوگ دیجیتال <i class="fa-solid fa-arrow-left mr-2 text-brandDark"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN APP CONTAINER (Rendered natively behind splash screen) -->
+    <div id="mainApp" class="flex-1 flex flex-col max-w-md md:max-w-4xl lg:max-w-6xl mx-auto w-full shadow-2xl bg-brandSurface border-x border-gray-800/80 relative">
+        
+        <!-- HEADER -->
+        <header class="sticky top-0 z-30 bg-brandNavy/95 backdrop-blur-xl border-b border-brandGold/20 px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div dir="ltr" class="w-10 h-10 rounded-lg bg-gradient-to-br from-brandBronze to-brandGold text-brandDark font-serif font-bold flex items-center justify-center text-lg shadow-lg border border-brandGold/30">AS</div>
+                <div>
+                    <h2 class="text-sm font-bold text-white">آرام صبا صنعت ایرانیان</h2>
+                    <p class="text-[10px] text-brandGold font-light mt-0.5">کلکسیون مدیران ارشد</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="toggleAdminModal()" class="px-3.5 py-2 bg-brandNavy hover:bg-gray-800 text-brandGold rounded-xl text-xs font-medium border border-brandGold/30 transition flex items-center gap-2 shadow-lg">
+                    <i class="fa-solid fa-terminal ml-1.5 text-[11px]"></i> <span class="hidden sm:inline">پنل مدیریت</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- HERO & SEARCH SECTION -->
+        <section class="p-6 sm:p-10 bg-gradient-to-b from-brandNavy/80 via-brandSurface to-brandSurface">
+            <div class="text-center mb-8">
+                <span class="text-[11px] text-brandGold block mb-2 font-medium">راهکارهای تخصصی فضاهای اداری</span>
+                <h3 class="text-2xl sm:text-4xl font-bold text-white mb-4">مبلمان اداری و فضاهای مدیریتی لوکس</h3>
+                <p class="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto font-light leading-loose">تلفیق بی‌نظیر ارگونومی پیشرفته، چوب طبیعی گردوی اروپایی و استانداردهای طراحی سفارشی برای خلق دفاتری با پرستیژ جهانی.</p>
+            </div>
+
+            <!-- SEARCH & GEMINI AI BAR -->
+            <div class="relative max-w-2xl mx-auto">
+                <div class="flex items-center bg-brandNavy/90 border border-brandGold/30 rounded-2xl overflow-hidden shadow-2xl focus-within:border-brandGold transition">
+                    <span class="pr-4 pl-2 text-brandGold text-sm"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="جستجو در کاتالوگ (مثال: صندلی چرمی)..." class="w-full bg-transparent px-4 py-3.5 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none">
+                    <button onclick="askGeminiAI()" class="bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3.5 text-[11px] font-bold hover:brightness-110 transition">
+                        مشاوره هوشمند
+                    </button>
+                </div>
+                <div id="aiResponseBox" class="hidden mt-3 p-4 bg-brandNavy border border-brandGold/40 rounded-2xl text-xs text-gray-200 leading-loose shadow-xl text-justify"></div>
+            </div>
+
+            <!-- CATEGORY TABS -->
+            <div class="flex gap-2 overflow-x-auto pb-2 mt-8 no-scrollbar justify-start sm:justify-center">
+                <button onclick="setCategory('all', this)" class="cat-btn px-5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark transition whitespace-nowrap shadow-md">تمامی کلکسیون‌ها</button>
+                <button onclick="setCategory('میز مدیریت', this)" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap">میزهای مدیریت</button>
+                <button onclick="setCategory('صندلی ارگونومیک', this)" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap">صندلی‌های ارگونومیک</button>
+                <button onclick="setCategory('میز کنفرانس', this)" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap">میزهای کنفرانس</button>
+                <button onclick="setCategory('کنسول و فایلینگ', this)" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap">کنسول و فایلینگ</button>
+            </div>
+        </section>
+
+        <!-- PRODUCT CATALOG GRID -->
+        <main class="flex-1 p-6 sm:p-10">
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Injected via JavaScript -->
+            </div>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="bg-brandNavy border-t border-brandGold/20 py-8 px-6 text-center text-xs text-gray-400 mt-auto">
+            <div class="flex justify-center items-center gap-3 mb-2">
+                <span class="font-serif font-bold text-white tracking-widest text-sm" dir="ltr">AS</span>
+                <span class="font-bold text-brandGold text-xs">آرام صبا صنعت ایرانیان</span>
+            </div>
+            <p class="text-[10px] text-gray-500 font-light mt-1">© ۲۰۲۶ تمامی حقوق محفوظ است. کاتالوگ دیجیتال مبلمان اداری لوکس.</p>
+        </footer>
+    </div>
+
+    <!-- ADMIN TERMINAL MODAL -->
+    <div id="adminModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="bg-brandNavy border border-brandGold/50 rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="p-5 border-b border-gray-800 flex justify-between items-center bg-brandSurface">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-terminal text-brandGold"></i>
+                    <h3 class="font-bold text-white text-sm">پنل مدیریت کاتالوگ</h3>
+                </div>
+                <button onclick="toggleAdminModal()" class="text-gray-400 hover:text-white p-1.5 rounded-lg bg-gray-800/50"><i class="fa-solid fa-xmark text-xs"></i></button>
+            </div>
+
+            <div class="p-6 overflow-y-auto space-y-6 flex-1 text-right">
+                <div class="bg-brandSurface p-5 rounded-2xl border border-brandGold/20 shadow-inner">
+                    <h4 id="formTitle" class="text-xs font-bold text-brandGold mb-4"><i class="fa-solid fa-plus-circle ml-1.5"></i> ثبت محصول جدید</h4>
+                    <form id="productForm" onsubmit="handleProductSubmit(event)" class="space-y-4">
+                        <input type="hidden" id="editIndex" value="-1">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[11px] font-medium text-gray-400 mb-1.5">نام محصول</label>
+                                <input type="text" id="prodName" required placeholder="مثال: میز مدیریت امپریال" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-sm text-gray-200 focus:border-brandGold focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-medium text-gray-400 mb-1.5">دسته‌بندی</label>
+                                <select id="prodCategory" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-sm text-gray-200 focus:border-brandGold focus:outline-none">
+                                    <option value="میز مدیریت">میزهای مدیریت</option>
+                                    <option value="صندلی ارگونومیک">صندلی‌های ارگونومیک</option>
+                                    <option value="میز کنفرانس">میزهای کنفرانس</option>
+                                    <option value="کنسول و فایلینگ">کنسول و فایلینگ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-medium text-gray-400 mb-1.5">لینک تصویر (URL)</label>
+                            <input type="url" id="prodImage" required placeholder="https://images.unsplash.com/..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-sm text-gray-200 focus:border-brandGold focus:outline-none text-left" dir="ltr">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-medium text-gray-400 mb-1.5">مشخصات فنی و توضیحات</label>
+                            <textarea id="prodInfo" rows="2" required placeholder="روکش چوب گردوی اروپایی، چرم طبیعی دست‌دوز..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-sm text-gray-200 focus:border-brandGold focus:outline-none leading-loose"></textarea>
+                        </div>
+                        <div class="flex justify-start gap-2.5 pt-2">
+                            <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark font-bold text-xs rounded-xl hover:brightness-110 transition shadow-lg">ذخیره اطلاعات</button>
+                            <button type="button" onclick="resetForm()" class="px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs rounded-xl transition font-medium">انصراف</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold text-gray-400 mb-3">مدیریت موجودی</h4>
+                    <div id="adminProductList" class="space-y-2.5 max-h-60 overflow-y-auto pl-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 left-6 z-50 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3 rounded-2xl text-xs font-bold shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 border border-white/20"></div>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        let products = [
+            {
+                name: "میز مدیریت اجرایی ونگارد",
+                category: "میز مدیریت",
+                image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=800&q=80",
+                info: "تلفیق بی‌نظیر ارگونومی پیشرفته و چوب طبیعی گردوی اروپایی با سیستم هوشمند مدیریت کابل."
+            },
+            {
+                name: "صندلی ارگونومیک پشتی‌بلند اجیس",
+                category: "صندلی ارگونومیک",
+                image: "https://images.unsplash.com/photo-1580481077494-e3299acae5e7?auto=format&fit=crop&w=800&q=80",
+                info: "طراحی پیشرفته با مکانیزم شیب همگام، پشتی مشبک تنفس‌پذیر و سیستم حمایت از ستون فقرات."
+            },
+            {
+                name: "میز کنفرانس دیپلمات",
+                category: "میز کنفرانس",
+                image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+                info: "میز جلسات ماژولار ۱۲ نفره، مجهز به پنل‌های پاپ‌آپ برق و اتصالات مخفی با تزئینات برنزی."
+            },
+            {
+                name: "کنسول و بوفه دکوراتیو کیان",
+                category: "کنسول و فایلینگ",
+                image: "https://images.unsplash.com/photo-1595515106967-1ce2e16d41f0?auto=format&fit=crop&w=800&q=80",
+                info: "درهای آرام‌بند، طبقات شیشه‌ای دودی و سیستم قفل یکپارچه و نامرئی برای بایگانی اسناد."
+            }
+        ];
+
+        let currentCategory = 'all';
+
+        // Pre-render the products on page load so it's ready behind the splash screen
+        document.addEventListener("DOMContentLoaded", () => {
+            renderProducts();
+            renderAdminList();
+        });
+
+        // 100% Fail-proof entry function
+        function enterCatalog() {
+            const splash = document.getElementById('splashScreen');
+            if (splash) {
+                splash.style.pointerEvents = 'none'; // Prevent double clicking
+                splash.style.opacity = '0'; // Trigger fade out
+                setTimeout(() => {
+                    splash.style.display = 'none'; // Completely remove from layout after fade
+                }, 1000);
+            }
+        }
+
+        function setCategory(cat, btn) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(b => {
+                b.className = "cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap";
+            });
+            if (btn) {
+                btn.className = "cat-btn px-5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark transition whitespace-nowrap shadow-md";
+            }
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            grid.innerHTML = '';
+
+            // Using mapped index to ensure sharing works perfectly even after filtering
+            const filteredProducts = products.map((p, originalIndex) => ({ p, originalIndex })).filter(item => {
