@@ -44,17 +44,21 @@
         }
         html { scroll-behavior: smooth; }
         
-        /* انیمیشن‌های جدید برای زنده‌تر شدن سایت */
+        /* انیمیشن‌های ظریف برای زنده کردن سایت */
         @keyframes fadeInScale {
             0% { opacity: 0; transform: scale(0.97); }
             100% { opacity: 1; transform: scale(1); }
         }
         @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(25px); }
+            0% { opacity: 0; transform: translateY(15px); }
             100% { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in { animation: fadeInScale 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .animate-fade-up { opacity: 0; animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        /* مخفی کردن اسکرول‌بار در دسته‌بندی‌ها */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="h-full flex flex-col selection:bg-brandGold selection:text-brandDark">
@@ -64,8 +68,9 @@
         <div class="text-center animate-fade-in max-w-lg w-full p-8 rounded-3xl glass-panel shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brandGold to-transparent"></div>
             
+            <!-- Classy Editorial Monogram AS (LTR ISOLATED) -->
             <div dir="ltr">
-                <div class="flex justify-center items-baseline gap-1 mb-6 hover:scale-105 transition-transform duration-700 cursor-default">
+                <div class="flex justify-center items-baseline gap-1 mb-6 hover:scale-105 transition-transform duration-700">
                     <span class="text-6xl font-serif font-light text-gray-100 tracking-tighter">A</span>
                     <span class="text-6xl font-serif font-light italic bg-gradient-to-r from-[#d4af37] via-[#f3e5ab] to-[#a2825e] bg-clip-text text-transparent tracking-tighter">S</span>
                 </div>
@@ -76,7 +81,7 @@
                 <p class="text-[10px] uppercase tracking-[0.4em] text-gray-400 mb-8 font-sans">Exquisite Office Architecture</p>
             </div>
             
-            <button onclick="enterCatalog()" class="w-full py-4 px-8 bg-gradient-to-r from-brandBronze via-[#c5a059] to-brandGold text-brandDark font-bold text-sm rounded-xl shadow-[0_10px_30px_rgba(212,175,55,0.15)] hover:shadow-[0_15px_40px_rgba(212,175,55,0.3)] hover:scale-[1.02] active:scale-95 transition-all duration-300">
+            <button type="button" onclick="enterCatalog()" class="w-full py-4 px-8 bg-gradient-to-r from-brandBronze via-[#c5a059] to-brandGold text-brandDark font-bold text-sm rounded-xl shadow-[0_10px_30px_rgba(212,175,55,0.15)] hover:shadow-[0_15px_40px_rgba(212,175,55,0.3)] hover:scale-[1.02] active:scale-95 transition-all duration-300">
                 ورود به کاتالوگ دیجیتال <i class="fa-solid fa-arrow-left mr-2 text-brandDark"></i>
             </button>
         </div>
@@ -86,16 +91,16 @@
     <div id="mainApp" class="flex-1 flex flex-col max-w-md md:max-w-4xl lg:max-w-6xl mx-auto w-full shadow-2xl bg-brandSurface border-x border-gray-800/80 relative opacity-0 transition-opacity duration-700">
         
         <!-- HEADER -->
-        <header class="sticky top-0 z-30 bg-brandNavy/95 backdrop-blur-xl border-b border-brandGold/20 px-6 py-4 flex items-center justify-between transition-all duration-500 hover:bg-brandNavy">
-            <div class="flex items-center gap-3 group cursor-default">
-                <div dir="ltr" class="w-10 h-10 rounded-lg bg-gradient-to-br from-brandBronze to-brandGold text-brandDark font-serif font-bold flex items-center justify-center text-lg shadow-lg border border-brandGold/30 group-hover:scale-110 transition-transform duration-500">AS</div>
-                <div>
-                    <h2 class="text-xs sm:text-sm font-serif font-bold text-white transition-colors duration-300 group-hover:text-brandGold">آرام صبا صنعت ایرانیان</h2>
+        <header class="sticky top-0 z-30 bg-brandNavy/95 backdrop-blur-xl border-b border-brandGold/20 px-6 py-4 flex items-center justify-between hover:bg-brandNavy transition-colors duration-500">
+            <div class="flex items-center gap-3 group">
+                <div dir="ltr" class="w-10 h-10 rounded-lg bg-gradient-to-br from-brandBronze to-brandGold text-brandDark font-serif font-bold flex items-center justify-center text-lg shadow-lg border border-brandGold/30 group-hover:scale-110 transition-transform duration-500 cursor-default">AS</div>
+                <div class="cursor-default">
+                    <h2 class="text-xs sm:text-sm font-serif font-bold text-white group-hover:text-brandGold transition-colors duration-300">آرام صبا صنعت ایرانیان</h2>
                     <p class="text-[9px] text-brandGold font-light mt-0.5">کلکسیون مدیران ارشد</p>
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <button onclick="toggleAdminModal()" class="px-3.5 py-2 bg-brandNavy hover:bg-gray-800 text-brandGold rounded-xl text-xs font-medium border border-brandGold/30 hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg flex items-center gap-2 group">
+                <button type="button" onclick="toggleAdminModal()" class="px-4 py-2 bg-brandNavy hover:bg-gray-800 text-brandGold rounded-xl text-xs font-medium border border-brandGold/30 shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 group">
                     <i class="fa-solid fa-terminal ml-1.5 text-[11px] group-hover:text-white transition-colors"></i> <span class="hidden sm:inline">پنل مدیریت</span>
                 </button>
             </div>
@@ -111,23 +116,21 @@
 
             <!-- SEARCH & GEMINI AI BAR -->
             <div class="relative max-w-2xl mx-auto animate-fade-up" style="animation-delay: 0.4s;">
-                <div class="flex items-center bg-brandNavy/90 border border-brandGold/30 rounded-2xl overflow-hidden shadow-2xl focus-within:border-brandGold focus-within:ring-2 focus-within:ring-brandGold/20 focus-within:scale-[1.01] transition-all duration-300">
+                <div class="flex items-center bg-brandNavy/90 border border-brandGold/30 rounded-2xl overflow-hidden shadow-2xl focus-within:border-brandGold focus-within:ring-1 focus-within:ring-brandGold/50 transition-all duration-300">
                     <span class="pr-4 pl-2 text-brandGold text-sm"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
-                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="جستجو در کاتالوگ (مثال: صندلی چرمی ارگونومیک)..." class="w-full bg-transparent px-4 py-3.5 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none transition-colors">
-                    <button onclick="askGeminiAI()" class="bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3.5 text-[11px] font-bold hover:brightness-110 active:bg-brandGold transition-all shrink-0">
+                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="جستجو در کاتالوگ (مثال: صندلی چرمی)..." class="w-full bg-transparent px-4 py-3.5 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none">
+                    
+                    <!-- AI Button (Fixed) -->
+                    <button type="button" onclick="askGeminiAI()" class="bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3.5 text-[11px] font-bold hover:brightness-110 active:bg-brandGold transition-all shrink-0">
                         مشاوره هوشمند
                     </button>
                 </div>
                 <div id="aiResponseBox" class="hidden mt-3 p-4 bg-brandNavy border border-brandGold/40 rounded-2xl text-xs text-gray-200 leading-loose shadow-xl text-justify animate-fade-up"></div>
             </div>
 
-            <!-- CATEGORY TABS -->
-            <div class="flex gap-2 overflow-x-auto pb-2 mt-8 no-scrollbar justify-start sm:justify-center animate-fade-up" style="animation-delay: 0.5s;">
-                <button onclick="setCategory('all')" class="cat-btn px-5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark transition-all duration-300 shadow-md hover:scale-105 active:scale-95">تمامی کلکسیون‌ها</button>
-                <button onclick="setCategory('میز مدیریت')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition-all duration-300 hover:scale-105 active:scale-95">میزهای مدیریت</button>
-                <button onclick="setCategory('صندلی ارگونومیک')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition-all duration-300 hover:scale-105 active:scale-95">صندلی‌های ارگونومیک</button>
-                <button onclick="setCategory('میز کنفرانس')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition-all duration-300 hover:scale-105 active:scale-95">میزهای کنفرانس</button>
-                <button onclick="setCategory('کنسول و فایلینگ')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition-all duration-300 hover:scale-105 active:scale-95">کنسول و فایلینگ</button>
+            <!-- DYNAMIC CATEGORY TABS -->
+            <div id="categoryTabs" class="flex gap-2 overflow-x-auto pb-2 mt-8 no-scrollbar justify-start sm:justify-center animate-fade-up" style="animation-delay: 0.5s;">
+                <!-- Injected via JavaScript -->
             </div>
         </section>
 
@@ -140,7 +143,7 @@
 
         <!-- FOOTER -->
         <footer class="bg-brandNavy border-t border-brandGold/20 py-8 px-6 text-center text-xs text-gray-400 mt-auto">
-            <div class="flex justify-center items-center gap-3 mb-2">
+            <div class="flex justify-center items-center gap-3 mb-2 cursor-default">
                 <span class="font-serif font-bold text-white text-base hover:text-brandGold transition-colors" dir="ltr">AS</span>
                 <span class="font-bold text-brandGold text-xs">آرام صبا صنعت ایرانیان</span>
             </div>
@@ -154,12 +157,26 @@
             <div class="p-5 border-b border-gray-800 flex justify-between items-center bg-brandSurface">
                 <div class="flex items-center gap-2.5">
                     <i class="fa-solid fa-terminal text-brandGold animate-pulse"></i>
-                    <h3 class="font-bold text-white text-sm">پنل مدیریت کاتالوگ</h3>
+                    <h3 class="font-bold text-white text-sm">پنل مدیریت سیستم</h3>
                 </div>
-                <button onclick="toggleAdminModal()" class="text-gray-400 hover:text-white p-1.5 rounded-lg bg-gray-800/50 hover:bg-gray-700 transition-colors hover:rotate-90"><i class="fa-solid fa-xmark text-xs"></i></button>
+                <button type="button" onclick="toggleAdminModal()" class="text-gray-400 hover:text-white p-1.5 rounded-lg bg-gray-800/50 hover:bg-gray-700 transition-colors hover:rotate-90"><i class="fa-solid fa-xmark text-xs"></i></button>
             </div>
 
             <div class="p-6 overflow-y-auto space-y-6 flex-1 text-right">
+                
+                <!-- Category Manager -->
+                <div class="bg-brandSurface p-5 rounded-2xl border border-brandGold/20 shadow-inner hover:border-brandGold/40 transition-colors">
+                    <h4 class="text-xs font-bold text-brandGold mb-4"><i class="fa-solid fa-tags ml-1.5"></i> مدیریت دسته‌بندی‌ها</h4>
+                    <div class="flex gap-3 mb-4">
+                        <input type="text" id="newCategoryName" placeholder="نام دسته‌بندی جدید..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-4 py-2.5 text-sm text-gray-200 focus:border-brandGold focus:outline-none">
+                        <button type="button" onclick="addCategory()" class="px-5 py-2.5 bg-brandGold hover:brightness-110 text-brandDark font-bold text-xs rounded-xl transition shrink-0 shadow-lg active:scale-95">افزودن دسته</button>
+                    </div>
+                    <div id="adminCategoryList" class="flex flex-wrap gap-2 mt-2">
+                        <!-- Injected via JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Product Manager -->
                 <div class="bg-brandSurface p-5 rounded-2xl border border-brandGold/20 shadow-inner hover:border-brandGold/40 transition-colors">
                     <h4 id="formTitle" class="text-xs font-bold text-brandGold mb-4"><i class="fa-solid fa-plus-circle ml-1.5"></i> ثبت محصول جدید</h4>
                     <form id="productForm" onsubmit="handleProductSubmit(event)" class="space-y-4">
@@ -167,25 +184,22 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[11px] font-medium text-gray-400 mb-1.5">نام محصول</label>
-                                <input type="text" id="prodName" required placeholder="مثال: میز مدیریت امپریال" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-sm text-gray-200 focus:border-brandGold focus:ring-1 focus:ring-brandGold/50 transition-all focus:outline-none">
+                                <input type="text" id="prodName" required placeholder="مثال: میز مدیریت امپریال" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-sm text-gray-200 focus:border-brandGold focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-[11px] font-medium text-gray-400 mb-1.5">دسته‌بندی</label>
-                                <select id="prodCategory" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-sm text-gray-200 focus:border-brandGold focus:ring-1 focus:ring-brandGold/50 transition-all focus:outline-none">
-                                    <option value="میز مدیریت">میزهای مدیریت</option>
-                                    <option value="صندلی ارگونومیک">صندلی‌های ارگونومیک</option>
-                                    <option value="میز کنفرانس">میزهای کنفرانس</option>
-                                    <option value="کنسول و فایلینگ">کنسول و فایلینگ</option>
+                                <select id="prodCategory" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-sm text-gray-200 focus:border-brandGold focus:outline-none">
+                                    <!-- Injected via JavaScript -->
                                 </select>
                             </div>
                         </div>
                         <div>
                             <label class="block text-[11px] font-medium text-gray-400 mb-1.5">لینک تصویر (URL)</label>
-                            <input type="url" id="prodImage" required placeholder="https://images.unsplash.com/..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-sm text-gray-200 focus:border-brandGold focus:ring-1 focus:ring-brandGold/50 transition-all focus:outline-none text-left" dir="ltr">
+                            <input type="url" id="prodImage" required placeholder="https://images.unsplash.com/..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-sm text-gray-200 focus:border-brandGold focus:outline-none text-left" dir="ltr">
                         </div>
                         <div>
                             <label class="block text-[11px] font-medium text-gray-400 mb-1.5">مشخصات فنی و توضیحات</label>
-                            <textarea id="prodInfo" rows="2" required placeholder="روکش چوب گردوی اروپایی، چرم طبیعی دست‌دوز..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-sm text-gray-200 focus:border-brandGold focus:ring-1 focus:ring-brandGold/50 transition-all focus:outline-none leading-loose"></textarea>
+                            <textarea id="prodInfo" rows="2" required placeholder="روکش چوب گردوی اروپایی، چرم طبیعی دست‌دوز..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-sm text-gray-200 focus:border-brandGold focus:outline-none leading-loose"></textarea>
                         </div>
                         <div class="flex justify-start gap-2.5 pt-2">
                             <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark font-bold text-xs rounded-xl hover:brightness-110 active:scale-95 transition-all shadow-lg">ذخیره اطلاعات</button>
@@ -196,7 +210,7 @@
 
                 <div>
                     <h4 class="text-xs font-bold text-gray-400 mb-3">مدیریت موجودی</h4>
-                    <div id="adminProductList" class="space-y-2.5 max-h-60 overflow-y-auto pl-1"></div>
+                    <div id="adminProductList" class="space-y-2.5 max-h-60 overflow-y-auto pl-1 pr-2"></div>
                 </div>
             </div>
         </div>
@@ -205,8 +219,12 @@
     <!-- TOAST NOTIFICATION -->
     <div id="toast" class="fixed bottom-6 left-6 z-50 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3 rounded-2xl text-xs font-bold shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 border border-white/20"></div>
 
-    <!-- SCRIPT LOGIC (Original structure maintained to guarantee button works) -->
+    <!-- SCRIPT LOGIC -->
     <script>
+        // Dynamic Categories
+        let categories = ["میز مدیریت", "صندلی ارگونومیک", "میز کنفرانس", "کنسول و فایلینگ"];
+        let currentCategory = 'all';
+
         let products = [
             {
                 name: "میز مدیریت اجرایی ونگارد",
@@ -234,8 +252,13 @@
             }
         ];
 
-        let currentCategory = 'all';
+        // Initialize UI
+        document.addEventListener("DOMContentLoaded", () => {
+            renderCategories();
+            renderProducts();
+        });
 
+        // 1. Core Functions
         function enterCatalog() {
             const splash = document.getElementById('splashScreen');
             const main = document.getElementById('mainApp');
@@ -243,59 +266,127 @@
             setTimeout(() => {
                 splash.style.display = 'none';
                 main.style.opacity = '1';
-                renderProducts();
             }, 800);
+        }
+
+        // 2. Category Management
+        function renderCategories() {
+            // Render Tabs
+            const tabsContainer = document.getElementById('categoryTabs');
+            tabsContainer.innerHTML = '';
+            
+            // All Button
+            const allBtn = document.createElement('button');
+            allBtn.type = "button";
+            allBtn.onclick = () => setCategory('all');
+            allBtn.innerText = "تمامی کلکسیون‌ها";
+            allBtn.className = `cat-btn px-5 py-2.5 rounded-xl text-xs transition-all duration-300 whitespace-nowrap ${currentCategory === 'all' ? 'font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark shadow-md scale-105' : 'font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 hover:scale-105 active:scale-95'}`;
+            tabsContainer.appendChild(allBtn);
+
+            // Dynamic Buttons
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.type = "button";
+                btn.onclick = () => setCategory(cat);
+                btn.innerText = cat;
+                btn.className = `cat-btn px-5 py-2.5 rounded-xl text-xs transition-all duration-300 whitespace-nowrap ${currentCategory === cat ? 'font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark shadow-md scale-105' : 'font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 hover:scale-105 active:scale-95'}`;
+                tabsContainer.appendChild(btn);
+            });
+
+            // Render Select Options
+            const select = document.getElementById('prodCategory');
+            if(select) {
+                const currentVal = select.value;
+                select.innerHTML = '';
+                categories.forEach(cat => {
+                    const opt = document.createElement('option');
+                    opt.value = cat;
+                    opt.innerText = cat;
+                    select.appendChild(opt);
+                });
+                if(categories.includes(currentVal)) select.value = currentVal;
+            }
+
+            // Render Admin Badges
+            const adminList = document.getElementById('adminCategoryList');
+            if(adminList) {
+                adminList.innerHTML = '';
+                categories.forEach(cat => {
+                    const badge = document.createElement('div');
+                    badge.className = "flex items-center gap-2 bg-brandNavy/50 border border-brandGold/30 px-3 py-1.5 rounded-lg text-xs text-brandGold shadow-sm";
+                    badge.innerHTML = `
+                        <span>${cat}</span>
+                        <button type="button" onclick="deleteCategory('${cat}')" class="text-red-400 hover:text-red-300 hover:scale-110 transition-all ml-1"><i class="fa-solid fa-xmark"></i></button>
+                    `;
+                    adminList.appendChild(badge);
+                });
+            }
         }
 
         function setCategory(cat) {
             currentCategory = cat;
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.className = "cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition-all duration-300 hover:scale-105 active:scale-95 whitespace-nowrap";
-            });
-            event.target.className = "cat-btn px-5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark transition-all duration-300 shadow-md hover:scale-105 active:scale-95 whitespace-nowrap";
+            renderCategories(); // Re-renders to update active tab styles
             renderProducts();
         }
 
+        function addCategory() {
+            const input = document.getElementById('newCategoryName');
+            const val = input.value.trim();
+            if(val) {
+                if(!categories.includes(val)) {
+                    categories.push(val);
+                    input.value = '';
+                    renderCategories();
+                    showToast("دسته‌بندی جدید با موفقیت اضافه شد.");
+                } else {
+                    showToast("این دسته‌بندی از قبل وجود دارد.");
+                }
+            }
+        }
+
+        function deleteCategory(catName) {
+            if (confirm(`آیا از حذف دسته‌بندی "${catName}" اطمینان دارید؟\n(محصولات این دسته حذف نمی‌شوند)`)) {
+                categories = categories.filter(c => c !== catName);
+                if (currentCategory === catName) currentCategory = 'all';
+                renderCategories();
+                renderProducts();
+                showToast("دسته‌بندی حذف شد.");
+            }
+        }
+
+        // 3. Product Management
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             grid.innerHTML = '';
 
-            const filtered = products.filter(p => {
-                const matchesCat = currentCategory === 'all' || p.category === currentCategory;
-                const matchesSearch = p.name.toLowerCase().includes(searchTerm) || p.info.toLowerCase().includes(searchTerm);
+            const filteredProducts = products.map((p, originalIndex) => ({ p, originalIndex })).filter(item => {
+                const matchesCat = currentCategory === 'all' || item.p.category === currentCategory;
+                const matchesSearch = item.p.name.toLowerCase().includes(searchTerm) || item.p.info.toLowerCase().includes(searchTerm);
                 return matchesCat && matchesSearch;
             });
 
-            if (filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-16 text-gray-500 text-sm animate-fade-in">هیچ محصولی با این مشخصات یافت نشد.</div>`;
+            if (filteredProducts.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-16 text-gray-500 text-sm animate-fade-in">هیچ محصولی یافت نشد.</div>`;
                 return;
             }
 
-            const catMap = {
-                'Desks': 'میز مدیریت',
-                'Chairs': 'صندلی ارگونومیک',
-                'Conference': 'میز کنفرانس',
-                'Storage': 'کتابخانه و کنسول'
-            };
-
-            filtered.forEach((p, idx) => {
+            filteredProducts.forEach(({ p, originalIndex }, idx) => {
                 const card = document.createElement('div');
-                // Added hover floating effect and staggered animation class
-                card.className = "bg-brandNavy border border-gray-800/80 rounded-3xl overflow-hidden flex flex-col shadow-2xl hover:border-brandGold/40 hover:-translate-y-2 hover:shadow-[0_15px_40px_-10px_rgba(212,175,55,0.15)] transition-all duration-500 group animate-fade-up";
-                card.style.animationDelay = `${idx * 0.15}s`; // Staggered fade in delay
+                card.className = "bg-brandNavy border border-gray-800/80 rounded-3xl overflow-hidden flex flex-col shadow-2xl hover:border-brandGold/40 hover:-translate-y-1.5 hover:shadow-[0_15px_40px_-10px_rgba(212,175,55,0.15)] transition-all duration-500 group animate-fade-up";
+                card.style.animationDelay = `${idx * 0.1}s`;
                 
                 card.innerHTML = `
                     <div class="relative h-56 overflow-hidden bg-gray-900">
                         <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100">
-                        <span class="absolute top-3.5 right-3.5 bg-brandNavy/95 backdrop-blur-md text-brandGold text-[11px] px-3 py-1.5 rounded-full font-medium border border-brandGold/30 shadow-lg">${catMap[p.category] || p.category}</span>
+                        <span class="absolute top-3.5 right-3.5 bg-brandNavy/95 backdrop-blur-md text-brandGold text-[11px] px-3 py-1.5 rounded-full font-medium border border-brandGold/30 shadow-lg">${p.category}</span>
                     </div>
                     <div class="p-6 flex-1 flex flex-col text-right">
                         <h4 class="font-bold text-white text-base mb-2.5 transition-colors duration-300 group-hover:text-brandGold">${p.name}</h4>
                         <p class="text-xs text-gray-400 font-light leading-loose mb-6 flex-1 text-justify">${p.info}</p>
                         <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between">
                             <span class="text-[11px] text-brandGold font-bold flex items-center"><i class="fa-solid fa-gem ml-1.5 text-[10px]"></i> آماده سفارشی‌سازی</span>
-                            <button onclick="shareProduct('${p.name}', '${p.info}')" class="px-4 py-2 bg-brandSurface hover:bg-gray-800 text-gray-200 text-xs rounded-xl transition-all duration-300 flex items-center gap-2 border border-gray-700/60 shadow font-medium hover:scale-105 active:scale-95 group/btn">
+                            <button type="button" onclick="shareProduct(${originalIndex})" class="px-4 py-2 bg-brandSurface hover:bg-gray-800 text-gray-200 text-xs rounded-xl transition-all duration-300 flex items-center gap-2 border border-gray-700/60 shadow font-medium hover:scale-105 active:scale-95 group/btn">
                                 <i class="fa-solid fa-share-nodes text-[11px] ml-1 group-hover/btn:-translate-y-0.5 transition-transform"></i> اشتراک‌گذاری
                             </button>
                         </div>
@@ -307,6 +398,7 @@
 
         function filterProducts() { renderProducts(); }
 
+        // 4. Admin Panel Logic
         function toggleAdminModal() {
             const modal = document.getElementById('adminModal');
             if (modal.classList.contains('hidden')) {
@@ -328,108 +420,5 @@
                 item.className = "flex items-center justify-between bg-brandNavy p-4 rounded-xl border border-gray-800 text-xs shadow-sm hover:border-brandGold/30 transition-colors";
                 item.innerHTML = `
                     <div class="flex items-center gap-2 shrink-0">
-                        <button onclick="editProduct(${idx})" class="p-2.5 bg-gray-800 hover:bg-gray-700 text-brandGold rounded-lg transition-all hover:scale-105 active:scale-95"><i class="fa-solid fa-pen text-xs"></i></button>
-                        <button onclick="deleteProduct(${idx})" class="p-2.5 bg-red-950/40 hover:bg-red-900 text-red-300 rounded-lg transition-all hover:scale-105 active:scale-95"><i class="fa-solid fa-trash text-xs"></i></button>
-                    </div>
-                    <div class="flex items-center gap-4 truncate flex-row-reverse">
-                        <div class="truncate text-right">
-                            <p class="font-bold text-white truncate text-sm mb-1">${p.name}</p>
-                            <p class="text-[11px] text-brandGold">${p.category}</p>
-                        </div>
-                        <img src="${p.image}" class="w-12 h-12 object-cover rounded-lg border border-gray-700">
-                    </div>
-                `;
-                list.appendChild(item);
-            });
-        }
-
-        function handleProductSubmit(e) {
-            e.preventDefault();
-            const editIndex = parseInt(document.getElementById('editIndex').value);
-            const name = document.getElementById('prodName').value;
-            const category = document.getElementById('prodCategory').value;
-            const image = document.getElementById('prodImage').value;
-            const info = document.getElementById('prodInfo').value;
-
-            const newProd = { name, category, image, info };
-
-            if (editIndex === -1) {
-                products.unshift(newProd);
-                showToast("محصول با موفقیت اضافه شد.");
-            } else {
-                products[editIndex] = newProd;
-                showToast("اطلاعات محصول به‌روزرسانی شد.");
-                resetForm();
-            }
-
-            renderProducts();
-            renderAdminList();
-            document.getElementById('productForm').reset();
-        }
-
-        function editProduct(idx) {
-            const p = products[idx];
-            document.getElementById('editIndex').value = idx;
-            document.getElementById('prodName').value = p.name;
-            document.getElementById('prodCategory').value = p.category;
-            document.getElementById('prodImage').value = p.image;
-            document.getElementById('prodInfo').value = p.info;
-            document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-pen ml-1.5"></i> ویرایش محصول: ${p.name}`;
-        }
-
-        function deleteProduct(idx) {
-            if (confirm("آیا از حذف این محصول اطمینان دارید؟")) {
-                products.splice(idx, 1);
-                renderProducts();
-                renderAdminList();
-                showToast("محصول با موفقیت حذف شد.");
-            }
-        }
-
-        function resetForm() {
-            document.getElementById('editIndex').value = -1;
-            document.getElementById('productForm').reset();
-            document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-plus-circle ml-1.5"></i> ثبت محصول جدید`;
-        }
-
-        function shareProduct(name, info) {
-            const shareText = `آرام صبا صنعت ایرانیان - ${name}\n${info}`;
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(shareText).then(() => {
-                    showToast("لینک محصول در حافظه کپی شد.");
-                }).catch(() => {
-                    showToast(shareText);
-                });
-            } else {
-                showToast(shareText);
-            }
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.innerText = msg;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
-        }
-
-        async function askGeminiAI() {
-            const query = document.getElementById('searchInput').value.trim();
-            const box = document.getElementById('aiResponseBox');
-            if (!query) {
-                box.classList.remove('hidden');
-                box.innerHTML = "لطفاً ابتدا نیاز خود را درباره طراحی فضای اداری وارد کنید.";
-                return;
-            }
-
-            box.classList.remove('hidden');
-            box.innerHTML = `<i class="fa-solid fa-spinner fa-spin ml-2 text-brandGold"></i> هوش مصنوعی در حال پردازش...`;
-
-            setTimeout(() => {
-                box.innerHTML = `<strong>مشاور هوش مصنوعی:</strong><br>برای درخواست شما («${query}»)، پیشنهاد می‌کنیم میزهای مدیریتی گردو را با صندلی‌های ارگونومیک مش ترکیب کنید تا بالاترین سطح پرستیژ فراهم شود.`;
-            }, 1200);
-        }
-    </script>
-</body>
-</html>
+                        <button type="button" onclick="editProduct(${idx})" class="p-2.5 bg-gray-800 hover:bg-gray-700 text-brandGold rounded-lg transition-all hover:scale-105 active:scale-95"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button type="button" onclick="deleteProduct(${idx})" class="p-2.5 bg-red-950/40 hover:bg-red-900 text-red-300 rounded-lg transition-all hover:scale-105 active:scale-95
