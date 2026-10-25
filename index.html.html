@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Playfair Display & Inter -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -45,8 +45,10 @@
     <div id="splashScreen" class="fixed inset-0 z-50 bg-brandDark flex flex-col items-center justify-center p-6 transition-opacity duration-1000">
         <div class="text-center animate-fade-in max-w-sm w-full">
             <div class="mb-6 flex justify-center">
-                <!-- Replace 'logo.jpg' with 'logo.png' if your image is png -->
-                <img src="logo.jpg" alt="Aram Saba Sanat Iranian Logo" class="w-full max-w-[260px] h-auto rounded-xl shadow-2xl border border-brandGold/30">
+                <img src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png" 
+                     onerror="this.onerror=null; this.src='https://placehold.co/400x200/111d2e/c5a059?text=ARAM+SABA+SANAT+IRANIAN';" 
+                     alt="Aram Saba Sanat Iranian Logo" 
+                     class="w-full max-w-[280px] h-auto rounded-xl shadow-2xl border border-brandGold/30">
             </div>
             <button onclick="enterCatalog()" class="w-full py-4 px-8 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark font-semibold uppercase tracking-widest text-sm rounded-xl shadow-2xl hover:opacity-95 transition transform active:scale-95">
                 Enter Digital Catalog <i class="fa-solid fa-arrow-right ml-2"></i>
@@ -60,7 +62,7 @@
         <!-- HEADER -->
         <header class="sticky top-0 z-30 bg-brandNavy/95 backdrop-blur-md border-b border-gray-800 px-4 py-3 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="logo.jpg" alt="Logo" class="w-10 h-10 object-cover rounded shadow border border-brandGold/30">
+                <div class="w-10 h-10 rounded bg-brandGold text-brandDark font-serif font-bold flex items-center justify-center text-sm shadow">AS</div>
                 <div>
                     <h2 class="text-xs sm:text-sm font-serif font-bold tracking-wider text-white">ARAM SABA SANAT</h2>
                     <p class="text-[10px] uppercase tracking-widest text-brandBronze">Office Furniture Collection</p>
@@ -84,7 +86,7 @@
             <div class="relative max-w-2xl mx-auto">
                 <div class="flex items-center bg-gray-900 border border-gray-700 rounded-xl overflow-hidden shadow-lg focus-within:border-brandGold transition">
                     <span class="pl-4 text-brandGold"><i class="fa-solid fa-sparkles"></i></span>
-                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Ask Gemini AI or search products (e.g., 'ergonomic leather chair')..." class="w-full bg-transparent px-3 py-3 text-sm text-gray-100 placeholder-gray-500 focus:outline-none">
+                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Ask Gemini AI or search products..." class="w-full bg-transparent px-3 py-3 text-sm text-gray-100 placeholder-gray-500 focus:outline-none">
                     <button onclick="askGeminiAI()" class="bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-4 py-3 text-xs font-semibold uppercase tracking-wider hover:opacity-90 transition">
                         <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> AI Assistant
                     </button>
@@ -104,9 +106,7 @@
 
         <!-- PRODUCT CATALOG GRID -->
         <main class="flex-1 p-4 sm:p-6">
-            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                <!-- Injected via JavaScript -->
-            </div>
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
         </main>
 
         <!-- FOOTER -->
@@ -118,7 +118,7 @@
         </footer>
     </div>
 
-<!-- ADMIN TERMINAL MODAL -->
+    <!-- ADMIN TERMINAL MODAL -->
     <div id="adminModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="bg-brandNavy border border-brandGold/40 rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl animate-fade-in overflow-hidden">
             <div class="p-4 border-b border-gray-800 flex justify-between items-center bg-gray-900/50">
