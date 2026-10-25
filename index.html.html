@@ -22,8 +22,8 @@
                         brandDark: '#06090f'
                     },
                     fontFamily: {
-                        serif: ['"Playfair Display"', 'Vazirmatn', 'serif'],
-                        sans: ['Vazirmatn', 'Inter', 'sans-serif']
+                        sans: ['Vazirmatn', 'Inter', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'Vazirmatn', 'serif']
                     }
                 }
             }
@@ -52,101 +52,13 @@
 </head>
 <body class="h-full flex flex-col selection:bg-brandGold selection:text-brandDark">
 
-    <!-- SPLASH SCREEN (EXACTLY AS YOU PROVIDED, LTR ISOLATED) -->
-    <div id="splashScreen" dir="ltr" class="fixed inset-0 z-50 bg-brandDark flex flex-col items-center justify-center p-6 transition-opacity duration-1000">
+    <!-- SPLASH SCREEN -->
+    <div id="splashScreen" class="fixed inset-0 z-[100] bg-brandDark flex flex-col items-center justify-center p-6 transition-opacity duration-1000">
         <div class="text-center animate-fade-in max-w-lg w-full p-8 rounded-3xl glass-panel shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brandGold to-transparent"></div>
             
-            <!-- Classy Editorial Monogram AS -->
-            <div class="flex justify-center items-baseline gap-1 mb-6">
-                <span class="text-6xl font-serif font-light text-gray-100 tracking-tighter">A</span>
-                <span class="text-6xl font-serif font-light italic bg-gradient-to-r from-[#d4af37] via-[#f3e5ab] to-[#a2825e] bg-clip-text text-transparent tracking-tighter">S</span>
-            </div>
-
-            <!-- Company Name -->
-            <h1 class="text-2xl sm:text-3xl font-serif tracking-[0.25em] gold-gradient-text mb-1 uppercase font-semibold">ARAM SABA</h1>
-            <h2 class="text-sm sm:text-base font-serif tracking-[0.3em] text-brandBronze mb-5 uppercase font-medium">SANAT IRANIAN</h2>
-            <div class="w-20 h-[1px] bg-brandGold/40 mx-auto mb-4"></div>
-            <p class="text-[10px] uppercase tracking-[0.4em] text-gray-400 mb-8 font-sans">Exquisite Office Architecture</p>
-            
-            <button onclick="enterCatalog()" class="w-full py-4 px-8 bg-gradient-to-r from-brandBronze via-[#c5a059] to-brandGold text-brandDark font-semibold uppercase tracking-[0.2em] text-xs rounded-xl shadow-2xl hover:brightness-110 transition transform active:scale-95 border border-brandGold/40">
-                Enter Digital Catalog <i class="fa-solid fa-arrow-right ml-2 text-brandDark"></i>
-            </button>
-        </div>
-    </div>
-
-    <!-- MAIN APP CONTAINER (FARSI & RTL) -->
-    <div id="mainApp" class="flex-1 flex flex-col max-w-md md:max-w-4xl lg:max-w-6xl mx-auto w-full shadow-2xl bg-brandSurface border-x border-gray-800/80 relative opacity-0 transition-opacity duration-700">
-        
-        <!-- HEADER -->
-        <header class="sticky top-0 z-30 bg-brandNavy/95 backdrop-blur-xl border-b border-brandGold/20 px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div dir="ltr" class="w-10 h-10 rounded-lg bg-gradient-to-br from-brandBronze to-brandGold text-brandDark font-serif font-bold flex items-center justify-center text-lg shadow-lg border border-brandGold/30">AS</div>
-                <div>
-                    <h2 class="text-xs sm:text-sm font-serif font-bold tracking-wider text-white">آرام صبا صنعت ایرانیان</h2>
-                    <p class="text-[9px] uppercase tracking-widest text-brandGold">کلکسیون مدیران ارشد</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-2">
-                <button onclick="toggleAdminModal()" class="px-3.5 py-2 bg-brandNavy hover:bg-gray-800 text-brandGold rounded-xl text-xs font-medium border border-brandGold/30 transition flex items-center gap-2 shadow-lg">
-                    <i class="fa-solid fa-terminal text-[11px]"></i> <span class="hidden sm:inline">ترمینال مدیریت</span>
-                </button>
-            </div>
-        </header>
-
-        <!-- HERO & SEARCH SECTION -->
-        <section class="p-6 sm:p-10 bg-gradient-to-b from-brandNavy/80 via-brandSurface to-brandSurface">
-            <div class="text-center mb-8">
-                <span class="text-[10px] uppercase tracking-[0.3em] text-brandGold block mb-2 font-medium">شاهکارهای معماری فضای کاری</span>
-                <h3 class="text-2xl sm:text-4xl font-serif text-white mb-3 tracking-wide">محیط‌های کاری نخبگان و مدیران</h3>
-                <p class="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto font-light leading-relaxed">تجربه ارگونومی بی‌نقص، ترکیب چوب گردوی اروپایی و طراحی‌های سفارشی برای دفاتر مدیریتی.</p>
-            </div>
-
-            <!-- SEARCH & GEMINI AI BAR -->
-            <div class="relative max-w-2xl mx-auto">
-                <div class="flex items-center bg-brandNavy/90 border border-brandGold/30 rounded-2xl overflow-hidden shadow-2xl focus-within:border-brandGold transition">
-                    <span class="pr-4 text-brandGold text-sm"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
-                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="جستجو در محصولات یا دریافت مشاوره از هوش مصنوعی (مثلا: صندلی چرمی)..." class="w-full bg-transparent px-4 py-3.5 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none">
-                    <button onclick="askGeminiAI()" class="bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3.5 text-[11px] font-semibold tracking-widest hover:brightness-110 transition shrink-0">
-                        مشاوره هوشمند
-                    </button>
-                </div>
-                <div id="aiResponseBox" class="hidden mt-3 p-4 bg-brandNavy border border-brandGold/40 rounded-2xl text-xs text-gray-200 leading-relaxed shadow-xl text-justify"></div>
-            </div>
-
-            <!-- CATEGORY TABS -->
-            <div class="flex gap-2 overflow-x-auto pb-2 mt-8 no-scrollbar justify-start sm:justify-center">
-                <button onclick="setCategory('all')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-gradient-to-r from-brandBronze to-brandGold text-brandDark transition whitespace-nowrap shadow-md">تمام مجموعه‌ها</button>
-                <button onclick="setCategory('Desks')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap">میزهای مدیریت</button>
-                <button onclick="setCategory('Chairs')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap">صندلی‌های ارگونومیک</button>
-                <button onclick="setCategory('Conference')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap">میزهای کنفرانس</button>
-                <button onclick="setCategory('Storage')" class="cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap">کنسول و کتابخانه</button>
-            </div>
-        </section>
-
-        <!-- PRODUCT CATALOG GRID -->
-        <main class="flex-1 p-6 sm:p-10">
-            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Injected via JavaScript -->
-            </div>
-        </main>
-
-        <!-- FOOTER -->
-        <footer class="bg-brandNavy border-t border-brandGold/20 py-8 px-6 text-center text-xs text-gray-400 mt-auto">
-            <div class="flex justify-center items-center gap-3 mb-2">
-                <span class="font-serif font-bold text-white tracking-widest text-sm" dir="ltr">AS</span>
-                <span class="tracking-widest uppercase font-serif text-brandGold text-xs">آرام صبا صنعت ایرانیان</span>
-            </div>
-            <p class="text-[10px] text-gray-500 tracking-widest">© ۲۰۲۶ تمامی حقوق محفوظ است. کاتالوگ دیجیتال مبلمان اداری لوکس.</p>
-        </footer>
-    </div>
-
-    <!-- ADMIN TERMINAL MODAL -->
-    <div id="adminModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
-        <div class="bg-brandNavy border border-brandGold/50 rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl animate-fade-in overflow-hidden">
-            <div class="p-5 border-b border-gray-800 flex justify-between items-center bg-brandSurface">
-                <div class="flex items-center gap-2.5">
-                    <i class="fa-solid fa-terminal text-brandGold"></i>
-                    <h3 class="font-serif font-bold text-white text-sm tracking-wider">ترمینال مدیریت سیستم</h3>
-                </div>
-                <button onclick="toggleAdminModal()" class="text-gray-400 hover:text-white p-1.
+            <!-- Classy Editorial Monogram AS (Isolating LTR design) -->
+            <div dir="ltr">
+                <div class="flex justify-center items-baseline gap-1 mb-6">
+                    <span class="text-6xl font-serif font-light text-gray-100 tracking-tighter">A</span>
+                    <span class="text-6xl font-serif font-light italic bg-gradient
