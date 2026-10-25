@@ -55,9 +55,9 @@
     <!-- SPLASH SCREEN -->
     <div id="splashScreen" class="fixed inset-0 z-[100] bg-brandDark flex flex-col items-center justify-center p-6 transition-opacity duration-700">
         <div class="text-center animate-fade-in max-w-lg w-full p-8 rounded-3xl glass-panel shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brandGold to-transparent"></div>
+            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brandGold to-transparent pointer-events-none"></div>
             
-            <div dir="ltr">
+            <div dir="ltr" class="pointer-events-none">
                 <div class="flex justify-center items-baseline gap-1 mb-6">
                     <span class="text-6xl font-serif font-light text-gray-100 tracking-tighter">A</span>
                     <span class="text-6xl font-serif font-light italic bg-gradient-to-r from-[#d4af37] via-[#f3e5ab] to-[#a2825e] bg-clip-text text-transparent tracking-tighter" style="-webkit-background-clip: text; -webkit-text-fill-color: transparent;">S</span>
@@ -68,13 +68,60 @@
                 <p class="text-[10px] uppercase tracking-[0.4em] text-gray-400 mb-8 font-sans">Exquisite Office Architecture</p>
             </div>
             
-            <button id="enterBtn" onclick="enterCatalog()" type="button" class="relative z-50 w-full py-4 px-8 bg-gradient-to-r from-brandBronze via-[#c5a059] to-brandGold text-brandDark font-bold text-sm rounded-xl shadow-2xl hover:brightness-110 transition transform active:scale-95 border border-brandGold/40 cursor-pointer">
+            <!-- Robust Enter Button -->
+            <button id="enterBtn" onclick="window.enterCatalog()" type="button" class="relative z-50 w-full py-4 px-8 bg-gradient-to-r from-brandBronze via-[#c5a059] to-brandGold text-brandDark font-bold text-sm rounded-xl shadow-2xl hover:brightness-110 transition transform active:scale-95 border border-brandGold/40 cursor-pointer pointer-events-auto">
                 ورود به کاتالوگ دیجیتال <i class="fa-solid fa-arrow-left mr-3 text-brandDark"></i>
             </button>
         </div>
     </div>
 
-    <!-- MAIN APP CONTAINER -->
-    <div id="mainApp" class="flex-col max-w-md md:max-w-4xl lg:max-w-6xl mx-auto w-full shadow-2xl bg-brandSurface border-x border-gray-800/80 relative opacity-0 transition-opacity duration-700" style="display: none; flex: 1;">
+    <!-- MAIN APP CONTAINER (Hidden natively by Tailwind class 'hidden' to prevent layout bugs) -->
+    <div id="mainApp" class="hidden flex-col flex-1 max-w-md md:max-w-4xl lg:max-w-6xl mx-auto w-full shadow-2xl bg-brandSurface border-x border-gray-800/80 relative opacity-0 transition-opacity duration-700 min-h-screen">
         
-        <header class="sticky top-0 z-30 bg-brandNavy/95 backdrop-blur-
+        <header class="sticky top-0 z-30 bg-brandNavy/95 backdrop-blur-xl border-b border-brandGold/20 px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div dir="ltr" class="w-11 h-11 rounded-lg bg-gradient-to-br from-brandBronze to-brandGold text-brandDark font-serif font-bold flex items-center justify-center text-lg shadow-lg border border-brandGold/30">AS</div>
+                <div>
+                    <h2 class="text-sm font-bold text-white">آرام صبا صنعت ایرانیان</h2>
+                    <p class="text-[10px] text-brandGold font-light mt-0.5">کلکسیون مدیران ارشد</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button type="button" onclick="toggleAdminModal()" class="px-4 py-2 bg-brandNavy hover:bg-gray-800 text-brandGold rounded-xl text-xs font-medium border border-brandGold/30 transition flex items-center gap-2 shadow-lg cursor-pointer">
+                    <i class="fa-solid fa-terminal ml-1.5 text-[11px]"></i> <span class="hidden sm:inline">پنل مدیریت</span>
+                </button>
+            </div>
+        </header>
+
+        <section class="p-6 sm:p-12 bg-gradient-to-b from-brandNavy/80 via-brandSurface to-brandSurface">
+            <div class="text-center mb-10">
+                <span class="text-[11px] text-brandGold block mb-3 font-medium">راهکارهای تخصصی فضاهای اداری</span>
+                <h3 class="text-2xl sm:text-4xl font-bold text-white mb-4">مبلمان اداری و فضاهای مدیریتی لوکس</h3>
+                <p class="text-xs sm:text-sm text-gray-400 max-w-2xl mx-auto font-light leading-loose">تلفیق بی‌نظیر ارگونومی پیشرفته، چوب طبیعی گردوی اروپایی و استانداردهای طراحی سفارشی برای خلق دفاتری با پرستیژ جهانی.</p>
+            </div>
+
+            <div class="relative max-w-2xl mx-auto">
+                <div class="flex items-center bg-brandNavy/90 border border-brandGold/30 rounded-2xl overflow-hidden shadow-2xl focus-within:border-brandGold transition">
+                    <button type="button" onclick="askGeminiAI()" class="bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-6 py-4 text-xs font-bold hover:brightness-110 transition shrink-0 cursor-pointer">
+                        مشاوره هوشمند
+                    </button>
+                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="جستجو در کاتالوگ (مثال: صندلی چرمی ارگونومیک)..." class="w-full bg-transparent px-5 py-4 text-sm text-gray-100 placeholder-gray-500 focus:outline-none">
+                    <span class="pr-5 pl-2 text-brandGold text-lg"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                </div>
+                <div id="aiResponseBox" class="hidden mt-4 p-5 bg-brandNavy border border-brandGold/40 rounded-2xl text-xs text-gray-200 leading-loose shadow-xl text-justify"></div>
+            </div>
+
+            <div class="flex gap-3 overflow-x-auto pb-4 mt-10 no-scrollbar justify-start sm:justify-center">
+                <button type="button" onclick="setCategory('all', this)" class="cat-btn px-6 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark transition whitespace-nowrap shadow-md cursor-pointer">تمامی کلکسیون‌ها</button>
+                <button type="button" onclick="setCategory('Desks', this)" class="cat-btn px-6 py-2.5 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap cursor-pointer">میزهای مدیریت</button>
+                <button type="button" onclick="setCategory('Chairs', this)" class="cat-btn px-6 py-2.5 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap cursor-pointer">صندلی‌های ارگونومیک</button>
+                <button type="button" onclick="setCategory('Conference', this)" class="cat-btn px-6 py-2.5 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap cursor-pointer">میزهای کنفرانس</button>
+                <button type="button" onclick="setCategory('Storage', this)" class="cat-btn px-6 py-2.5 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap cursor-pointer">کنسول و فایلینگ</button>
+            </div>
+        </section>
+
+        <main class="flex-1 p-6 sm:p-10">
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </main>
+
+        <footer class="bg-brandNavy border-t border-brandGold/20 py-8 px-6 text-center
