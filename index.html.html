@@ -35,7 +35,8 @@
         .glass-panel {
             background: rgba(15, 24, 38, 0.9);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.85);
         }
         .gold-gradient-text {
             background: linear-gradient(135deg, #ffffff 0%, #d4af37 100%);
@@ -54,13 +55,16 @@
 
     <!-- SPLASH SCREEN -->
     <div id="splashScreen" class="fixed inset-0 z-50 bg-brandDark flex flex-col items-center justify-center p-6 transition-opacity duration-1000">
-        <div class="text-center animate-fade-in max-w-lg w-full p-8 rounded-3xl glass-panel shadow-2xl relative overflow-hidden">
+        <div class="text-center animate-fade-in max-w-lg w-full p-8 sm:p-10 rounded-3xl glass-panel shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brandGold to-transparent"></div>
             
-            <!-- Classy Editorial Monogram AS -->
-            <div class="flex justify-center items-baseline gap-1 mb-6">
-                <span class="text-6xl font-serif font-light text-gray-100 tracking-tighter">A</span>
-                <span class="text-6xl font-serif font-light italic bg-gradient-to-r from-[#d4af37] via-[#f3e5ab] to-[#a2825e] bg-clip-text text-transparent tracking-tighter">S</span>
+            <!-- Elite Luxury Crest Emblem -->
+            <div class="relative w-20 h-20 mx-auto mb-6 flex items-center justify-center rounded-full border border-brandGold/40 bg-gradient-to-b from-brandNavy to-[#040810] shadow-2xl">
+                <div class="absolute inset-1.5 rounded-full border border-brandGold/20 pointer-events-none"></div>
+                <div class="flex items-baseline gap-0.5 z-10">
+                    <span class="text-3xl font-serif font-bold text-white tracking-tighter">A</span>
+                    <span class="text-3xl font-serif font-bold italic bg-gradient-to-r from-brandBronze to-brandGold bg-clip-text text-transparent tracking-tighter">S</span>
+                </div>
             </div>
 
             <!-- Company Name -->
@@ -149,4 +153,270 @@
                     <i class="fa-solid fa-terminal text-brandGold"></i>
                     <h3 class="font-serif font-bold text-white text-sm tracking-wider uppercase">Admin Management Terminal</h3>
                 </div>
-                <button onclick="toggleAdminModal()" class="text
+                <button onclick="toggleAdminModal()" class="text-gray-400 hover:text-white p-1.5 rounded-lg bg-gray-800/50"><i class="fa-solid fa-xmark text-xs"></i></button>
+            </div>
+
+            <div class="p-6 overflow-y-auto space-y-6 flex-1">
+                <div class="bg-brandSurface p-5 rounded-2xl border border-brandGold/20 shadow-inner">
+                    <h4 id="formTitle" class="text-[11px] font-semibold uppercase tracking-[0.2em] text-brandGold mb-4"><i class="fa-solid fa-plus-circle mr-1.5"></i> Add New Product</h4>
+                    <form id="productForm" onsubmit="handleProductSubmit(event)" class="space-y-4">
+                        <input type="hidden" id="editIndex" value="-1">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1.5">Product Name</label>
+                                <input type="text" id="prodName" required placeholder="e.g. Imperial Executive Desk" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1.5">Category</label>
+                                <select id="prodCategory" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none">
+                                    <option value="Desks">Managerial Desks</option>
+                                    <option value="Chairs">Ergonomic Chairs</option>
+                                    <option value="Conference">Conference Tables</option>
+                                    <option value="Storage">Storage & Credenzas</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1.5">Image URL</label>
+                            <input type="url" id="prodImage" required placeholder="https://images.unsplash.com/..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-1.5">Product Specifications & Info</label>
+                            <textarea id="prodInfo" rows="2" required placeholder="Aged European Walnut veneer, genuine leather..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none"></textarea>
+                        </div>
+                        <div class="flex justify-end gap-2.5 pt-2">
+                            <button type="button" onclick="resetForm()" class="px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs rounded-xl transition">Cancel</button>
+                            <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark font-semibold text-xs rounded-xl hover:brightness-110 transition shadow-lg">Save Product</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div>
+                    <h4 class="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400 mb-3">Manage Catalog Inventory</h4>
+                    <div id="adminProductList" class="space-y-2.5 max-h-60 overflow-y-auto pr-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3 rounded-2xl text-xs font-semibold shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 border border-white/20"></div>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        let products = [
+            {
+                name: "Vanguard Executive Managerial Desk",
+                category: "Desks",
+                image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=800&q=80",
+                info: "Crafted from premium aged European Walnut with hand-stitched Italian leather inlay and concealed smart cable management ports."
+            },
+            {
+                name: "Aegis Ergonomic High-Back Chair",
+                category: "Chairs",
+                image: "https://images.unsplash.com/photo-1580481077494-e3299acae5e7?auto=format&fit=crop&w=800&q=80",
+                info: "Synchronized multi-tilt mechanism, breathable mesh backing, adjustable 4D armrests, and dynamic lumbar support system."
+            },
+            {
+                name: "Diplomat Boardroom Conference Table",
+                category: "Conference",
+                image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+                info: "Modular 12-seater executive meeting table featuring integrated pop-up power modules, HDMI/USB connectivity, and brushed bronze trim."
+            },
+            {
+                name: "Kian Architectural Credenza & Storage",
+                category: "Storage",
+                image: "https://images.unsplash.com/photo-1595515106967-1ce2e16d41f0?auto=format&fit=crop&w=800&q=80",
+                info: "Soft-close matte lacquer doors, tempered smoked glass display shelves, and integrated security lock system."
+            }
+        ];
+
+        let currentCategory = 'all';
+
+        function enterCatalog() {
+            const splash = document.getElementById('splashScreen');
+            const main = document.getElementById('mainApp');
+            splash.style.opacity = '0';
+            setTimeout(() => {
+                splash.style.display = 'none';
+                main.style.opacity = '1';
+                renderProducts();
+            }, 800);
+        }
+
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap tracking-wider";
+            });
+            event.target.className = "cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-gradient-to-r from-brandBronze to-brandGold text-brandDark transition whitespace-nowrap shadow-md tracking-wider";
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            grid.innerHTML = '';
+
+            const filtered = products.filter(p => {
+                const matchesCat = currentCategory === 'all' || p.category === currentCategory;
+                const matchesSearch = p.name.toLowerCase().includes(searchTerm) || p.info.toLowerCase().includes(searchTerm);
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-16 text-gray-500 text-xs tracking-wider">No luxury items found matching your criteria.</div>`;
+                return;
+            }
+
+            filtered.forEach((p, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-brandNavy border border-gray-800/80 rounded-3xl overflow-hidden flex flex-col shadow-2xl hover:border-brandGold/50 transition duration-300 group";
+                card.innerHTML = `
+                    <div class="relative h-56 overflow-hidden bg-gray-900">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-90 group-hover:opacity-100">
+                        <span class="absolute top-3.5 left-3.5 bg-brandNavy/90 backdrop-blur-md text-brandGold text-[10px] px-3 py-1 rounded-full uppercase tracking-[0.2em] font-medium border border-brandGold/30 shadow-lg">${p.category}</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h4 class="font-serif font-bold text-white text-base mb-2.5 tracking-wide group-hover:text-brandGold transition">${p.name}</h4>
+                        <p class="text-xs text-gray-400 font-light leading-relaxed mb-6 flex-1">${p.info}</p>
+                        <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between">
+                            <span class="text-[10px] text-brandGold uppercase tracking-[0.2em] font-medium flex items-center"><i class="fa-solid fa-gem mr-1.5 text-[9px]"></i> Bespoke Ready</span>
+                            <button onclick="shareProduct('${p.name}', '${p.info}')" class="px-3.5 py-2 bg-brandSurface hover:bg-gray-800 text-gray-200 text-xs rounded-xl transition flex items-center gap-2 border border-gray-700/60 shadow">
+                                <i class="fa-solid fa-share-nodes text-[10px]"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProducts() { renderProducts(); }
+
+        function toggleAdminModal() {
+            const modal = document.getElementById('adminModal');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                renderAdminList();
+            } else {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                resetForm();
+            }
+        }
+
+        function renderAdminList() {
+            const list = document.getElementById('adminProductList');
+            list.innerHTML = '';
+            products.forEach((p, idx) => {
+                const item = document.createElement('div');
+                item.className = "flex items-center justify-between bg-brandNavy p-3 rounded-xl border border-gray-800 text-xs shadow-sm";
+                item.innerHTML = `
+                    <div class="flex items-center gap-3 truncate">
+                        <img src="${p.image}" class="w-10 h-10 object-cover rounded-lg border border-gray-700">
+                        <div class="truncate">
+                            <p class="font-medium text-white truncate tracking-wide">${p.name}</p>
+                            <p class="text-[10px] text-brandGold uppercase tracking-wider">${p.category}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button onclick="editProduct(${idx})" class="p-2 bg-gray-800 hover:bg-gray-700 text-brandGold rounded-lg transition"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="deleteProduct(${idx})" class="p-2 bg-red-950/40 hover:bg-red-900 text-red-300 rounded-lg transition"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function handleProductSubmit(e) {
+            e.preventDefault();
+            const editIndex = parseInt(document.getElementById('editIndex').value);
+            const name = document.getElementById('prodName').value;
+            const category = document.getElementById('prodCategory').value;
+            const image = document.getElementById('prodImage').value;
+            const info = document.getElementById('prodInfo').value;
+
+            const newProd = { name, category, image, info };
+
+            if (editIndex === -1) {
+                products.unshift(newProd);
+                showToast("Product successfully added!");
+            } else {
+                products[editIndex] = newProd;
+                showToast("Product successfully updated!");
+                resetForm();
+            }
+
+            renderProducts();
+            renderAdminList();
+            document.getElementById('productForm').reset();
+        }
+
+        function editProduct(idx) {
+            const p = products[idx];
+            document.getElementById('editIndex').value = idx;
+            document.getElementById('prodName').value = p.name;
+            document.getElementById('prodCategory').value = p.category;
+            document.getElementById('prodImage').value = p.image;
+            document.getElementById('prodInfo').value = p.info;
+            document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-pen mr-1.5"></i> Edit Product: ${p.name}`;
+        }
+
+        function deleteProduct(idx) {
+            if (confirm("Are you sure you want to delete this product?")) {
+                products.splice(idx, 1);
+                renderProducts();
+                renderAdminList();
+                showToast("Product removed.");
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('editIndex').value = -1;
+            document.getElementById('productForm').reset();
+            document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-plus-circle mr-1.5"></i> Add New Product`;
+        }
+
+        function shareProduct(name, info) {
+            const shareText = `Aram Saba Sanat Iranian - ${name}\n${info}`;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareText).then(() => {
+                    showToast("Product details copied to clipboard!");
+                }).catch(() => {
+                    showToast(shareText);
+                });
+            } else {
+                showToast(shareText);
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        async function askGeminiAI() {
+            const query = document.getElementById('searchInput').value.trim();
+            const box = document.getElementById('aiResponseBox');
+            if (!query) {
+                box.classList.remove('hidden');
+                box.innerHTML = "Please enter an inquiry regarding executive office requirements.";
+                return;
+            }
+
+            box.classList.remove('hidden');
+            box.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2 text-brandGold"></i> Gemini AI is curating executive workspace recommendations...`;
+
+            setTimeout(() => {
+                box.innerHTML = `<strong>Gemini AI Consultant:</strong><br>For your executive workspace query ("${query}"), we recommend pairing our European walnut managerial desks with ergonomic mesh seating to achieve optimal prestige and physical comfort.`;
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
