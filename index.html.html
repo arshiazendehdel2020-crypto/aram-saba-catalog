@@ -59,20 +59,19 @@
         <div class="text-center animate-fade-in max-w-lg w-full p-8 rounded-3xl glass-panel shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brandGold to-transparent"></div>
             
-            <!-- Classy Editorial Monogram AS (Isolating English layout) -->
+            <!-- Classy Editorial Monogram AS (LTR ISOLATED) -->
             <div dir="ltr">
                 <div class="flex justify-center items-baseline gap-1 mb-6">
                     <span class="text-6xl font-serif font-light text-gray-100 tracking-tighter">A</span>
                     <span class="text-6xl font-serif font-light italic bg-gradient-to-r from-[#d4af37] via-[#f3e5ab] to-[#a2825e] bg-clip-text text-transparent tracking-tighter">S</span>
                 </div>
-
                 <h1 class="text-2xl sm:text-3xl font-serif tracking-[0.25em] gold-gradient-text mb-1 uppercase font-semibold">ARAM SABA</h1>
                 <h2 class="text-sm sm:text-base font-serif tracking-[0.3em] text-brandBronze mb-5 uppercase font-medium">SANAT IRANIAN</h2>
                 <div class="w-20 h-[1px] bg-brandGold/40 mx-auto mb-4"></div>
                 <p class="text-[10px] uppercase tracking-[0.4em] text-gray-400 mb-8 font-sans">Exquisite Office Architecture</p>
             </div>
             
-            <button onclick="enterCatalog()" class="w-full py-4 px-8 bg-gradient-to-r from-brandBronze via-[#c5a059] to-brandGold text-brandDark font-bold text-sm rounded-xl shadow-2xl hover:brightness-110 transition transform active:scale-95 border border-brandGold/40">
+            <button type="button" onclick="enterCatalog()" class="w-full py-4 px-8 bg-gradient-to-r from-brandBronze via-[#c5a059] to-brandGold text-brandDark font-semibold text-xs rounded-xl shadow-2xl hover:brightness-110 transition transform active:scale-95 border border-brandGold/40">
                 ورود به کاتالوگ دیجیتال <i class="fa-solid fa-arrow-left mr-2 text-brandDark"></i>
             </button>
         </div>
@@ -87,11 +86,11 @@
                 <div dir="ltr" class="w-10 h-10 rounded-lg bg-gradient-to-br from-brandBronze to-brandGold text-brandDark font-serif font-bold flex items-center justify-center text-lg shadow-lg border border-brandGold/30">AS</div>
                 <div>
                     <h2 class="text-xs sm:text-sm font-serif font-bold text-white">آرام صبا صنعت ایرانیان</h2>
-                    <p class="text-[9px] text-brandGold mt-0.5">کلکسیون مدیران ارشد</p>
+                    <p class="text-[9px] text-brandGold font-light mt-1">کلکسیون مدیران ارشد</p>
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <button onclick="toggleAdminModal()" class="px-3.5 py-2 bg-brandNavy hover:bg-gray-800 text-brandGold rounded-xl text-xs font-medium border border-brandGold/30 transition flex items-center gap-2 shadow-lg">
+                <button type="button" onclick="toggleAdminModal()" class="px-3.5 py-2 bg-brandNavy hover:bg-gray-800 text-brandGold rounded-xl text-xs font-medium border border-brandGold/30 transition flex items-center gap-2 shadow-lg">
                     <i class="fa-solid fa-terminal ml-1.5 text-[11px]"></i> <span class="hidden sm:inline">ترمینال مدیریت</span>
                 </button>
             </div>
@@ -102,22 +101,22 @@
             <div class="text-center mb-8">
                 <span class="text-[11px] text-brandGold block mb-2 font-medium">راهکارهای تخصصی فضاهای اداری</span>
                 <h3 class="text-2xl sm:text-4xl font-serif font-bold text-white mb-4">مبلمان اداری و فضاهای مدیریتی لوکس</h3>
-                <p class="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto font-light leading-loose">تلفیق بی‌نظیر ارگونومی پیشرفته، چوب طبیعی گردوی اروپایی و استانداردهای طراحی سفارشی برای خلق دفاتری با پرستیژ جهانی.</p>
+                <p class="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto font-light leading-relaxed">تلفیق بی‌نظیر ارگونومی پیشرفته، چوب طبیعی گردوی اروپایی و استانداردهای طراحی سفارشی برای خلق دفاتری با پرستیژ جهانی.</p>
             </div>
 
             <!-- SEARCH & GEMINI AI BAR -->
             <div class="relative max-w-2xl mx-auto">
                 <div class="flex items-center bg-brandNavy/90 border border-brandGold/30 rounded-2xl overflow-hidden shadow-2xl focus-within:border-brandGold transition">
                     <span class="pr-4 pl-2 text-brandGold text-sm"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
-                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="جستجو در کاتالوگ (مثال: صندلی چرمی)..." class="w-full bg-transparent px-4 py-3.5 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none">
-                    <button onclick="askGeminiAI()" class="bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3.5 text-[11px] font-bold hover:brightness-110 transition shrink-0">
-                        مشاوره هوشمند
+                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="جستجو در کاتالوگ (مثال: صندلی چرمی ارگونومیک)..." class="w-full bg-transparent px-4 py-3.5 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none">
+                    <button type="button" onclick="askGeminiAI()" class="bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3.5 text-[11px] font-semibold hover:brightness-110 transition shrink-0">
+                        مشاور هوشمند
                     </button>
                 </div>
-                <div id="aiResponseBox" class="hidden mt-3 p-4 bg-brandNavy border border-brandGold/40 rounded-2xl text-xs text-gray-200 leading-loose shadow-xl text-justify"></div>
+                <div id="aiResponseBox" class="hidden mt-3 p-4 bg-brandNavy border border-brandGold/40 rounded-2xl text-xs text-gray-200 leading-relaxed shadow-xl text-justify"></div>
             </div>
 
-            <!-- CATEGORY TABS CONTAINER -->
+            <!-- DYNAMIC CATEGORY TABS -->
             <div id="categoryTabsContainer" class="flex gap-2 overflow-x-auto pb-2 mt-8 no-scrollbar justify-start sm:justify-center">
                 <!-- Injected via JavaScript -->
             </div>
@@ -136,7 +135,7 @@
                 <span class="font-serif font-bold text-white text-base" dir="ltr">AS</span>
                 <span class="font-bold text-brandGold text-xs">آرام صبا صنعت ایرانیان</span>
             </div>
-            <p class="text-[10px] text-gray-500 font-light mt-1">© ۲۰۲۶ تمامی حقوق محفوظ است. کاتالوگ دیجیتال مبلمان اداری لوکس.</p>
+            <p class="text-[10px] text-gray-500 mt-1">© ۲۰۲۶ تمامی حقوق محفوظ است. کاتالوگ دیجیتال مبلمان اداری لوکس.</p>
         </footer>
     </div>
 
@@ -148,57 +147,57 @@
                     <i class="fa-solid fa-terminal text-brandGold"></i>
                     <h3 class="font-bold text-white text-sm">ترمینال مدیریت سیستم</h3>
                 </div>
-                <button onclick="toggleAdminModal()" class="text-gray-400 hover:text-white p-1.5 rounded-lg bg-gray-800/50"><i class="fa-solid fa-xmark text-xs"></i></button>
+                <button type="button" onclick="toggleAdminModal()" class="text-gray-400 hover:text-white p-1.5 rounded-lg bg-gray-800/50"><i class="fa-solid fa-xmark text-xs"></i></button>
             </div>
 
             <div class="p-6 overflow-y-auto space-y-6 flex-1 text-right">
                 
                 <!-- Category Management -->
                 <div class="bg-brandSurface p-5 rounded-2xl border border-brandGold/20 shadow-inner">
-                    <h4 class="text-[11px] font-bold text-gray-400 mb-3"><i class="fa-solid fa-tags ml-1.5"></i> مدیریت دسته‌بندی‌ها</h4>
+                    <h4 class="text-xs font-bold text-brandGold mb-4"><i class="fa-solid fa-tags ml-1.5"></i> مدیریت دسته‌بندی‌ها</h4>
                     <div class="flex gap-2 mb-4">
                         <input type="text" id="newCategoryName" placeholder="نام دسته‌بندی جدید..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none">
-                        <button type="button" onclick="addCategory()" class="px-5 py-2.5 bg-brandGold hover:brightness-110 text-brandDark font-bold text-xs rounded-xl transition shadow-lg whitespace-nowrap">افزودن دسته</button>
+                        <button type="button" onclick="addCategory()" class="px-5 py-2.5 bg-brandGold hover:brightness-110 text-brandDark font-semibold text-xs rounded-xl transition shadow-lg shrink-0">افزودن دسته</button>
                     </div>
-                    <div id="adminCategoryList" class="flex flex-wrap gap-2 mb-2">
+                    <div id="adminCategoryList" class="flex flex-wrap gap-2">
                         <!-- Injected via JavaScript -->
                     </div>
                 </div>
 
                 <!-- Product Form -->
                 <div class="bg-brandSurface p-5 rounded-2xl border border-brandGold/20 shadow-inner">
-                    <h4 id="formTitle" class="text-[11px] font-bold text-brandGold mb-4"><i class="fa-solid fa-plus-circle ml-1.5"></i> ثبت محصول جدید</h4>
+                    <h4 id="formTitle" class="text-xs font-bold text-brandGold mb-4"><i class="fa-solid fa-plus-circle ml-1.5"></i> ثبت محصول جدید</h4>
                     <form id="productForm" onsubmit="handleProductSubmit(event)" class="space-y-4">
                         <input type="hidden" id="editIndex" value="-1">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-[10px] text-gray-400 mb-1.5">نام محصول</label>
+                                <label class="block text-[11px] text-gray-400 mb-1.5">نام محصول</label>
                                 <input type="text" id="prodName" required placeholder="مثال: میز مدیریت امپریال" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none">
                             </div>
                             <div>
-                                <label class="block text-[10px] text-gray-400 mb-1.5">دسته‌بندی</label>
+                                <label class="block text-[11px] text-gray-400 mb-1.5">دسته‌بندی</label>
                                 <select id="prodCategory" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none">
                                     <!-- Injected via JavaScript -->
                                 </select>
                             </div>
                         </div>
                         <div>
-                            <label class="block text-[10px] text-gray-400 mb-1.5">لینک تصویر (URL)</label>
+                            <label class="block text-[11px] text-gray-400 mb-1.5">لینک تصویر (URL)</label>
                             <input type="url" id="prodImage" required placeholder="https://images.unsplash.com/..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none text-left" dir="ltr">
                         </div>
                         <div>
-                            <label class="block text-[10px] text-gray-400 mb-1.5">مشخصات فنی و توضیحات</label>
-                            <textarea id="prodInfo" rows="2" required placeholder="روکش چوب گردوی اروپایی، چرم طبیعی دست‌دوز..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none leading-loose"></textarea>
+                            <label class="block text-[11px] text-gray-400 mb-1.5">مشخصات فنی و توضیحات</label>
+                            <textarea id="prodInfo" rows="2" required placeholder="روکش چوب گردوی اروپایی، چرم طبیعی دست‌دوز..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none leading-relaxed"></textarea>
                         </div>
                         <div class="flex justify-start gap-2.5 pt-2">
-                            <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark font-bold text-xs rounded-xl hover:brightness-110 transition shadow-lg">ذخیره اطلاعات</button>
+                            <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark font-semibold text-xs rounded-xl hover:brightness-110 transition shadow-lg">ذخیره اطلاعات</button>
                             <button type="button" onclick="resetForm()" class="px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs rounded-xl transition">انصراف</button>
                         </div>
                     </form>
                 </div>
 
                 <div>
-                    <h4 class="text-[10px] font-bold text-gray-400 mb-3">مدیریت موجودی کاتالوگ</h4>
+                    <h4 class="text-xs font-bold text-gray-400 mb-3">مدیریت موجودی کاتالوگ</h4>
                     <div id="adminProductList" class="space-y-2.5 max-h-60 overflow-y-auto pl-1"></div>
                 </div>
             </div>
@@ -206,9 +205,9 @@
     </div>
 
     <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-6 left-6 z-50 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3 rounded-2xl text-xs font-bold shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 border border-white/20"></div>
+    <div id="toast" class="fixed bottom-6 left-6 z-50 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3 rounded-2xl text-xs font-semibold shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 border border-white/20"></div>
 
-    <!-- SCRIPT LOGIC (Structure fully matched to your initial functional paste) -->
+    <!-- SCRIPT LOGIC -->
     <script>
         let categories = ["میز مدیریت", "صندلی ارگونومیک", "میز کنفرانس", "کنسول و فایلینگ"];
         let currentCategory = 'all';
@@ -240,6 +239,9 @@
             }
         ];
 
+        // Ensure categories are loaded in DOM
+        renderCategories();
+
         function enterCatalog() {
             const splash = document.getElementById('splashScreen');
             const main = document.getElementById('mainApp');
@@ -247,63 +249,44 @@
             setTimeout(() => {
                 splash.style.display = 'none';
                 main.style.opacity = '1';
-                renderCategories(); 
                 renderProducts();
             }, 800);
         }
 
         function renderCategories() {
             const container = document.getElementById('categoryTabsContainer');
-            if(!container) return;
-            container.innerHTML = '';
-
-            const allBtn = document.createElement('button');
-            allBtn.onclick = () => setCategory('all');
-            allBtn.innerText = "تمامی کلکسیون‌ها";
-            if (currentCategory === 'all') {
-                allBtn.className = "cat-btn px-5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark transition whitespace-nowrap shadow-md";
-            } else {
-                allBtn.className = "cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap";
+            if (container) {
+                let html = `<button type="button" onclick="setCategory('all')" class="cat-btn px-5 py-2 rounded-xl text-xs transition whitespace-nowrap ${currentCategory === 'all' ? 'font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark shadow-md' : 'font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800'}">تمامی کلکسیون‌ها</button>`;
+                
+                categories.forEach(cat => {
+                    html += `<button type="button" onclick="setCategory('${cat}')" class="cat-btn px-5 py-2 rounded-xl text-xs transition whitespace-nowrap ${currentCategory === cat ? 'font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark shadow-md' : 'font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800'}">${cat}</button>`;
+                });
+                container.innerHTML = html;
             }
-            container.appendChild(allBtn);
-
-            categories.forEach(cat => {
-                const btn = document.createElement('button');
-                btn.onclick = () => setCategory(cat);
-                btn.innerText = cat;
-                if (currentCategory === cat) {
-                    btn.className = "cat-btn px-5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark transition whitespace-nowrap shadow-md";
-                } else {
-                    btn.className = "cat-btn px-5 py-2 rounded-xl text-xs font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 transition whitespace-nowrap";
-                }
-                container.appendChild(btn);
-            });
 
             const select = document.getElementById('prodCategory');
-            if(select) {
+            if (select) {
                 const currentVal = select.value;
-                select.innerHTML = '';
+                let optionsHtml = '';
                 categories.forEach(cat => {
-                    const opt = document.createElement('option');
-                    opt.value = cat;
-                    opt.innerText = cat;
-                    select.appendChild(opt);
+                    optionsHtml += `<option value="${cat}">${cat}</option>`;
                 });
-                if(categories.includes(currentVal)) select.value = currentVal;
+                select.innerHTML = optionsHtml;
+                if (categories.includes(currentVal)) select.value = currentVal;
             }
 
-            const adminList = document.getElementById('adminCategoryList');
-            if(adminList) {
-                adminList.innerHTML = '';
+            const adminCatList = document.getElementById('adminCategoryList');
+            if (adminCatList) {
+                let adminHtml = '';
                 categories.forEach(cat => {
-                    const badge = document.createElement('div');
-                    badge.className = "flex items-center gap-3 bg-brandSurface border border-brandGold/30 px-3 py-1.5 rounded-lg text-xs text-brandGold shadow-sm";
-                    badge.innerHTML = `
+                    adminHtml += `
+                    <div class="flex items-center gap-2 bg-brandSurface border border-brandGold/30 px-3 py-1.5 rounded-lg text-xs text-brandGold shadow-sm">
                         <span>${cat}</span>
                         <button type="button" onclick="deleteCategory('${cat}')" class="text-red-400 hover:text-red-300 transition"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
                     `;
-                    adminList.appendChild(badge);
                 });
+                adminCatList.innerHTML = adminHtml;
             }
         }
 
@@ -321,10 +304,188 @@
                 input.value = '';
                 renderCategories();
                 showToast("دسته‌بندی جدید ثبت شد.");
-            } else if(categories.includes(val)) {
+            } else if (categories.includes(val)) {
                 showToast("این دسته‌بندی از قبل وجود دارد.");
             }
         }
 
         function deleteCategory(cat) {
-            if(confirm("آیا از حذف این
+            if(confirm("آیا از حذف این دسته‌بندی اطمینان دارید؟")) {
+                categories = categories.filter(c => c !== cat);
+                if(currentCategory === cat) currentCategory = 'all';
+                renderCategories();
+                renderProducts();
+                showToast("دسته‌بندی حذف شد.");
+            }
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            grid.innerHTML = '';
+
+            const filtered = products.map((p, idx) => ({ p, idx })).filter(item => {
+                const matchesCat = currentCategory === 'all' || item.p.category === currentCategory;
+                const matchesSearch = item.p.name.toLowerCase().includes(searchTerm) || item.p.info.toLowerCase().includes(searchTerm);
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-16 text-gray-500 text-xs">هیچ محصولی با این مشخصات یافت نشد.</div>`;
+                return;
+            }
+
+            filtered.forEach(item => {
+                const p = item.p;
+                const originalIdx = item.idx;
+                const card = document.createElement('div');
+                card.className = "bg-brandNavy border border-gray-800/80 rounded-3xl overflow-hidden flex flex-col shadow-2xl hover:border-brandGold/50 transition duration-300 group";
+                card.innerHTML = `
+                    <div class="relative h-56 overflow-hidden bg-gray-900">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-90 group-hover:opacity-100">
+                        <span class="absolute top-3.5 right-3.5 bg-brandNavy/90 backdrop-blur-md text-brandGold text-[10px] px-3 py-1.5 rounded-full font-medium border border-brandGold/30 shadow-lg">${p.category}</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col text-right">
+                        <h4 class="font-bold text-white text-base mb-2.5 transition group-hover:text-brandGold">${p.name}</h4>
+                        <p class="text-xs text-gray-400 font-light leading-relaxed mb-6 flex-1 text-justify">${p.info}</p>
+                        <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between">
+                            <span class="text-[11px] text-brandGold font-bold flex items-center"><i class="fa-solid fa-gem ml-1.5 text-[10px]"></i> آماده سفارشی‌سازی</span>
+                            <button type="button" onclick="shareProduct(${originalIdx})" class="px-3.5 py-2 bg-brandSurface hover:bg-gray-800 text-gray-200 text-xs rounded-xl transition flex items-center gap-2 border border-gray-700/60 shadow">
+                                <i class="fa-solid fa-share-nodes text-[10px] ml-1"></i> اشتراک‌گذاری
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProducts() { renderProducts(); }
+
+        function toggleAdminModal() {
+            const modal = document.getElementById('adminModal');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                renderAdminList();
+            } else {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                resetForm();
+            }
+        }
+
+        function renderAdminList() {
+            const list = document.getElementById('adminProductList');
+            list.innerHTML = '';
+            products.forEach((p, idx) => {
+                const item = document.createElement('div');
+                item.className = "flex items-center justify-between bg-brandNavy p-3 rounded-xl border border-gray-800 text-xs shadow-sm";
+                item.innerHTML = `
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button type="button" onclick="editProduct(${idx})" class="p-2 bg-gray-800 hover:bg-gray-700 text-brandGold rounded-lg transition"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button type="button" onclick="deleteProduct(${idx})" class="p-2 bg-red-950/40 hover:bg-red-900 text-red-300 rounded-lg transition"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                    <div class="flex items-center gap-3 truncate flex-row-reverse">
+                        <div class="truncate text-right">
+                            <p class="font-bold text-white truncate mb-1">${p.name}</p>
+                            <p class="text-[10px] text-brandGold">${p.category}</p>
+                        </div>
+                        <img src="${p.image}" class="w-10 h-10 object-cover rounded-lg border border-gray-700">
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function handleProductSubmit(e) {
+            e.preventDefault();
+            const editIndex = parseInt(document.getElementById('editIndex').value);
+            const name = document.getElementById('prodName').value;
+            const category = document.getElementById('prodCategory').value;
+            const image = document.getElementById('prodImage').value;
+            const info = document.getElementById('prodInfo').value;
+
+            const newProd = { name, category, image, info };
+
+            if (editIndex === -1) {
+                products.unshift(newProd);
+                showToast("محصول با موفقیت اضافه شد.");
+            } else {
+                products[editIndex] = newProd;
+                showToast("اطلاعات محصول به‌روزرسانی شد.");
+                resetForm();
+            }
+
+            renderProducts();
+            renderAdminList();
+            document.getElementById('productForm').reset();
+        }
+
+        function editProduct(idx) {
+            const p = products[idx];
+            document.getElementById('editIndex').value = idx;
+            document.getElementById('prodName').value = p.name;
+            document.getElementById('prodCategory').value = p.category;
+            document.getElementById('prodImage').value = p.image;
+            document.getElementById('prodInfo').value = p.info;
+            document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-pen ml-1.5"></i> ویرایش محصول: ${p.name}`;
+        }
+
+        function deleteProduct(idx) {
+            if (confirm("آیا از حذف این محصول اطمینان دارید؟")) {
+                products.splice(idx, 1);
+                renderProducts();
+                renderAdminList();
+                showToast("محصول با موفقیت حذف شد.");
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('editIndex').value = -1;
+            document.getElementById('productForm').reset();
+            document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-plus-circle ml-1.5"></i> ثبت محصول جدید`;
+        }
+
+        function shareProduct(idx) {
+            const p = products[idx];
+            const shareText = `آرام صبا صنعت ایرانیان - ${p.name}\n${p.info}`;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareText).then(() => {
+                    showToast("لینک محصول در حافظه کپی شد.");
+                }).catch(() => {
+                    showToast("مرورگر شما از این قابلیت پشتیبانی نمی‌کند.");
+                });
+            } else {
+                showToast("مرورگر شما از این قابلیت پشتیبانی نمی‌کند.");
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        async function askGeminiAI() {
+            const query = document.getElementById('searchInput').value.trim();
+            const box = document.getElementById('aiResponseBox');
+            if (!query) {
+                box.classList.remove('hidden');
+                box.innerHTML = "لطفاً ابتدا نیاز خود را درباره طراحی فضای اداری وارد کنید.";
+                return;
+            }
+
+            box.classList.remove('hidden');
+            box.innerHTML = `<i class="fa-solid fa-spinner fa-spin ml-2 text-brandGold"></i> هوش مصنوعی در حال پردازش...`;
+
+            setTimeout(() => {
+                box.innerHTML = `<strong>مشاور هوش مصنوعی:</strong><br>برای درخواست شما («${query}»)، پیشنهاد می‌کنیم میزهای مدیریتی گردو را با صندلی‌های ارگونومیک مش ترکیب کنید تا بالاترین سطح پرستیژ فراهم شود.`;
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
