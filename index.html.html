@@ -6,8 +6,6 @@
     <title>آرام صبا صنعت ایرانیان - مبلمان اداری لوکس</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Supabase JS Client Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -206,19 +204,21 @@
     <!-- TOAST NOTIFICATION -->
     <div id="toast" class="fixed bottom-6 left-6 z-50 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3 rounded-2xl text-xs font-bold shadow-2xl transform translate-y-20 opacity-0 transition-all duration-500 ease-out border border-white/20"></div>
 
-    <!-- SUPABASE & APP LOGIC -->
+    <!-- ROBUST CLOUD & APP LOGIC -->
     <script>
         const SUPABASE_URL = 'https://gsefloewufawbrwlwoij.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_IjINafPfpd1BkY57hWcvwA_sQ0uYslh';
 
-        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        let categories = [];
-        let products = [];
+        let categories = ["میز مدیریت", "صندلی ارگونومیک", "میز کنفرانس", "کنسول و فایلینگ"];
+        let products = [
+            { id: 1, name: "میز مدیریت اجرایی ونگارد", category: "میز مدیریت", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=800&q=80", info: "تلفیق بی‌نظیر ارگونومی پیشرفته و چوب طبیعی گردوی اروپایی با سیستم هوشمند مدیریت کابل." },
+            { id: 2, name: "صندلی ارگونومیک پشتی‌بلند اجیس", category: "صندلی ارگونومیک", image: "https://images.unsplash.com/photo-1580481077494-e3299acae5e7?auto=format&fit=crop&w=800&q=80", info: "طراحی پیشرفته با مکانیزم شیب همگام، پشتی مشبک تنفس‌پذیر و سیستم حمایت از ستون فقرات." },
+            { id: 3, name: "میز کنفرانس دیپلمات", category: "میز کنفرانس", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80", info: "میز جلسات ماژولار ۱۲ نفره، مجهز به پنل‌های پاپ‌آپ برق و اتصالات مخفی با تزئینات برنزی." },
+            { id: 4, name: "کنسول و بوفه دکوراتیو کیان", category: "کنسول و فایلینگ", image: "https://images.unsplash.com/photo-1595515106967-1ce2e16d41f0?auto=format&fit=crop&w=800&q=80", info: "درهای آرام‌بند، طبقات شیشه‌ای دودی و سیستم قفل یکپارچه و نامرئی برای بایگانی اسناد." }
+        ];
         let currentCategory = 'all';
 
         document.addEventListener("DOMContentLoaded", async () => {
-            // Attach event listeners securely
             document.getElementById('enterBtn').addEventListener('click', enterCatalog);
             document.getElementById('adminBtn').addEventListener('click', toggleAdminModal);
             document.getElementById('closeAdminBtn').addEventListener('click', toggleAdminModal);
@@ -230,20 +230,37 @@
             await fetchAppData();
         });
 
-        async function fetchAppData() {
+        async function restApi(endpoint, method = 'GET', body = null) {
             try {
-                const { data: catData, error: catError } = await supabaseClient.from('categories').select('*');
-                if (!catError && catData) {
-                    categories = catData.map(c => c.name);
-                }
-
-                const { data: prodData, error: prodError } = await supabaseClient.from('products').select('*');
-                if (!prodError && prodData) {
-                    products = prodData;
-                }
+                const options = {
+                    method: method,
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=representation'
+                    }
+                };
+                if (body) options.body = JSON.stringify(body);
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/${endpoint}`, options);
+                if (!res.ok) return null;
+                return await res.json();
             } catch (err) {
-                console.error("Database connection error:", err);
+                return null;
             }
+        }
+
+        async function fetchAppData() {
+            const catData = await restApi('categories?select=*');
+            if (catData && Array.isArray(catData) && catData.length > 0) {
+                categories = catData.map(c => c.name);
+            }
+
+            const prodData = await restApi('products?select=*');
+            if (prodData && Array.isArray(prodData) && prodData.length > 0) {
+                products = prodData;
+            }
+
             renderCategories();
             renderProducts();
         }
@@ -307,8 +324,8 @@
             const input = document.getElementById('newCategoryName');
             const val = input.value.trim();
             if (val && !categories.includes(val)) {
-                const { error } = await supabaseClient.from('categories').insert([{ name: val }]);
-                if (!error) {
+                const result = await restApi('categories', 'POST', { name: val });
+                if (result !== null) {
                     categories.push(val);
                     input.value = '';
                     renderCategories();
@@ -323,8 +340,8 @@
 
         async function deleteCategory(cat) {
             if (confirm(`آیا از حذف دسته‌بندی "${cat}" اطمینان دارید؟`)) {
-                const { error } = await supabaseClient.from('categories').delete().eq('name', cat);
-                if (!error) {
+                const result = await restApi(`categories?name=eq.${encodeURIComponent(cat)}`, 'DELETE');
+                if (result !== null) {
                     categories = categories.filter(c => c !== cat);
                     if (currentCategory === cat) currentCategory = 'all';
                     renderCategories();
@@ -343,173 +360,4 @@
             grid.innerHTML = '';
 
             const filtered = products.filter(p => {
-                const matchesCat = currentCategory === 'all' || p.category === currentCategory;
-                const matchesSearch = p.name.toLowerCase().includes(searchTerm) || p.info.toLowerCase().includes(searchTerm);
-                return matchesCat && matchesSearch;
-            });
-
-            if (filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-16 text-gray-500 text-sm animate-fade-in">هیچ محصولی با این مشخصات یافت نشد.</div>`;
-                return;
-            }
-
-            filtered.forEach((p, displayIndex) => {
-                const card = document.createElement('div');
-                card.className = "bg-brandNavy border border-gray-800/80 rounded-3xl overflow-hidden flex flex-col shadow-2xl hover:border-brandGold/40 hover:-translate-y-2 hover:shadow-[0_15px_40px_-10px_rgba(212,175,55,0.15)] transition-all duration-700 ease-out group animate-fade-up";
-                card.style.animationDelay = `${displayIndex * 0.15}s`;
-
-                card.innerHTML = `
-                    <div class="relative h-56 overflow-hidden bg-gray-900">
-                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out opacity-90 group-hover:opacity-100">
-                        <span class="absolute top-3.5 right-3.5 bg-brandNavy/90 backdrop-blur-md text-brandGold text-[10px] px-3 py-1.5 rounded-full font-medium border border-brandGold/30 shadow-lg">${p.category}</span>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col text-right">
-                        <h4 class="font-bold text-white text-base mb-2.5 transition-colors duration-500 ease-out group-hover:text-brandGold">${p.name}</h4>
-                        <p class="text-xs text-gray-400 font-light leading-loose mb-6 flex-1 text-justify">${p.info}</p>
-                        <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between">
-                            <span class="text-[11px] text-brandGold font-bold flex items-center"><i class="fa-solid fa-gem ml-1.5 text-[10px]"></i> آماده سفارشی‌سازی</span>
-                            <button type="button" onclick="shareProduct('${p.name.replace(/'/g, "\\'")}', '${p.info.replace(/'/g, "\\'")}')" class="px-4 py-2 bg-brandSurface hover:bg-gray-800 text-gray-200 text-xs rounded-xl hover:scale-[1.03] active:scale-[0.98] transition-all duration-500 ease-out flex items-center gap-2 border border-gray-700/60 shadow font-medium group/btn cursor-pointer">
-                                <i class="fa-solid fa-share-nodes text-[11px] ml-1 group-hover/btn:-translate-y-0.5 transition-transform duration-500"></i> اشتراک‌گذاری
-                            </button>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        function filterProducts() { renderProducts(); }
-
-        function toggleAdminModal() {
-            const modal = document.getElementById('adminModal');
-            if (modal.classList.contains('hidden')) {
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                renderAdminList();
-            } else {
-                modal.classList.remove('flex');
-                modal.classList.add('hidden');
-                resetForm();
-            }
-        }
-
-        function renderAdminList() {
-            const list = document.getElementById('adminProductList');
-            list.innerHTML = '';
-            products.forEach((p) => {
-                const item = document.createElement('div');
-                item.className = "flex items-center justify-between bg-brandNavy p-3 rounded-xl border border-gray-800 text-xs shadow-sm transition-colors duration-300 hover:bg-brandSurface hover:border-brandGold/30";
-                item.innerHTML = `
-                    <div class="flex items-center gap-2 shrink-0">
-                        <button type="button" onclick="editProduct('${p.id}')" class="p-2 bg-gray-800 hover:bg-gray-700 text-brandGold rounded-lg hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 cursor-pointer"><i class="fa-solid fa-pen text-xs"></i></button>
-                        <button type="button" onclick="deleteProduct('${p.id}')" class="p-2 bg-red-950/40 hover:bg-red-900 text-red-300 rounded-lg hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 cursor-pointer"><i class="fa-solid fa-trash text-xs"></i></button>
-                    </div>
-                    <div class="flex items-center gap-3 truncate flex-row-reverse">
-                        <div class="truncate text-right">
-                            <p class="font-bold text-white truncate mb-1">${p.name}</p>
-                            <p class="text-[10px] text-brandGold">${p.category}</p>
-                        </div>
-                        <img src="${p.image}" class="w-10 h-10 object-cover rounded-lg border border-gray-700">
-                    </div>
-                `;
-                list.appendChild(item);
-            });
-        }
-
-        async function handleProductSubmit(e) {
-            e.preventDefault();
-            const editId = document.getElementById('editId').value;
-            const name = document.getElementById('prodName').value;
-            const category = document.getElementById('prodCategory').value;
-            const image = document.getElementById('prodImage').value;
-            const info = document.getElementById('prodInfo').value;
-
-            if (!editId) {
-                const { error } = await supabaseClient.from('products').insert([{ name, category, image, info }]);
-                if (!error) {
-                    showToast("محصول در کلود ذخیره شد.");
-                } else {
-                    showToast("خطا در ثبت محصول.");
-                }
-            } else {
-                const { error } = await supabaseClient.from('products').update({ name, category, image, info }).eq('id', editId);
-                if (!error) {
-                    showToast("اطلاعات محصول به‌روزرسانی شد.");
-                } else {
-                    showToast("خطا در ویرایش محصول.");
-                }
-                resetForm();
-            }
-
-            await fetchAppData();
-            renderAdminList();
-            document.getElementById('productForm').reset();
-        }
-
-        function editProduct(id) {
-            const p = products.find(item => item.id == id);
-            if (!p) return;
-            document.getElementById('editId').value = p.id;
-            document.getElementById('prodName').value = p.name;
-            document.getElementById('prodCategory').value = p.category;
-            document.getElementById('prodImage').value = p.image;
-            document.getElementById('prodInfo').value = p.info;
-            document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-pen ml-1.5"></i> ویرایش محصول: ${p.name}`;
-        }
-
-        async function deleteProduct(id) {
-            if (confirm("آیا از حذف این محصول در کلود اطمینان دارید؟")) {
-                const { error } = await supabaseClient.from('products').delete().eq('id', id);
-                if (!error) {
-                    showToast("محصول حذف شد.");
-                    await fetchAppData();
-                    renderAdminList();
-                } else {
-                    showToast("خطا در حذف محصول.");
-                }
-            }
-        }
-
-        function resetForm() {
-            document.getElementById('editId').value = '';
-            document.getElementById('productForm').reset();
-            document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-plus-circle ml-1.5"></i> ثبت محصول جدید`;
-        }
-
-        function shareProduct(name, info) {
-            const shareText = `آرام صبا صنعت ایرانیان - ${name}\n${info}`;
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(shareText).then(() => {
-                    showToast("لینک محصول در حافظه کپی شد.");
-                });
-            }
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.innerText = msg;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
-        }
-
-        async function askGeminiAI() {
-            const query = document.getElementById('searchInput').value.trim();
-            const box = document.getElementById('aiResponseBox');
-            if (!query) {
-                box.classList.remove('hidden');
-                box.innerHTML = "لطفاً ابتدا نیاز خود را درباره طراحی فضای اداری وارد کنید.";
-                return;
-            }
-
-            box.classList.remove('hidden');
-            box.innerHTML = `<i class="fa-solid fa-spinner fa-spin ml-2 text-brandGold"></i> هوش مصنوعی در حال پردازش...`;
-
-            setTimeout(() => {
-                box.innerHTML = `<strong>مشاور هوش مصنوعی:</strong><br>برای درخواست شما («${query}»)، پیشنهاد می‌کنیم میزهای مدیریتی گردو را با صندلی‌های ارگونومیک مش ترکیب کنید تا بالاترین سطح پرستیژ فراهم شود.`;
-            }, 1200);
-        }
-    </script>
-</body>
-</html>
+                const matchesCat = currentCategory === 'all' || p.category
