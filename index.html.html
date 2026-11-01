@@ -401,4 +401,113 @@
 
         function renderAdminList() {
             const list = document.getElementById('adminProductList');
-            list.innerHTML
+            list.innerHTML = '';
+            products.forEach((p, idx) => {
+                const item = document.createElement('div');
+                item.className = "flex items-center justify-between bg-black/20 p-3 rounded-xl border border-white/5 text-xs transition-colors duration-300 hover:bg-white/5 hover:border-brandGold/20";
+                item.innerHTML = `
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button type="button" onclick="editProduct(${idx})" class="p-2.5 bg-white/5 hover:bg-white/10 text-brandGold rounded-lg hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 cursor-pointer border border-white/5"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button type="button" onclick="deleteProduct(${idx})" class="p-2.5 bg-red-950/20 hover:bg-red-900/40 text-red-400 rounded-lg hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 cursor-pointer border border-red-900/30"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                    <div class="flex items-center gap-4 truncate flex-row-reverse">
+                        <div class="truncate text-right">
+                            <p class="font-bold text-gray-200 truncate mb-1 text-sm">${p.name}</p>
+                            <p class="text-[10px] text-brandGold tracking-wider">${p.category}</p>
+                        </div>
+                        <img src="${p.image}" class="w-12 h-12 object-cover rounded-lg border border-white/10 opacity-80">
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function handleProductSubmit(e) {
+            e.preventDefault();
+            const editIndex = parseInt(document.getElementById('editIndex').value);
+            const name = document.getElementById('prodName').value;
+            const category = document.getElementById('prodCategory').value;
+            const image = document.getElementById('prodImage').value;
+            const info = document.getElementById('prodInfo').value;
+
+            const newProd = { name, category, image, info };
+
+            if (editIndex === -1) {
+                products.unshift(newProd);
+                showToast(`<i class="fa-solid fa-check-circle text-lg text-brandGold"></i> محصول به کلکسیون اضافه شد.`);
+            } else {
+                products[editIndex] = newProd;
+                showToast(`<i class="fa-solid fa-check-circle text-lg text-brandGold"></i> اطلاعات محصول به‌روزرسانی شد.`);
+                resetForm();
+            }
+
+            saveToStorage();
+            renderProducts();
+            renderAdminList();
+            document.getElementById('productForm').reset();
+        }
+
+        function editProduct(idx) {
+            const p = products[idx];
+            document.getElementById('editIndex').value = idx;
+            document.getElementById('prodName').value = p.name;
+            document.getElementById('prodCategory').value = p.category;
+            document.getElementById('prodImage').value = p.image;
+            document.getElementById('prodInfo').value = p.info;
+            document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-pen text-brandGold"></i> ویرایش محصول: ${p.name}`;
+        }
+
+        function deleteProduct(idx) {
+            if (confirm("آیا از حذف این محصول اطمینان دارید؟")) {
+                products.splice(idx, 1);
+                saveToStorage();
+                renderProducts();
+                renderAdminList();
+                showToast(`<i class="fa-solid fa-trash text-lg text-brandBronze"></i> محصول حذف شد.`);
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('editIndex').value = -1;
+            document.getElementById('productForm').reset();
+            document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-plus-circle text-brandGold"></i> ثبت محصول جدید`;
+        }
+
+        function shareProduct(idx) {
+            const p = products[idx];
+            const shareText = `آرام صبا صنعت ایرانیان - ${p.name}\n${p.info}`;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareText).then(() => {
+                    showToast(`<i class="fa-regular fa-copy text-lg text-brandGold"></i> لینک در حافظه کپی شد.`);
+                });
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerHTML = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        function askGeminiAI() {
+            const query = document.getElementById('searchInput').value.trim();
+            const box = document.getElementById('aiResponseBox');
+            if (!query) {
+                box.classList.remove('hidden');
+                box.innerHTML = "لطفاً ابتدا نیاز خود را وارد کنید.";
+                return;
+            }
+
+            box.classList.remove('hidden');
+            box.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin ml-2 text-brandGold"></i> هوش مصنوعی در حال تحلیل دکوراسیون...`;
+
+            setTimeout(() => {
+                box.innerHTML = `<strong class="text-brandGold"><i class="fa-solid fa-wand-magic-sparkles ml-1"></i> مشاور هوش مصنوعی:</strong><br>برای درخواست شما («${query}»)، پیشنهاد می‌کنیم میزهای مدیریتی گردو را با صندلی‌های ارگونومیک مش ترکیب کنید تا بالاترین سطح پرستیژ و راحتی فراهم شود.`;
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
