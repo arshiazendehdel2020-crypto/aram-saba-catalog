@@ -86,7 +86,7 @@
     </div>
 
     <!-- MAIN APP CONTAINER -->
-    <div id="mainApp" class="flex-1 flex flex-col mx-auto w-full relative z-10 opacity-0 transition-opacity duration-[1200ms] ease-out">
+    <div id="mainApp" class="flex-1 flex flex-col mx-auto w-full relative z-10 opacity-0 transition-opacity duration-[1200ms] ease-out hidden">
         
         <!-- HEADER -->
         <header class="sticky top-0 z-30 bg-[#06090f]/70 backdrop-blur-2xl border-b border-brandGold/10 px-6 py-4 flex items-center justify-between transition-colors duration-700 ease-out">
@@ -161,24 +161,4 @@
                 <button type="button" id="closeAdminBtn" class="text-gray-400 hover:text-white w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 transition-all duration-300 cursor-pointer flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
             </div>
 
-            <div class="p-8 overflow-y-auto space-y-8 flex-1 text-right no-scrollbar">
-                <div class="bg-black/40 p-6 rounded-2xl border border-white/5 shadow-inner">
-                    <h4 class="text-xs font-bold text-brandGold mb-5 flex items-center gap-2"><i class="fa-solid fa-tags"></i> مدیریت دسته‌بندی‌ها</h4>
-                    <div class="flex gap-3 mb-5">
-                        <input type="text" id="newCategoryName" placeholder="نام دسته‌بندی جدید..." class="w-full bg-[#06090f] border border-white/10 rounded-xl px-4 py-3 text-xs text-gray-200 focus:border-brandGold/50 focus:outline-none transition-colors duration-300">
-                        <button type="button" id="addCatBtn" class="px-6 py-3 bg-brandGold hover:bg-[#e6c243] text-brandDark font-bold text-xs rounded-xl transition-all duration-300 shadow-lg hover:shadow-brandGold/20 hover:scale-[1.02] active:scale-[0.98] shrink-0 cursor-pointer">افزودن</button>
-                    </div>
-                    <div id="adminCategoryList" class="flex flex-wrap gap-2.5"></div>
-                </div>
-
-                <div class="bg-black/40 p-6 rounded-2xl border border-white/5 shadow-inner">
-                    <h4 id="formTitle" class="text-xs font-bold text-brandGold mb-5 flex items-center gap-2"><i class="fa-solid fa-plus-circle"></i> ثبت محصول جدید</h4>
-                    <form id="productForm" class="space-y-5">
-                        <input type="hidden" id="editIndex" value="-1">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                            <div>
-                                <label class="block text-[11px] text-gray-400 mb-2">نام محصول</label>
-                                <input type="text" id="prodName" required placeholder="مثال: میز مدیریت امپریال" class="w-full bg-[#06090f] border border-white/10 rounded-xl px-4 py-3 text-xs text-gray-200 focus:border-brandGold/50 focus:outline-none transition-colors duration-300">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] text-gray-400 mb-2">دسته‌بندی
+            <div class="p-8 overflow-y-
