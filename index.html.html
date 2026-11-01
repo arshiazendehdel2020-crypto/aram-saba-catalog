@@ -72,4 +72,448 @@
         <!-- HEADER -->
         <header class="sticky top-0 z-30 bg-[#06090f]/70 backdrop-blur-2xl border-b border-brandGold/10 px-6 py-4 flex items-center justify-between transition-colors duration-700 ease-out">
             <div class="flex items-center gap-4 group">
-                <div dir="ltr" class="w-11 h-11 rounded-xl bg-gradient-to-br from-brandBronze to-brand
+                <div dir="ltr" class="w-11 h-11 rounded-xl bg-gradient-to-br from-brandBronze to-brandGold text-brandDark font-serif font-bold flex items-center justify-center text-xl shadow-[0_0_20px_rgba(212,175,55,0.2)] border border-white/20 group-hover:scale-105 transition-transform duration-700 ease-out">AS</div>
+                <div>
+                    <h2 class="text-xs sm:text-sm font-serif font-bold text-gray-100 tracking-wide group-hover:text-brandGold transition-colors duration-500 ease-out">آرام صبا صنعت ایرانیان</h2>
+                    <p class="text-[10px] text-brandGold/80 font-light mt-1 tracking-wider uppercase">Executive Collection</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button type="button" id="adminBtn" class="px-4 py-2.5 bg-white/5 hover:bg-white/10 text-brandGold rounded-xl text-xs font-medium border border-white/10 hover:border-brandGold/40 hover:shadow-[0_0_15px_rgba(212,175,55,0.15)] active:scale-[0.98] transition-all duration-500 ease-out group cursor-pointer backdrop-blur-md">
+                    <i class="fa-solid fa-terminal ml-1.5 text-[11px] group-hover:text-white transition-colors duration-500"></i> <span class="hidden sm:inline">ترمینال مدیریت</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- HERO & SEARCH SECTION -->
+        <section class="p-6 sm:p-14 relative">
+            <div class="text-center mb-12 relative z-10">
+                <span class="text-[10px] uppercase tracking-[0.3em] text-brandGold/80 block mb-4 font-medium animate-fade-up" style="animation-delay: 0.2s;">Bespoke Office Solutions</span>
+                <h3 class="text-3xl sm:text-5xl font-serif font-bold text-white mb-6 animate-fade-up leading-tight" style="animation-delay: 0.4s;">مبلمان اداری و فضاهای<br><span class="gold-gradient-text">مدیریتی لوکس</span></h3>
+                <p class="text-xs sm:text-sm text-gray-400 max-w-2xl mx-auto font-light leading-loose animate-fade-up" style="animation-delay: 0.6s;">تلفیق بی‌نظیر ارگونومی پیشرفته، چوب طبیعی گردوی اروپایی و استانداردهای طراحی سفارشی برای خلق دفاتری با پرستیژ جهانی.</p>
+            </div>
+
+            <!-- SEARCH & AI BAR -->
+            <div class="relative max-w-3xl mx-auto animate-fade-up z-20" style="animation-delay: 0.8s;">
+                <div class="flex items-center bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl focus-within:border-brandGold/50 focus-within:bg-white/10 transition-all duration-500 ease-out p-1.5">
+                    <span class="pr-4 pl-3 text-brandGold text-lg"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="text" id="searchInput" placeholder="جستجو در کلکسیون..." class="w-full bg-transparent px-2 py-3.5 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none transition-colors duration-500 font-light">
+                    <button type="button" id="aiBtn" class="bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-6 py-3.5 text-[11px] font-bold rounded-xl hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] active:scale-[0.98] transition-all duration-500 ease-out shrink-0 cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> مشاوره هوشمند
+                    </button>
+                </div>
+                <div id="aiResponseBox" class="hidden mt-4 p-5 bg-[#0a111c]/90 backdrop-blur-md border border-brandGold/30 rounded-2xl text-xs text-gray-300 leading-loose shadow-2xl text-justify animate-fade-up"></div>
+            </div>
+
+            <!-- CATEGORY TABS -->
+            <div id="categoryTabsContainer" class="flex gap-3 overflow-x-auto pb-4 mt-12 no-scrollbar justify-start sm:justify-center animate-fade-up relative z-20" style="animation-delay: 1s;"></div>
+        </section>
+
+        <!-- PRODUCT CATALOG GRID -->
+        <main class="flex-1 px-6 sm:px-14 pb-14 relative z-10 max-w-[1400px] mx-auto w-full">
+            <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"></div>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="bg-[#06090f] border-t border-white/5 py-10 px-6 text-center text-xs text-gray-500 relative z-20">
+            <div class="flex justify-center items-center gap-3 mb-3 cursor-default">
+                <span class="font-serif font-bold text-gray-400 text-lg" dir="ltr">AS</span>
+                <span class="w-1 h-1 bg-brandGold rounded-full"></span>
+                <span class="font-light tracking-wide text-gray-400">آرام صبا صنعت ایرانیان</span>
+            </div>
+            <p class="text-[10px] font-light tracking-widest uppercase">© 2026 All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <!-- ADMIN TERMINAL MODAL -->
+    <div id="adminModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-4 transition-opacity duration-500 ease-out">
+        <div class="bg-brandSurface border border-brandGold/30 rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-[0_0_50px_rgba(0,0,0,0.8)] animate-fade-up overflow-hidden">
+            <div class="p-6 border-b border-white/5 flex justify-between items-center bg-black/20">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-brandGold/10 flex items-center justify-center border border-brandGold/20">
+                        <i class="fa-solid fa-terminal text-brandGold text-xs"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-sm">ترمینال مدیریت سیستم</h3>
+                </div>
+                <button type="button" id="closeAdminBtn" class="text-gray-400 hover:text-white w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 transition-all duration-300 cursor-pointer flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+            </div>
+
+            <div class="p-8 overflow-y-auto space-y-8 flex-1 text-right no-scrollbar">
+                <div class="bg-black/40 p-6 rounded-2xl border border-white/5 shadow-inner">
+                    <h4 class="text-xs font-bold text-brandGold mb-5 flex items-center gap-2"><i class="fa-solid fa-tags"></i> مدیریت دسته‌بندی‌ها</h4>
+                    <div class="flex gap-3 mb-5">
+                        <input type="text" id="newCategoryName" placeholder="نام دسته‌بندی جدید..." class="w-full bg-[#06090f] border border-white/10 rounded-xl px-4 py-3 text-xs text-gray-200 focus:border-brandGold/50 focus:outline-none transition-colors duration-300">
+                        <button type="button" id="addCatBtn" class="px-6 py-3 bg-brandGold hover:bg-[#e6c243] text-brandDark font-bold text-xs rounded-xl transition-all duration-300 shadow-lg hover:shadow-brandGold/20 hover:scale-[1.02] active:scale-[0.98] shrink-0 cursor-pointer">افزودن</button>
+                    </div>
+                    <div id="adminCategoryList" class="flex flex-wrap gap-2.5"></div>
+                </div>
+
+                <div class="bg-black/40 p-6 rounded-2xl border border-white/5 shadow-inner">
+                    <h4 id="formTitle" class="text-xs font-bold text-brandGold mb-5 flex items-center gap-2"><i class="fa-solid fa-plus-circle"></i> ثبت محصول جدید</h4>
+                    <form id="productForm" class="space-y-5">
+                        <input type="hidden" id="editIndex" value="-1">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-[11px] text-gray-400 mb-2">نام محصول</label>
+                                <input type="text" id="prodName" required placeholder="مثال: میز مدیریت امپریال" class="w-full bg-[#06090f] border border-white/10 rounded-xl px-4 py-3 text-xs text-gray-200 focus:border-brandGold/50 focus:outline-none transition-colors duration-300">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-gray-400 mb-2">دسته‌بندی</label>
+                                <select id="prodCategory" class="w-full bg-[#06090f] border border-white/10 rounded-xl px-4 py-3 text-xs text-gray-200 focus:border-brandGold/50 focus:outline-none transition-colors duration-300"></select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-gray-400 mb-2">مسیر یا لینک تصویر</label>
+                            <input type="text" id="prodImage" required placeholder="./images/desk.jpg" class="w-full bg-[#06090f] border border-white/10 rounded-xl px-4 py-3 text-xs text-gray-200 focus:border-brandGold/50 focus:outline-none transition-colors duration-300 text-left" dir="ltr">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-gray-400 mb-2">مشخصات فنی و توضیحات</label>
+                            <textarea id="prodInfo" rows="3" required placeholder="روکش چوب گردوی اروپایی..." class="w-full bg-[#06090f] border border-white/10 rounded-xl px-4 py-3 text-xs text-gray-200 focus:border-brandGold/50 focus:outline-none transition-colors duration-300 leading-relaxed"></textarea>
+                        </div>
+                        <div class="flex justify-start gap-3 pt-3">
+                            <button type="submit" class="px-6 py-3 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark font-bold text-xs rounded-xl hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer">ذخیره اطلاعات</button>
+                            <button type="button" id="cancelFormBtn" class="px-6 py-3 bg-white/5 hover:bg-white/10 text-gray-300 text-xs rounded-xl border border-white/10 transition-all duration-300 font-medium cursor-pointer">انصراف</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div>
+                    <h4 class="text-[10px] font-bold text-gray-500 mb-4 uppercase tracking-widest border-b border-white/5 pb-2">مدیریت موجودی</h4>
+                    <div id="adminProductList" class="space-y-3 max-h-72 overflow-y-auto pl-2 pr-1 no-scrollbar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-8 left-8 z-50 bg-[#06090f]/90 backdrop-blur-xl border border-brandGold/30 text-white px-6 py-4 rounded-2xl text-xs font-bold shadow-[0_10px_40px_rgba(0,0,0,0.5)] transform translate-y-20 opacity-0 transition-all duration-500 ease-out flex items-center gap-3 pointer-events-none"></div>
+
+    <!-- ISOLATED JAVASCRIPT MODULE -->
+    <script>
+        (function() {
+            const DEFAULT_CATEGORIES = ["میز مدیریت", "صندلی ارگونومیک", "میز کنفرانس", "کنسول و فایلینگ"];
+            const DEFAULT_PRODUCTS = [
+                { name: "میز مدیریت اجرایی ونگارد", category: "میز مدیریت", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=800&q=80", info: "تلفیق بی‌نظیر ارگونومی پیشرفته و چوب طبیعی گردوی اروپایی با سیستم هوشمند مدیریت کابل." },
+                { name: "صندلی ارگونومیک پشتی‌بلند اجیس", category: "صندلی ارگونومیک", image: "https://images.unsplash.com/photo-1580481077494-e3299acae5e7?auto=format&fit=crop&w=800&q=80", info: "طراحی پیشرفته با مکانیزم شیب همگام، پشتی مشبک تنفس‌پذیر و سیستم حمایت از ستون فقرات." },
+                { name: "میز کنفرانس دیپلمات", category: "میز کنفرانس", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80", info: "میز جلسات ماژولار ۱۲ نفره، مجهز به پنل‌های پاپ‌آپ برق و اتصالات مخفی با تزئینات برنزی." },
+                { name: "کنسول و بوفه دکوراتیو کیان", category: "کنسول و فایلینگ", image: "https://images.unsplash.com/photo-1595515106967-1ce2e16d41f0?auto=format&fit=crop&w=800&q=80", info: "درهای آرام‌بند، طبقات شیشه‌ای دودی و سیستم قفل یکپارچه و نامرئی برای بایگانی اسناد." }
+            ];
+
+            let categories = [...DEFAULT_CATEGORIES];
+            let products = [...DEFAULT_PRODUCTS];
+            let currentCategory = 'all';
+
+            function loadData() {
+                try {
+                    const savedCats = JSON.parse(localStorage.getItem('aram_categories'));
+                    if (Array.isArray(savedCats) && savedCats.length > 0) categories = savedCats;
+                    
+                    const savedProds = JSON.parse(localStorage.getItem('aram_products'));
+                    if (Array.isArray(savedProds) && savedProds.length > 0) products = savedProds;
+                } catch (e) {
+                    console.warn("Storage restricted. Using defaults.");
+                }
+            }
+
+            function saveToStorage() {
+                try {
+                    localStorage.setItem('aram_categories', JSON.stringify(categories));
+                    localStorage.setItem('aram_products', JSON.stringify(products));
+                } catch (e) {
+                    showToast(`<i class="fa-solid fa-triangle-exclamation text-lg text-red-400"></i> خطا در ذخیره‌سازی.`);
+                }
+            }
+
+            function enterCatalog() {
+                const splash = document.getElementById('splashScreen');
+                const main = document.getElementById('mainApp');
+                if(!splash || !main) return;
+                
+                splash.style.pointerEvents = 'none';
+                splash.style.opacity = '0';
+                main.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    main.style.opacity = '1';
+                }, 800);
+            }
+
+            function toggleAdminModal() {
+                const modal = document.getElementById('adminModal');
+                if(!modal) return;
+                if (modal.classList.contains('hidden')) {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    renderAdminList();
+                } else {
+                    modal.classList.remove('flex');
+                    modal.classList.add('hidden');
+                    resetForm();
+                }
+            }
+
+            function addCategory() {
+                const input = document.getElementById('newCategoryName');
+                if(!input) return;
+                const val = input.value.trim();
+                if (val && !categories.includes(val)) {
+                    categories.push(val);
+                    input.value = '';
+                    saveToStorage();
+                    renderCategories();
+                    showToast(`<i class="fa-solid fa-check text-lg text-brandGold"></i> دسته‌بندی جدید ثبت شد.`);
+                } else if (categories.includes(val)) {
+                    showToast(`<i class="fa-solid fa-circle-exclamation text-lg text-brandBronze"></i> این دسته‌بندی از قبل وجود دارد.`);
+                }
+            }
+
+            function deleteCategory(cat) {
+                if (confirm(`آیا از حذف دسته‌بندی اطمینان دارید؟`)) {
+                    categories = categories.filter(c => c !== cat);
+                    if (currentCategory === cat) currentCategory = 'all';
+                    saveToStorage();
+                    renderCategories();
+                    renderProducts();
+                    showToast(`<i class="fa-solid fa-trash text-lg text-brandBronze"></i> دسته‌بندی حذف شد.`);
+                }
+            }
+
+            function handleProductSubmit(e) {
+                e.preventDefault();
+                const editIndex = parseInt(document.getElementById('editIndex').value);
+                const name = document.getElementById('prodName').value;
+                const category = document.getElementById('prodCategory').value;
+                const image = document.getElementById('prodImage').value;
+                const info = document.getElementById('prodInfo').value;
+
+                const newProd = { name, category, image, info };
+
+                if (editIndex === -1) {
+                    products.unshift(newProd);
+                    showToast(`<i class="fa-solid fa-check-circle text-lg text-brandGold"></i> محصول اضافه شد.`);
+                } else {
+                    products[editIndex] = newProd;
+                    showToast(`<i class="fa-solid fa-check-circle text-lg text-brandGold"></i> محصول به‌روزرسانی شد.`);
+                    resetForm();
+                }
+
+                saveToStorage();
+                renderProducts();
+                renderAdminList();
+                document.getElementById('productForm').reset();
+            }
+
+            function editProduct(idx) {
+                const p = products[idx];
+                document.getElementById('editIndex').value = idx;
+                document.getElementById('prodName').value = p.name;
+                document.getElementById('prodCategory').value = p.category;
+                document.getElementById('prodImage').value = p.image;
+                document.getElementById('prodInfo').value = p.info;
+                document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-pen text-brandGold"></i> ویرایش محصول: ${p.name}`;
+            }
+
+            function deleteProduct(idx) {
+                if (confirm("آیا از حذف این محصول اطمینان دارید؟")) {
+                    products.splice(idx, 1);
+                    saveToStorage();
+                    renderProducts();
+                    renderAdminList();
+                    showToast(`<i class="fa-solid fa-trash text-lg text-brandBronze"></i> محصول حذف شد.`);
+                }
+            }
+
+            function resetForm() {
+                const idxField = document.getElementById('editIndex');
+                const form = document.getElementById('productForm');
+                const title = document.getElementById('formTitle');
+                if(idxField) idxField.value = -1;
+                if(form) form.reset();
+                if(title) title.innerHTML = `<i class="fa-solid fa-plus-circle text-brandGold"></i> ثبت محصول جدید`;
+            }
+
+            function shareProduct(idx) {
+                const p = products[idx];
+                const shareText = `آرام صبا صنعت ایرانیان - ${p.name}\n${p.info}`;
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(shareText).then(() => {
+                        showToast(`<i class="fa-regular fa-copy text-lg text-brandGold"></i> لینک کپی شد.`);
+                    });
+                }
+            }
+
+            function askGeminiAI() {
+                const searchInput = document.getElementById('searchInput');
+                const box = document.getElementById('aiResponseBox');
+                if(!searchInput || !box) return;
+                
+                const query = searchInput.value.trim();
+                if (!query) {
+                    box.classList.remove('hidden');
+                    box.innerHTML = "لطفاً ابتدا نیاز خود را وارد کنید.";
+                    return;
+                }
+
+                box.classList.remove('hidden');
+                box.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin ml-2 text-brandGold"></i> در حال تحلیل...`;
+
+                setTimeout(() => {
+                    box.innerHTML = `<strong class="text-brandGold"><i class="fa-solid fa-wand-magic-sparkles ml-1"></i> مشاور هوش مصنوعی:</strong><br>برای درخواست شما («${query}»)، پیشنهاد می‌کنیم میزهای مدیریتی گردو را با صندلی‌های ارگونومیک مش ترکیب کنید.`;
+                }, 1500);
+            }
+
+            function showToast(msg) {
+                const toast = document.getElementById('toast');
+                if(!toast) return;
+                toast.innerHTML = msg;
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                setTimeout(() => {
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                }, 3500);
+            }
+
+            function renderCategories() {
+                const container = document.getElementById('categoryTabsContainer');
+                if (container) {
+                    let html = `<button type="button" data-action="set-cat" data-val="all" class="px-6 py-2.5 rounded-xl text-xs transition-all duration-500 ease-out whitespace-nowrap cursor-pointer ${currentCategory === 'all' ? 'bg-white/10 border-brandGold/40 text-brandGold shadow-[0_0_15px_rgba(212,175,55,0.15)] scale-[1.02]' : 'bg-transparent text-gray-400 border-white/5 hover:border-white/20 hover:text-gray-200'} border backdrop-blur-md font-medium">تمامی کلکسیون‌ها</button>`;
+                    categories.forEach(cat => {
+                        html += `<button type="button" data-action="set-cat" data-val="${cat}" class="px-6 py-2.5 rounded-xl text-xs transition-all duration-500 ease-out whitespace-nowrap cursor-pointer ${currentCategory === cat ? 'bg-white/10 border-brandGold/40 text-brandGold shadow-[0_0_15px_rgba(212,175,55,0.15)] scale-[1.02]' : 'bg-transparent text-gray-400 border-white/5 hover:border-white/20 hover:text-gray-200'} border backdrop-blur-md font-medium">${cat}</button>`;
+                    });
+                    container.innerHTML = html;
+                }
+
+                const select = document.getElementById('prodCategory');
+                if (select) {
+                    const currentVal = select.value;
+                    let optionsHtml = '';
+                    categories.forEach(cat => { optionsHtml += `<option value="${cat}">${cat}</option>`; });
+                    select.innerHTML = optionsHtml;
+                    if (categories.includes(currentVal)) select.value = currentVal;
+                }
+
+                const adminCatList = document.getElementById('adminCategoryList');
+                if (adminCatList) {
+                    let adminHtml = '';
+                    categories.forEach(cat => {
+                        adminHtml += `<div class="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-lg text-xs text-brandGold shadow-sm hover:bg-white/10">
+                            <span>${cat}</span>
+                            <button type="button" data-action="del-cat" data-val="${cat}" class="text-red-400/80 hover:text-red-400 hover:scale-110 transition-all duration-300 cursor-pointer border-r border-white/10 pr-2 mr-1"><i class="fa-solid fa-xmark"></i></button>
+                        </div>`;
+                    });
+                    adminCatList.innerHTML = adminHtml;
+                }
+            }
+
+            function renderProducts() {
+                const grid = document.getElementById('productGrid');
+                const searchInput = document.getElementById('searchInput');
+                if(!grid) return;
+                
+                const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+                grid.innerHTML = '';
+
+                const filtered = products.map((p, idx) => ({ p, idx })).filter(item => {
+                    const matchesCat = currentCategory === 'all' || item.p.category === currentCategory;
+                    const matchesSearch = item.p.name.toLowerCase().includes(searchTerm) || item.p.info.toLowerCase().includes(searchTerm);
+                    return matchesCat && matchesSearch;
+                });
+
+                if (filtered.length === 0) {
+                    grid.innerHTML = `<div class="col-span-full text-center py-20 text-gray-500 text-sm animate-fade-in font-light tracking-wide">هیچ محصولی یافت نشد.</div>`;
+                    return;
+                }
+
+                filtered.forEach((item, displayIndex) => {
+                    const p = item.p;
+                    const card = document.createElement('div');
+                    card.className = "bg-brandNavy border border-white/5 rounded-3xl overflow-hidden flex flex-col shadow-[0_15px_40px_rgba(0,0,0,0.6)] hover:border-brandGold/30 hover:-translate-y-2 transition-all duration-[800ms] ease-out group animate-fade-up relative";
+                    card.style.animationDelay = `${displayIndex * 0.1s}`;
+                    card.innerHTML = `
+                        <div class="relative h-72 overflow-hidden bg-black">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] ease-out opacity-80 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-brandNavy via-brandNavy/20 to-transparent opacity-90 group-hover:opacity-60 transition-opacity duration-700"></div>
+                            <span class="absolute top-4 right-4 bg-black/50 backdrop-blur-md text-brandGold text-[10px] px-4 py-2 rounded-full font-medium border border-brandGold/20 tracking-wider">${p.category}</span>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col text-right relative bg-gradient-to-b from-brandNavy to-[#0a111c]">
+                            <div class="absolute -top-7 right-8 w-14 h-14 bg-brandSurface border border-brandGold/30 rounded-2xl rotate-45 flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.15)] z-10 group-hover:rotate-90 transition-transform duration-700 ease-out">
+                                <i class="fa-solid fa-gem text-brandGold text-lg -rotate-45 group-hover:-rotate-90 transition-transform duration-700"></i>
+                            </div>
+                            <h4 class="font-serif font-bold text-white text-lg mb-3 transition-colors duration-500 ease-out group-hover:text-brandGold mt-3">${p.name}</h4>
+                            <p class="text-xs text-gray-400 font-light leading-[2.2] mb-8 flex-1 text-justify">${p.info}</p>
+                            <div class="pt-5 border-t border-white/5 flex items-center justify-between">
+                                <button type="button" data-action="share-prod" data-val="${item.idx}" class="px-5 py-2.5 bg-white/5 hover:bg-brandGold hover:text-brandDark text-brandGold text-xs rounded-xl transition-all duration-500 ease-out flex items-center gap-2 border border-brandGold/20 font-medium cursor-pointer">
+                                    <i class="fa-solid fa-share-nodes text-[11px]"></i> اشتراک‌گذاری
+                                </button>
+                            </div>
+                        </div>`;
+                    grid.appendChild(card);
+                });
+            }
+
+            function renderAdminList() {
+                const list = document.getElementById('adminProductList');
+                if(!list) return;
+                list.innerHTML = '';
+                products.forEach((p, idx) => {
+                    const item = document.createElement('div');
+                    item.className = "flex items-center justify-between bg-black/20 p-3 rounded-xl border border-white/5 text-xs transition-colors duration-300 hover:bg-white/5 hover:border-brandGold/20";
+                    item.innerHTML = `
+                        <div class="flex items-center gap-2 shrink-0">
+                            <button type="button" data-action="edit-prod" data-val="${idx}" class="p-2.5 bg-white/5 hover:bg-white/10 text-brandGold rounded-lg hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 cursor-pointer border border-white/5"><i class="fa-solid fa-pen text-xs"></i></button>
+                            <button type="button" data-action="del-prod" data-val="${idx}" class="p-2.5 bg-red-950/20 hover:bg-red-900/40 text-red-400 rounded-lg hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 cursor-pointer border border-red-900/30"><i class="fa-solid fa-trash text-xs"></i></button>
+                        </div>
+                        <div class="flex items-center gap-4 truncate flex-row-reverse">
+                            <div class="truncate text-right">
+                                <p class="font-bold text-gray-200 truncate mb-1 text-sm">${p.name}</p>
+                                <p class="text-[10px] text-brandGold tracking-wider">${p.category}</p>
+                            </div>
+                            <img src="${p.image}" class="w-12 h-12 object-cover rounded-lg border border-white/10 opacity-80">
+                        </div>`;
+                    list.appendChild(item);
+                });
+            }
+
+            function globalClickHandler(e) {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                
+                if (btn.id === 'enterBtn') enterCatalog();
+                if (btn.id === 'adminBtn' || btn.id === 'closeAdminBtn') toggleAdminModal();
+                if (btn.id === 'addCatBtn') addCategory();
+                if (btn.id === 'cancelFormBtn') resetForm();
+                if (btn.id === 'aiBtn') askGeminiAI();
+
+                const action = btn.getAttribute('data-action');
+                const val = btn.getAttribute('data-val');
+                
+                if (action === 'set-cat') { currentCategory = val; renderCategories(); renderProducts(); }
+                if (action === 'del-cat') deleteCategory(val);
+                if (action === 'share-prod') shareProduct(parseInt(val));
+                if (action === 'edit-prod') editProduct(parseInt(val));
+                if (action === 'del-prod') deleteProduct(parseInt(val));
+            }
+
+            function initApp() {
+                loadData();
+                renderCategories();
+                renderProducts();
+                
+                document.body.addEventListener('click', globalClickHandler);
+                
+                const searchInput = document.getElementById('searchInput');
+                if(searchInput) searchInput.addEventListener('input', renderProducts);
+                
+                const form = document.getElementById('productForm');
+                if(form) form.addEventListener('submit', handleProductSubmit);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initApp);
+            } else {
+                initApp();
+            }
+        })();
+    </script>
+</body>
+</html>
