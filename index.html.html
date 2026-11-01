@@ -59,7 +59,7 @@
 </head>
 <body class="h-full flex flex-col selection:bg-brandGold selection:text-brandDark">
 
-    <!-- 1. SPLASH SCREEN -->
+    <!-- SPLASH SCREEN -->
     <div id="splashScreen" class="fixed inset-0 z-50 bg-brandDark flex flex-col items-center justify-center p-6 transition-opacity duration-1000 ease-out">
         <div class="text-center animate-fade-in max-w-lg w-full p-8 rounded-3xl glass-panel shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brandGold to-transparent"></div>
@@ -81,9 +81,10 @@
         </div>
     </div>
 
-    <!-- 2 & 3. MAIN APP CONTAINER & HEADER -->
+    <!-- MAIN APP CONTAINER -->
     <div id="mainApp" class="flex-1 flex flex-col max-w-md md:max-w-4xl lg:max-w-6xl mx-auto w-full shadow-2xl bg-brandSurface border-x border-gray-800/80 relative opacity-0 transition-opacity duration-[1200ms] ease-out">
         
+        <!-- HEADER -->
         <header class="sticky top-0 z-30 bg-brandNavy/95 backdrop-blur-xl border-b border-brandGold/20 px-6 py-4 flex items-center justify-between transition-colors duration-700 ease-out hover:bg-brandNavy">
             <div class="flex items-center gap-3 group">
                 <div dir="ltr" class="w-10 h-10 rounded-lg bg-gradient-to-br from-brandBronze to-brandGold text-brandDark font-serif font-bold flex items-center justify-center text-lg shadow-lg border border-brandGold/30 group-hover:scale-110 transition-transform duration-700 ease-out">AS</div>
@@ -99,7 +100,7 @@
             </div>
         </header>
 
-        <!-- 4 & 5. HERO & SEARCH & DYNAMIC CATEGORIES -->
+        <!-- HERO & SEARCH SECTION -->
         <section class="p-6 sm:p-10 bg-gradient-to-b from-brandNavy/80 via-brandSurface to-brandSurface">
             <div class="text-center mb-8">
                 <span class="text-[11px] text-brandGold block mb-2 font-medium animate-fade-up" style="animation-delay: 0.2s;">راهکارهای تخصصی فضاهای اداری</span>
@@ -107,6 +108,7 @@
                 <p class="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto font-light leading-loose animate-fade-up" style="animation-delay: 0.6s;">تلفیق بی‌نظیر ارگونومی پیشرفته، چوب طبیعی گردوی اروپایی و استانداردهای طراحی سفارشی برای خلق دفاتری با پرستیژ جهانی.</p>
             </div>
 
+            <!-- SEARCH & GEMINI AI BAR -->
             <div class="relative max-w-2xl mx-auto animate-fade-up" style="animation-delay: 0.8s;">
                 <div class="flex items-center bg-brandNavy/90 border border-brandGold/30 rounded-2xl overflow-hidden shadow-2xl focus-within:border-brandGold focus-within:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all duration-500 ease-out">
                     <span class="pr-4 pl-2 text-brandGold text-sm"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
@@ -118,12 +120,13 @@
                 <div id="aiResponseBox" class="hidden mt-3 p-4 bg-brandNavy border border-brandGold/40 rounded-2xl text-xs text-gray-200 leading-loose shadow-xl text-justify animate-fade-up"></div>
             </div>
 
+            <!-- CATEGORY TABS -->
             <div id="categoryTabsContainer" class="flex gap-2 overflow-x-auto pb-2 mt-8 no-scrollbar justify-start sm:justify-center animate-fade-up" style="animation-delay: 1s;">
                 <!-- Injected via JavaScript -->
             </div>
         </section>
 
-        <!-- 6. PRODUCT GRID -->
+        <!-- PRODUCT CATALOG GRID -->
         <main class="flex-1 p-6 sm:p-10">
             <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Injected via JavaScript -->
@@ -140,19 +143,18 @@
         </footer>
     </div>
 
-    <!-- 7. ADMIN TERMINAL MODAL -->
+    <!-- ADMIN TERMINAL MODAL -->
     <div id="adminModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 transition-opacity duration-500 ease-out">
         <div class="bg-brandNavy border border-brandGold/50 rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl animate-fade-up overflow-hidden">
             <div class="p-5 border-b border-gray-800 flex justify-between items-center bg-brandSurface">
                 <div class="flex items-center gap-2.5">
                     <i class="fa-solid fa-terminal text-brandGold"></i>
-                    <h3 class="font-bold text-white text-sm">ترمینال مدیریت سیستم (ذخیره‌سازی دائم LocalStorage)</h3>
+                    <h3 class="font-bold text-white text-sm">ترمینال مدیریت سیستم (ذخیره‌سازی دائم)</h3>
                 </div>
                 <button type="button" id="closeAdminBtn" class="text-gray-400 hover:text-white p-1.5 rounded-lg bg-gray-800/50 transition-colors duration-300 cursor-pointer"><i class="fa-solid fa-xmark text-xs"></i></button>
             </div>
 
             <div class="p-6 overflow-y-auto space-y-6 flex-1 text-right">
-                <!-- Category Management inside Admin -->
                 <div class="bg-brandSurface p-5 rounded-2xl border border-brandGold/20 shadow-inner">
                     <h4 class="text-xs font-bold text-brandGold mb-4"><i class="fa-solid fa-tags ml-1.5"></i> مدیریت دسته‌بندی‌ها</h4>
                     <div class="flex gap-2 mb-4">
@@ -162,7 +164,6 @@
                     <div id="adminCategoryList" class="flex flex-wrap gap-2"></div>
                 </div>
 
-                <!-- Product Form -->
                 <div class="bg-brandSurface p-5 rounded-2xl border border-brandGold/20 shadow-inner">
                     <h4 id="formTitle" class="text-xs font-bold text-brandGold mb-4"><i class="fa-solid fa-plus-circle ml-1.5"></i> ثبت محصول جدید</h4>
                     <form id="productForm" class="space-y-4">
@@ -178,8 +179,9 @@
                             </div>
                         </div>
                         <div>
-                            <label class="block text-[11px] text-gray-400 mb-1.5">لینک تصویر (URL)</label>
-                            <input type="url" id="prodImage" required placeholder="https://images.unsplash.com/..." class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none transition-colors duration-300 text-left" dir="ltr">
+                            <label class="block text-[11px] text-gray-400 mb-1.5">مسیر یا لینک تصویر</label>
+                            <!-- تغییر از type="url" به type="text" تا مسیر لوکال مجاز باشد -->
+                            <input type="text" id="prodImage" required placeholder="./images/desk.jpg یا لینک اینترنتی" class="w-full bg-brandNavy border border-gray-700/80 rounded-xl px-3.5 py-2.5 text-xs text-gray-200 focus:border-brandGold focus:outline-none transition-colors duration-300 text-left" dir="ltr">
                         </div>
                         <div>
                             <label class="block text-[11px] text-gray-400 mb-1.5">مشخصات فنی و توضیحات</label>
@@ -200,10 +202,10 @@
         </div>
     </div>
 
-    <!-- 10. TOAST NOTIFICATION -->
+    <!-- TOAST NOTIFICATION -->
     <div id="toast" class="fixed bottom-6 left-6 z-50 bg-gradient-to-r from-brandBronze to-brandGold text-brandDark px-5 py-3 rounded-2xl text-xs font-bold shadow-2xl transform translate-y-20 opacity-0 transition-all duration-500 ease-out border border-white/20"></div>
 
-    <!-- 8 & 9. PERSISTENT STORAGE & ROBUST EVENT LISTENERS -->
+    <!-- PERSISTENT LOCALSTORAGE APP LOGIC -->
     <script>
         const DEFAULT_CATEGORIES = ["میز مدیریت", "صندلی ارگونومیک", "میز کنفرانس", "کنسول و فایلینگ"];
         const DEFAULT_PRODUCTS = [
@@ -228,6 +230,7 @@
             document.getElementById('searchInput').addEventListener('input', renderProducts);
 
             renderCategories();
+            renderProducts();
         });
 
         function saveToStorage() {
@@ -247,13 +250,31 @@
             }, 1000);
         }
 
+        function attachCategoryEvents() {
+            const catBtns = document.querySelectorAll('.cat-btn');
+            catBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const cat = e.target.getAttribute('data-cat');
+                    setCategory(cat);
+                });
+            });
+
+            const deleteBtns = document.querySelectorAll('.delete-cat-btn');
+            deleteBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const cat = e.currentTarget.getAttribute('data-cat');
+                    deleteCategory(cat);
+                });
+            });
+        }
+
         function renderCategories() {
             const container = document.getElementById('categoryTabsContainer');
             if (container) {
-                let html = `<button type="button" onclick="setCategory('all')" class="cat-btn px-5 py-2.5 rounded-xl text-xs transition-all duration-500 ease-out whitespace-nowrap cursor-pointer ${currentCategory === 'all' ? 'font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark shadow-md scale-[1.03]' : 'font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 hover:scale-[1.03] active:scale-[0.98]'}">تمامی کلکسیون‌ها</button>`;
+                let html = `<button type="button" data-cat="all" class="cat-btn px-5 py-2.5 rounded-xl text-xs transition-all duration-500 ease-out whitespace-nowrap cursor-pointer ${currentCategory === 'all' ? 'font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark shadow-md scale-[1.03]' : 'font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 hover:scale-[1.03] active:scale-[0.98]'}">تمامی کلکسیون‌ها</button>`;
                 
                 categories.forEach(cat => {
-                    html += `<button type="button" onclick="setCategory('${cat}')" class="cat-btn px-5 py-2.5 rounded-xl text-xs transition-all duration-500 ease-out whitespace-nowrap cursor-pointer ${currentCategory === cat ? 'font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark shadow-md scale-[1.03]' : 'font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 hover:scale-[1.03] active:scale-[0.98]'}">${cat}</button>`;
+                    html += `<button type="button" data-cat="${cat}" class="cat-btn px-5 py-2.5 rounded-xl text-xs transition-all duration-500 ease-out whitespace-nowrap cursor-pointer ${currentCategory === cat ? 'font-bold bg-gradient-to-r from-brandBronze to-brandGold text-brandDark shadow-md scale-[1.03]' : 'font-medium bg-brandNavy text-gray-300 hover:bg-gray-800 border border-gray-800 hover:scale-[1.03] active:scale-[0.98]'}">${cat}</button>`;
                 });
                 container.innerHTML = html;
             }
@@ -276,12 +297,14 @@
                     adminHtml += `
                     <div class="flex items-center gap-2 bg-brandSurface border border-brandGold/30 px-3 py-1.5 rounded-lg text-xs text-brandGold shadow-sm transition-colors duration-300 hover:bg-brandNavy">
                         <span>${cat}</span>
-                        <button type="button" onclick="deleteCategory('${cat}')" class="text-red-400 hover:text-red-300 hover:scale-110 transition-all duration-300 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+                        <button type="button" data-cat="${cat}" class="delete-cat-btn text-red-400 hover:text-red-300 hover:scale-110 transition-all duration-300 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
                     </div>
                     `;
                 });
                 adminCatList.innerHTML = adminHtml;
             }
+            
+            attachCategoryEvents();
         }
 
         function setCategory(cat) {
@@ -315,11 +338,36 @@
             }
         }
 
+        function attachProductEvents() {
+            const shareBtns = document.querySelectorAll('.share-btn');
+            shareBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = e.currentTarget.getAttribute('data-idx');
+                    shareProduct(idx);
+                });
+            });
+
+            const editBtns = document.querySelectorAll('.edit-btn');
+            editBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = e.currentTarget.getAttribute('data-idx');
+                    editProduct(idx);
+                });
+            });
+
+            const deleteBtns = document.querySelectorAll('.delete-btn');
+            deleteBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = e.currentTarget.getAttribute('data-idx');
+                    deleteProduct(idx);
+                });
+            });
+        }
+
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             const searchInput = document.getElementById('searchInput');
             const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-            if (!grid) return;
             grid.innerHTML = '';
 
             const filtered = products.map((p, idx) => ({ p, idx })).filter(item => {
@@ -342,7 +390,7 @@
 
                 card.innerHTML = `
                     <div class="relative h-56 overflow-hidden bg-gray-900">
-                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out opacity-90 group-hover:opacity-100" onerror="this.src='https://placehold.co/800x600/0f1826/d4af37?text=Aram+Saba+Image'">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out opacity-90 group-hover:opacity-100">
                         <span class="absolute top-3.5 right-3.5 bg-brandNavy/90 backdrop-blur-md text-brandGold text-[10px] px-3 py-1.5 rounded-full font-medium border border-brandGold/30 shadow-lg">${p.category}</span>
                     </div>
                     <div class="p-6 flex-1 flex flex-col text-right">
@@ -350,7 +398,7 @@
                         <p class="text-xs text-gray-400 font-light leading-loose mb-6 flex-1 text-justify">${p.info}</p>
                         <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between">
                             <span class="text-[11px] text-brandGold font-bold flex items-center"><i class="fa-solid fa-gem ml-1.5 text-[10px]"></i> آماده سفارشی‌سازی</span>
-                            <button type="button" onclick="shareProduct(${originalIdx})" class="px-4 py-2 bg-brandSurface hover:bg-gray-800 text-gray-200 text-xs rounded-xl hover:scale-[1.03] active:scale-[0.98] transition-all duration-500 ease-out flex items-center gap-2 border border-gray-700/60 shadow font-medium group/btn cursor-pointer">
+                            <button type="button" data-idx="${originalIdx}" class="share-btn px-4 py-2 bg-brandSurface hover:bg-gray-800 text-gray-200 text-xs rounded-xl hover:scale-[1.03] active:scale-[0.98] transition-all duration-500 ease-out flex items-center gap-2 border border-gray-700/60 shadow font-medium group/btn cursor-pointer">
                                 <i class="fa-solid fa-share-nodes text-[11px] ml-1 group-hover/btn:-translate-y-0.5 transition-transform duration-500"></i> اشتراک‌گذاری
                             </button>
                         </div>
@@ -358,9 +406,8 @@
                 `;
                 grid.appendChild(card);
             });
+            attachProductEvents();
         }
-
-        function filterProducts() { renderProducts(); }
 
         function toggleAdminModal() {
             const modal = document.getElementById('adminModal');
@@ -377,26 +424,26 @@
 
         function renderAdminList() {
             const list = document.getElementById('adminProductList');
-            if (!list) return;
             list.innerHTML = '';
             products.forEach((p, idx) => {
                 const item = document.createElement('div');
                 item.className = "flex items-center justify-between bg-brandNavy p-3 rounded-xl border border-gray-800 text-xs shadow-sm transition-colors duration-300 hover:bg-brandSurface hover:border-brandGold/30";
                 item.innerHTML = `
                     <div class="flex items-center gap-2 shrink-0">
-                        <button type="button" onclick="editProduct(${idx})" class="p-2 bg-gray-800 hover:bg-gray-700 text-brandGold rounded-lg hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 cursor-pointer"><i class="fa-solid fa-pen text-xs"></i></button>
-                        <button type="button" onclick="deleteProduct(${idx})" class="p-2 bg-red-950/40 hover:bg-red-900 text-red-300 rounded-lg hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 cursor-pointer"><i class="fa-solid fa-trash text-xs"></i></button>
+                        <button type="button" data-idx="${idx}" class="edit-btn p-2 bg-gray-800 hover:bg-gray-700 text-brandGold rounded-lg hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 cursor-pointer"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button type="button" data-idx="${idx}" class="delete-btn p-2 bg-red-950/40 hover:bg-red-900 text-red-300 rounded-lg hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 cursor-pointer"><i class="fa-solid fa-trash text-xs"></i></button>
                     </div>
                     <div class="flex items-center gap-3 truncate flex-row-reverse">
                         <div class="truncate text-right">
                             <p class="font-bold text-white truncate mb-1">${p.name}</p>
                             <p class="text-[10px] text-brandGold">${p.category}</p>
                         </div>
-                        <img src="${p.image}" class="w-10 h-10 object-cover rounded-lg border border-gray-700" onerror="this.src='https://placehold.co/100x100/0f1826/d4af37?text=AS'">
+                        <img src="${p.image}" class="w-10 h-10 object-cover rounded-lg border border-gray-700">
                     </div>
                 `;
                 list.appendChild(item);
             });
+            attachProductEvents();
         }
 
         function handleProductSubmit(e) {
@@ -462,7 +509,6 @@
 
         function showToast(msg) {
             const toast = document.getElementById('toast');
-            if (!toast) return;
             toast.innerText = msg;
             toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => {
@@ -470,10 +516,9 @@
             }, 3000);
         }
 
-        async function askGeminiAI() {
+        function askGeminiAI() {
             const query = document.getElementById('searchInput').value.trim();
             const box = document.getElementById('aiResponseBox');
-            if (!box) return;
             if (!query) {
                 box.classList.remove('hidden');
                 box.innerHTML = "لطفاً ابتدا نیاز خود را درباره طراحی فضای اداری وارد کنید.";
