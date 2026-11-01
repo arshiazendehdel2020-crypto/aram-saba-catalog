@@ -62,6 +62,8 @@
             border-left: 1px solid rgba(212, 175, 55, 0.15);
             border-right: 1px solid rgba(212, 175, 55, 0.15);
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            transition: opacity 0.8s ease;
         }
 
         /* Header */
@@ -228,4 +230,392 @@
             <h1 style="font-size: 1.5rem; letter-spacing: 0.2em; margin-bottom: 0.2rem;" class="font-serif gold-gradient">ARAM SABA</h1>
             <h2 style="font-size: 0.8rem; letter-spacing: 0.25em; color: #a2825e; margin-bottom: 1.5rem;" class="font-serif">SANAT IRANIAN</h2>
             <div style="width: 4rem; height: 1px; background: rgba(212,175,55,0.4); margin: 0 auto 1rem;"></div>
-            <p style="font-size: 9px; letter-spacing: 0.3em; color: #9ca3af; margin
+            <p style="font-size: 9px; letter-spacing: 0.3em; color: #9ca3af; margin-bottom: 2rem;">Exquisite Office Architecture</p>
+            
+            <button type="button" id="enterBtn" style="width: 100%; padding: 0.9rem; background: linear-gradient(135deg, #a2825e, #d4af37); color: #06090f; font-weight: bold; font-size: 0.85rem; border: none; border-radius: 0.75rem; cursor: pointer; font-family: inherit;">
+                ورود به کاتالوگ دیجیتال <i class="fa-solid fa-arrow-left" style="margin-right: 0.5rem;"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN APP CONTAINER -->
+    <div id="mainApp" class="hidden">
+        <header>
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div dir="ltr" class="brand-logo font-serif">AS</div>
+                <div>
+                    <h2 style="font-size: 0.9rem; font-weight: bold; color: #fff;">آرام صبا صنعت ایرانیان</h2>
+                    <p style="font-size: 0.65rem; color: #d4af37; margin-top: 2px;">کلکسیون مدیران ارشد</p>
+                </div>
+            </div>
+            <button type="button" id="adminBtn" style="padding: 0.5rem 1rem; background: #06090f; color: #d4af37; border: 1px solid rgba(212,175,55,0.3); border-radius: 0.65rem; font-size: 0.75rem; font-weight: 500; cursor: pointer; font-family: inherit;">
+                <i class="fa-solid fa-terminal" style="margin-left: 0.4rem;"></i> ترمینال مدیریت
+            </button>
+        </header>
+
+        <section class="hero">
+            <span style="font-size: 0.75rem; color: #d4af37; display: block; margin-bottom: 0.5rem;">راهکارهای تخصصی فضاهای اداری</span>
+            <h3 style="font-size: 1.8rem; font-weight: bold; color: #fff; margin-bottom: 0.75rem;">مبلمان اداری و فضاهای مدیریتی لوکس</h3>
+            <p style="font-size: 0.8rem; color: #9ca3af; max-width: 35rem; margin: 0 auto; line-height: 1.8;">تلفیق بی‌نظیر ارگونومی پیشرفته، چوب طبیعی گردوی اروپایی و استانداردهای طراحی سفارشی.</p>
+
+            <div class="search-box">
+                <span style="padding: 0.8rem 0.5rem 0.8rem 1rem; color: #d4af37;"><i class="fa-solid fa-magnifying-glass"></i></span>
+                <input type="text" id="searchInput" placeholder="جستجو در کلکسیون...">
+                <button type="button" id="aiBtn" style="background: linear-gradient(135deg, #a2825e, #d4af37); color: #06090f; padding: 0 1.25rem; font-weight: bold; font-size: 0.75rem; border: none; cursor: pointer; font-family: inherit;">
+                    مشاوره هوشمند
+                </button>
+            </div>
+            <div id="aiResponseBox" class="hidden" style="max-width: 40rem; margin: 1rem auto 0; padding: 1rem; background: #0a111c; border: 1px solid rgba(212,175,55,0.3); border-radius: 0.75rem; font-size: 0.78rem; text-align: right; line-height: 1.8;"></div>
+
+            <div id="categoryTabsContainer"></div>
+        </section>
+
+        <main>
+            <div id="productGrid"></div>
+        </main>
+
+        <footer style="background: #0a111c; border-top: 1px solid rgba(212,175,55,0.2); padding: 1.5rem; text-align: center; font-size: 0.75rem; color: #9ca3af;">
+            <p>© ۲۰۲۶ تمامی حقوق محفوظ است. آرام صبا صنعت ایرانیان.</p>
+        </footer>
+    </div>
+
+    <!-- ADMIN MODAL -->
+    <div id="adminModal" class="hidden">
+        <div class="modal-content">
+            <div style="padding: 1rem 1.25rem; background: #06090f; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="font-size: 0.85rem; font-weight: bold; color: #d4af37;"><i class="fa-solid fa-terminal" style="margin-left: 0.5rem;"></i> ترمینال مدیریت سیستم</h3>
+                <button type="button" id="closeAdminBtn" style="background: none; border: none; color: #9ca3af; font-size: 1rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div style="padding: 1.25rem; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 1.25rem; text-align: right;">
+                <div style="background: #06090f; padding: 1rem; border-radius: 0.75rem; border: 1px solid rgba(212,175,55,0.2);">
+                    <h4 style="font-size: 0.75rem; font-weight: bold; color: #d4af37; margin-bottom: 0.75rem;">مدیریت دسته‌بندی‌ها</h4>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+                        <input type="text" id="newCategoryName" placeholder="نام دسته جدید..." class="input-field">
+                        <button type="button" id="addCatBtn" style="padding: 0 1rem; background: #d4af37; color: #06090f; font-weight: bold; font-size: 0.75rem; border: none; border-radius: 0.65rem; cursor: pointer; white-space: nowrap;">افزودن</button>
+                    </div>
+                    <div id="adminCategoryList" style="display: flex; flex-wrap: wrap; gap: 0.4rem;"></div>
+                </div>
+
+                <div style="background: #06090f; padding: 1rem; border-radius: 0.75rem; border: 1px solid rgba(212,175,55,0.2);">
+                    <h4 id="formTitle" style="font-size: 0.75rem; font-weight: bold; color: #d4af37; margin-bottom: 0.75rem;">ثبت محصول جدید</h4>
+                    <form id="productForm" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <input type="hidden" id="editIndex" value="-1">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                            <input type="text" id="prodName" required placeholder="نام محصول" class="input-field">
+                            <select id="prodCategory" class="input-field"></select>
+                        </div>
+                        <input type="text" id="prodImage" required placeholder="./images/desk1.jpg" class="input-field" dir="ltr" style="text-align: left;">
+                        <textarea id="prodInfo" rows="2" required placeholder="توضیحات فنی..." class="input-field"></textarea>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button type="submit" style="padding: 0.6rem 1.2rem; background: linear-gradient(135deg, #a2825e, #d4af37); color: #06090f; font-weight: bold; font-size: 0.75rem; border: none; border-radius: 0.65rem; cursor: pointer;">ذخیره</button>
+                            <button type="button" id="cancelFormBtn" style="padding: 0.6rem 1rem; background: #1f2937; color: #d1d5db; font-size: 0.75rem; border: none; border-radius: 0.65rem; cursor: pointer;">انصراف</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div>
+                    <h4 style="font-size: 0.75rem; font-weight: bold; color: #9ca3af; margin-bottom: 0.5rem;">موجودی کاتالوگ</h4>
+                    <div id="adminProductList" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 12rem; overflow-y: auto;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="hidden"></div>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        const DEFAULT_CATEGORIES = ["میز مدیریت", "صندلی ارگونومیک", "میز کنفرانس", "کنسول و فایلینگ"];
+        const DEFAULT_PRODUCTS = [
+            { name: "میز مدیریت اجرایی ونگارد", category: "میز مدیریت", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=800&q=80", info: "تلفیق بی‌نظیر ارگونومی پیشرفته و چوب طبیعی گردوی اروپایی با سیستم هوشمند مدیریت کابل." },
+            { name: "صندلی ارگونومیک پشتی‌بلند اجیس", category: "صندلی ارگونومیک", image: "https://images.unsplash.com/photo-1580481077494-e3299acae5e7?auto=format&fit=crop&w=800&q=80", info: "طراحی پیشرفته با مکانیزم شیب همگام، پشتی مشبک تنفس‌پذیر و سیستم حمایت از ستون فقرات." },
+            { name: "میز کنفرانس دیپلمات", category: "میز کنفرانس", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80", info: "میز جلسات ماژولار ۱۲ نفره، مجهز به پنل‌های پاپ‌آپ برق و اتصالات مخفی با تزئینات برنزی." },
+            { name: "کنسول و بوفه دکوراتیو کیان", category: "کنسول و فایلینگ", image: "https://images.unsplash.com/photo-1595515106967-1ce2e16d41f0?auto=format&fit=crop&w=800&q=80", info: "درهای آرام‌بند، طبقات شیشه‌ای دودی و سیستم قفل یکپارچه و نامرئی برای بایگانی اسناد." }
+        ];
+
+        let categories = [...DEFAULT_CATEGORIES];
+        let products = [...DEFAULT_PRODUCTS];
+        let currentCategory = 'all';
+
+        try {
+            const savedCats = localStorage.getItem('aram_categories');
+            if (savedCats) {
+                const p = JSON.parse(savedCats);
+                if (Array.isArray(p) && p.length > 0) categories = p;
+            }
+            const savedProds = localStorage.getItem('aram_products');
+            if (savedProds) {
+                const p = JSON.parse(savedProds);
+                if (Array.isArray(p) && p.length > 0) products = p;
+            }
+        } catch (e) {}
+
+        function saveToStorage() {
+            try {
+                localStorage.setItem('aram_categories', JSON.stringify(categories));
+                localStorage.setItem('aram_products', JSON.stringify(products));
+            } catch (e) {}
+        }
+
+        function enterCatalog() {
+            const splash = document.getElementById('splashScreen');
+            const main = document.getElementById('mainApp');
+            if (splash) {
+                splash.style.opacity = '0';
+                setTimeout(() => { splash.classList.add('hidden'); }, 600);
+            }
+            if (main) {
+                main.classList.remove('hidden');
+                setTimeout(() => { main.style.opacity = '1'; }, 50);
+            }
+            renderCategories();
+            renderProducts();
+        }
+
+        function toggleAdminModal() {
+            const modal = document.getElementById('adminModal');
+            if (!modal) return;
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                renderAdminList();
+            } else {
+                modal.classList.add('hidden');
+                resetForm();
+            }
+        }
+
+        function addCategory() {
+            const input = document.getElementById('newCategoryName');
+            if (!input) return;
+            const val = input.value.trim();
+            if (val && !categories.includes(val)) {
+                categories.push(val);
+                input.value = '';
+                saveToStorage();
+                renderCategories();
+                showToast("دسته‌بندی ثبت شد.");
+            }
+        }
+
+        function deleteCategory(cat) {
+            if (confirm('حذف دسته "' + cat + '"؟')) {
+                categories = categories.filter(c => c !== cat);
+                if (currentCategory === cat) currentCategory = 'all';
+                saveToStorage();
+                renderCategories();
+                renderProducts();
+                showToast("حذف شد.");
+            }
+        }
+
+        function handleProductSubmit(e) {
+            e.preventDefault();
+            const editIndex = parseInt(document.getElementById('editIndex').value, 10);
+            const newProd = {
+                name: document.getElementById('prodName').value,
+                category: document.getElementById('prodCategory').value,
+                image: document.getElementById('prodImage').value,
+                info: document.getElementById('prodInfo').value
+            };
+
+            if (editIndex === -1) {
+                products.unshift(newProd);
+                showToast("محصول اضافه شد.");
+            } else {
+                products[editIndex] = newProd;
+                showToast("محصول به‌روزرسانی شد.");
+                resetForm();
+            }
+            saveToStorage();
+            renderProducts();
+            renderAdminList();
+            document.getElementById('productForm').reset();
+        }
+
+        function editProduct(idx) {
+            const p = products[idx];
+            if (!p) return;
+            document.getElementById('editIndex').value = idx;
+            document.getElementById('prodName').value = p.name;
+            document.getElementById('prodCategory').value = p.category;
+            document.getElementById('prodImage').value = p.image;
+            document.getElementById('prodInfo').value = p.info;
+            document.getElementById('formTitle').innerText = 'ویرایش محصول: ' + p.name;
+        }
+
+        function deleteProduct(idx) {
+            if (confirm("حذف این محصول؟")) {
+                products.splice(idx, 1);
+                saveToStorage();
+                renderProducts();
+                renderAdminList();
+                showToast("محصول حذف شد.");
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('editIndex').value = -1;
+            document.getElementById('productForm').reset();
+            document.getElementById('formTitle').innerText = 'ثبت محصول جدید';
+        }
+
+        function shareProduct(idx) {
+            const p = products[idx];
+            if (!p) return;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(p.name + "\n" + p.info).then(() => {
+                    showToast("لینک کپی شد.");
+                });
+            }
+        }
+
+        function askGeminiAI() {
+            const q = document.getElementById('searchInput').value.trim();
+            const box = document.getElementById('aiResponseBox');
+            if (!box) return;
+            if (!q) {
+                box.classList.remove('hidden');
+                box.innerText = "لطفاً نیاز خود را وارد کنید.";
+                return;
+            }
+            box.classList.remove('hidden');
+            box.innerText = "در حال پردازش...";
+            setTimeout(() => {
+                box.innerText = "مشاور هوش مصنوعی: برای درخواست شما («" + q + "»)، پیشنهاد می‌کنیم میزهای مدیریتی گردو را با صندلی‌های ارگونومیک ترکیب کنید.";
+            }, 1000);
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            if (!t) return;
+            t.innerText = msg;
+            t.classList.remove('hidden');
+            setTimeout(() => { t.classList.add('hidden'); }, 3000);
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('categoryTabsContainer');
+            if (container) {
+                let html = '<button type="button" data-cat="all" class="cat-btn ' + (currentCategory === 'all' ? 'active' : '') + '">تمامی کلکسیون‌ها</button>';
+                categories.forEach(cat => {
+                    html += '<button type="button" data-cat="' + cat + '" class="cat-btn ' + (currentCategory === cat ? 'active' : '') + '">' + cat + '</button>';
+                });
+                container.innerHTML = html;
+                container.querySelectorAll('.cat-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        currentCategory = btn.getAttribute('data-cat');
+                        renderCategories();
+                        renderProducts();
+                    };
+                });
+            }
+
+            const select = document.getElementById('prodCategory');
+            if (select) {
+                let opts = '';
+                categories.forEach(cat => { opts += '<option value="' + cat + '">' + cat + '</option>'; });
+                select.innerHTML = opts;
+            }
+
+            const adminCatList = document.getElementById('adminCategoryList');
+            if (adminCatList) {
+                let listHtml = '';
+                categories.forEach(cat => {
+                    listHtml += '<div style="display: flex; align-items: center; gap: 0.4rem; background: #0f1826; padding: 0.3rem 0.6rem; border-radius: 0.4rem; font-size: 0.75rem; color: #d4af37;">' +
+                        '<span>' + cat + '</span>' +
+                        '<button type="button" data-cat="' + cat + '" class="del-cat" style="background:none; border:none; color:#f87171; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>' +
+                    '</div>';
+                });
+                adminCatList.innerHTML = listHtml;
+                adminCatList.querySelectorAll('.del-cat').forEach(b => {
+                    b.onclick = () => deleteCategory(b.getAttribute('data-cat'));
+                });
+            }
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const searchInput = document.getElementById('searchInput');
+            if (!grid) return;
+            const term = searchInput ? searchInput.value.toLowerCase() : '';
+            grid.innerHTML = '';
+
+            const filtered = products.map((p, idx) => ({p, idx})).filter(item => {
+                const matchCat = currentCategory === 'all' || item.p.category === currentCategory;
+                const matchSearch = (item.p.name || '').toLowerCase().includes(term) || (item.p.info || '').toLowerCase().includes(term);
+                return matchCat && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #6b7280; font-size: 0.85rem;">موردی یافت نشد.</div>';
+                return;
+            }
+
+            filtered.forEach(item => {
+                const p = item.p;
+                const card = document.createElement('div');
+                card.className = "product-card";
+                card.innerHTML = 
+                    '<div class="card-img">' +
+                        '<img src="' + p.image + '" alt="' + p.name + '">' +
+                    '</div>' +
+                    '<div class="card-body">' +
+                        '<span style="font-size: 0.65rem; color: #d4af37; margin-bottom: 0.4rem; font-weight: bold;">' + p.category + '</span>' +
+                        '<h4 style="font-size: 0.95rem; font-weight: bold; color: #fff; margin-bottom: 0.5rem;">' + p.name + '</h4>' +
+                        '<p style="font-size: 0.75rem; color: #9ca3af; line-height: 1.7; margin-bottom: 1rem; flex: 1;">' + p.info + '</p>' +
+                        '<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.75rem;">' +
+                            '<span style="font-size: 0.7rem; color: #d4af37;">آماده سفارش</span>' +
+                            '<button type="button" data-idx="' + item.idx + '" class="share-btn" style="padding: 0.35rem 0.75rem; background: #06090f; color: #d4af37; border: 1px solid rgba(212,175,55,0.3); border-radius: 0.5rem; font-size: 0.7rem; cursor: pointer;">اشتراک‌گذاری</button>' +
+                        '</div>' +
+                    '</div>';
+                grid.appendChild(card);
+            });
+
+            grid.querySelectorAll('.share-btn').forEach(b => {
+                b.onclick = () => shareProduct(parseInt(b.getAttribute('data-idx'), 10));
+            });
+        }
+
+        function renderAdminList() {
+            const list = document.getElementById('adminProductList');
+            if (!list) return;
+            list.innerHTML = '';
+            products.forEach((p, idx) => {
+                const row = document.createElement('div');
+                row.style.cssText = "display: flex; align-items: center; justify-content: space-between; background: #06090f; padding: 0.5rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.06); font-size: 0.75rem;";
+                row.innerHTML = 
+                    '<div style="display: flex; align-items: center; gap: 0.5rem;">' +
+                        '<img src="' + p.image + '" style="width: 2rem; height: 2rem; object-fit: cover; border-radius: 0.3rem;">' +
+                        '<span style="color: #fff; font-weight: bold;">' + p.name + '</span>' +
+                    '</div>' +
+                    '<div style="display: flex; gap: 0.3rem;">' +
+                        '<button type="button" data-idx="' + idx + '" class="edit-p" style="padding: 0.3rem 0.5rem; background: #1f2937; color: #d4af37; border: none; border-radius: 0.3rem; cursor: pointer;"><i class="fa-solid fa-pen"></i></button>' +
+                        '<button type="button" data-idx="' + idx + '" class="del-p" style="padding: 0.3rem 0.5rem; background: #7f1d1d; color: #fca5a5; border: none; border-radius: 0.3rem; cursor: pointer;"><i class="fa-solid fa-trash"></i></button>' +
+                    '</div>';
+                list.appendChild(row);
+            });
+
+            list.querySelectorAll('.edit-p').forEach(b => {
+                b.onclick = () => editProduct(parseInt(b.getAttribute('data-idx'), 10));
+            });
+            list.querySelectorAll('.del-p').forEach(b => {
+                b.onclick = () => deleteProduct(parseInt(b.getAttribute('data-idx'), 10));
+            });
+        }
+
+        // Event bindings
+        document.getElementById('enterBtn').onclick = enterCatalog;
+        document.getElementById('adminBtn').onclick = toggleAdminModal;
+        document.getElementById('closeAdminBtn').onclick = toggleAdminModal;
+        document.getElementById('aiBtn').onclick = askGeminiAI;
+        document.getElementById('addCatBtn').onclick = addCategory;
+        document.getElementById('cancelFormBtn').onclick = resetForm;
+        document.getElementById('productForm').onsubmit = handleProductSubmit;
+        document.getElementById('searchInput').oninput = renderProducts;
+
+        renderCategories();
+        renderProducts();
+    </script>
+</body>
+</html>
