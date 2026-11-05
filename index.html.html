@@ -182,7 +182,10 @@
             <p class="mt-1 text-[10px] text-gray-500">مدیریت محصولات و دسته‌بندی‌ها</p>
           </div>
         </div>
-        <button id="closeAdminButton" type="button" class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-gray-400 transition hover:bg-white/10 hover:text-white" aria-label="بستن پنجره"><i class="fa-solid fa-xmark"></i></button>
+        <div class="flex items-center gap-2">
+          <button id="adminLogoutButton" type="button" class="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-[10px] text-gray-300 transition hover:bg-white/10">خروج مدیر</button>
+          <button id="closeAdminButton" type="button" class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-gray-400 transition hover:bg-white/10 hover:text-white" aria-label="بستن پنجره"><i class="fa-solid fa-xmark"></i></button>
+        </div>
       </div>
 
       <div class="modal-scroll flex-1 space-y-7 overflow-y-auto p-4 text-right sm:p-7">
@@ -237,6 +240,31 @@
     </div>
   </div>
 
+  <!-- Admin sign-in -->
+  <div id="adminLoginModal" class="fixed inset-0 z-[55] hidden items-center justify-center bg-black/85 p-4 backdrop-blur-xl" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle">
+    <div class="glass-panel w-full max-w-md rounded-3xl p-6 shadow-2xl sm:p-8">
+      <div class="mb-6 flex items-center justify-between">
+        <div>
+          <h2 id="adminLoginTitle" class="text-base font-bold text-white">ورود مدیر کاتالوگ</h2>
+          <p class="mt-2 text-xs text-gray-400">برای مدیریت محصولات، با حساب مدیر وارد شوید.</p>
+        </div>
+        <button id="closeAdminLoginButton" type="button" class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-gray-400 hover:text-white" aria-label="بستن"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="adminLoginForm" class="space-y-4">
+        <div>
+          <label for="adminEmail" class="mb-2 block text-xs text-gray-400">ایمیل مدیر</label>
+          <input id="adminEmail" type="email" autocomplete="username" required class="admin-input text-left" dir="ltr" placeholder="admin@example.com">
+        </div>
+        <div>
+          <label for="adminPassword" class="mb-2 block text-xs text-gray-400">رمز عبور</label>
+          <input id="adminPassword" type="password" autocomplete="current-password" required class="admin-input text-left" dir="ltr" placeholder="رمز عبور حساب مدیر">
+        </div>
+        <button id="adminLoginSubmit" type="submit" class="gold-button w-full rounded-xl px-6 py-3 text-xs font-bold transition">ورود امن</button>
+      </form>
+      <p class="mt-4 text-[10px] leading-6 text-gray-500">حساب مدیر باید از قبل در بخش Authentication پروژه Supabase ساخته شده باشد.</p>
+    </div>
+  </div>
+
   <!-- Toast -->
   <div id="toast" class="pointer-events-none fixed bottom-5 left-5 z-[60] flex max-w-[calc(100vw-2.5rem)] translate-y-5 items-center gap-3 rounded-2xl border border-brandGold/30 bg-[#0a111c]/95 px-5 py-3.5 text-xs font-medium text-white opacity-0 shadow-2xl transition-all duration-300" role="status" aria-live="polite">
     <i id="toastIcon" class="fa-solid fa-circle-check text-brandGold"></i>
@@ -253,6 +281,8 @@
     .admin-input::placeholder { color: #6b7280; }
   </style>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script>
     'use strict';
 
@@ -262,7 +292,7 @@
     // key here. Do not use a service_role or sb_secret key.
     // =========================================================
     const SUPABASE_URL = 'https://gsefloewufawbrwlwoij.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_IjINafPfpd1BkY57hWcvwA_sQ0uYslh';
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_PUBLISHABLE_KEY';
 
     const SUPABASE_CONFIGURED =
       /^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(SUPABASE_URL.trim()) &&
@@ -273,6 +303,14 @@
       'Content-Type': 'application/json',
       'apikey': SUPABASE_ANON_KEY
     };
+
+    // Supabase Auth keeps the admin session in this browser. The publishable
+    // key identifies the project; the signed-in user's JWT controls permissions.
+    const supabaseClient = SUPABASE_CONFIGURED && window.supabase?.createClient
+      ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+          auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+        })
+      : null;
 
     let categories = [];
     let products = [];
@@ -335,6 +373,11 @@
       const { method = 'GET', body, prefer = 'return=minimal' } = options;
       const headers = { ...supabaseHeaders };
       if (prefer) headers.Prefer = prefer;
+      if (supabaseClient) {
+        const { data: sessionData } = await supabaseClient.auth.getSession();
+        const accessToken = sessionData?.session?.access_token;
+        if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
+      }
 
       const response = await fetch(`${supabaseBaseUrl}/rest/v1/${resource}`, {
         method,
@@ -806,7 +849,7 @@
       renderCategorySelect();
     }
 
-    function openAdminModal() {
+    function showAdminModal() {
       lastFocusedElement = document.activeElement;
       $('adminModal').classList.remove('hidden');
       $('adminModal').classList.add('flex');
@@ -815,6 +858,75 @@
       renderAdminList();
       $('closeAdminButton').focus();
       refreshCatalog(true);
+    }
+
+    async function openAdminModal() {
+      if (!supabaseClient) {
+        showToast('ابتدا کلید عمومی Supabase را در تنظیمات کد وارد کنید.', 'error');
+        return;
+      }
+      try {
+        const { data, error } = await supabaseClient.auth.getSession();
+        if (error) throw error;
+        if (data?.session) {
+          showAdminModal();
+        } else {
+          $('adminLoginModal').classList.remove('hidden');
+          $('adminLoginModal').classList.add('flex');
+          document.body.style.overflow = 'hidden';
+          $('adminEmail').focus();
+        }
+      } catch (error) {
+        console.error('خطا در بررسی نشست مدیر:', error);
+        showToast('بررسی ورود مدیر انجام نشد. تنظیمات Supabase را بررسی کنید.', 'error');
+      }
+    }
+
+    function closeAdminLoginModal() {
+      $('adminLoginModal').classList.add('hidden');
+      $('adminLoginModal').classList.remove('flex');
+      if ($('adminModal').classList.contains('hidden')) document.body.style.overflow = '';
+    }
+
+    async function handleAdminLogin(event) {
+      event.preventDefault();
+      if (!supabaseClient) {
+        showToast('کلید عمومی Supabase وارد نشده است.', 'error');
+        return;
+      }
+      const email = $('adminEmail').value.trim();
+      const password = $('adminPassword').value;
+      const button = $('adminLoginSubmit');
+      button.disabled = true;
+      button.textContent = 'در حال ورود...';
+      try {
+        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        if (!data?.session) throw new Error('نشست کاربری ایجاد نشد.');
+        $('adminPassword').value = '';
+        closeAdminLoginModal();
+        showAdminModal();
+        showToast('ورود انجام شد. دسترسی ویرایش توسط سیاست‌های پایگاه داده کنترل می‌شود.');
+      } catch (error) {
+        console.error('خطای ورود مدیر:', error);
+        showToast('ورود ناموفق بود. ایمیل، رمز عبور و فعال‌بودن حساب را بررسی کنید.', 'error');
+      } finally {
+        button.disabled = false;
+        button.textContent = 'ورود امن';
+      }
+    }
+
+    async function handleAdminLogout() {
+      if (supabaseClient) {
+        const { error } = await supabaseClient.auth.signOut();
+        if (error) {
+          console.error('خطا در خروج مدیر:', error);
+          showToast('خروج انجام نشد. دوباره تلاش کنید.', 'error');
+          return;
+        }
+      }
+      closeAdminModal();
+      showToast('از حساب مدیریت خارج شدید.');
     }
 
     function closeAdminModal() {
@@ -920,6 +1032,12 @@
       $('enterButton').addEventListener('click', enterCatalog);
       $('openAdminButton').addEventListener('click', openAdminModal);
       $('closeAdminButton').addEventListener('click', closeAdminModal);
+      $('adminLogoutButton').addEventListener('click', handleAdminLogout);
+      $('adminLoginForm').addEventListener('submit', handleAdminLogin);
+      $('closeAdminLoginButton').addEventListener('click', closeAdminLoginModal);
+      $('adminLoginModal').addEventListener('click', event => {
+        if (event.target === $('adminLoginModal')) closeAdminLoginModal();
+      });
       $('adminModal').addEventListener('click', event => {
         if (event.target === $('adminModal')) closeAdminModal();
       });
@@ -930,7 +1048,9 @@
       $('aiButton').addEventListener('click', askGeminiAI);
 
       document.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && !$('adminModal').classList.contains('hidden')) closeAdminModal();
+        if (event.key !== 'Escape') return;
+        if (!$('adminLoginModal').classList.contains('hidden')) closeAdminLoginModal();
+        else if (!$('adminModal').classList.contains('hidden')) closeAdminModal();
       });
 
       renderCategories();
