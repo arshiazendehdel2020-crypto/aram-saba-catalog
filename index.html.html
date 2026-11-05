@@ -22,7 +22,7 @@
             brandSurface: '#0f1826',
             brandBronze: '#a2825e',
             brandGold: '#d4af37',
-            brandDark: '#06090f'
+            brandDark: '#04060a'
           },
           fontFamily: {
             sans: ['Vazirmatn', 'Inter', 'sans-serif'],
@@ -41,7 +41,7 @@
       min-height: 100%;
       margin: 0;
       overflow-x: hidden;
-      background: #06090f;
+      background: #030508;
       color: #e5e7eb;
       font-family: 'Vazirmatn', 'Inter', sans-serif;
     }
@@ -52,30 +52,38 @@
       outline-offset: 3px;
     }
     .glass-panel {
-      background: rgba(15, 24, 38, .88);
-      border: 1px solid rgba(212, 175, 55, .2);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      background: rgba(10, 16, 26, .85);
+      border: 1px solid rgba(212, 175, 55, .28);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
     }
     .gold-gradient-text {
-      background: linear-gradient(135deg, #fff 0%, #d4af37 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #fef08a 50%, #d4af37 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
     .gold-button {
-      color: #06090f;
-      background: linear-gradient(110deg, #a2825e, #c5a059, #d4af37);
+      color: #04060a;
+      background: linear-gradient(110deg, #a2825e, #e6c575, #d4af37);
+      box-shadow: 0 4px 20px rgba(212,175,55,0.25);
     }
-    .gold-button:hover { filter: brightness(1.08); box-shadow: 0 10px 28px rgba(212,175,55,.18); }
+    .gold-button:hover { filter: brightness(1.1); box-shadow: 0 10px 32px rgba(212,175,55,.35); }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
     .fade-in { animation: fadeIn .65s ease both; }
     .fade-up { animation: fadeUp .65s cubic-bezier(.22,1,.36,1) both; }
     @keyframes fadeIn { from { opacity: 0; transform: scale(.985); } to { opacity: 1; transform: scale(1); } }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes floatOrb {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(35px, -25px) scale(1.08); }
+    }
+    .orb-1 { animation: floatOrb 14s ease-in-out infinite; }
+    .orb-2 { animation: floatOrb 18s ease-in-out infinite reverse; }
+    .orb-3 { animation: floatOrb 20s ease-in-out infinite 2s; }
     .product-card { transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
-    .product-card:hover { transform: translateY(-6px); border-color: rgba(212,175,55,.38); box-shadow: 0 22px 55px rgba(0,0,0,.42); }
+    .product-card:hover { transform: translateY(-6px); border-color: rgba(212,175,55,.45); box-shadow: 0 25px 60px rgba(0,0,0,.5); }
     .product-image { transition: transform 1s cubic-bezier(.2,.8,.2,1); }
     .product-card:hover .product-image { transform: scale(1.055); }
     .modal-scroll { overscroll-behavior: contain; }
@@ -86,23 +94,31 @@
 </head>
 
 <body class="min-h-screen flex flex-col selection:bg-brandGold selection:text-brandDark">
-  <!-- Ambient background -->
-  <div aria-hidden="true" class="fixed -top-48 -left-40 w-[65vw] h-[65vw] rounded-full bg-brandGold/[.045] blur-[120px] pointer-events-none"></div>
-  <div aria-hidden="true" class="fixed -bottom-40 -right-40 w-[55vw] h-[55vw] rounded-full bg-brandBronze/[.05] blur-[110px] pointer-events-none"></div>
+  <!-- Immersive Rich Luxury Background Layers -->
+  <div aria-hidden="true" class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <!-- Fine geometric architectural grid -->
+    <div class="absolute inset-0 opacity-[0.035]" style="background-image: radial-gradient(#d4af37 1.5px, transparent 1.5px); background-size: 40px 40px;"></div>
+    <!-- Diagonal metallic light streak -->
+    <div class="absolute -top-[50%] -left-[50%] w-[200%] h-[200%] opacity-[0.015]" style="background: linear-gradient(45deg, transparent 45%, #d4af37 50%, transparent 55%);"></div>
+    <!-- Animated Glowing Orbs -->
+    <div class="orb-1 absolute -top-20 -left-20 w-[60vw] h-[60vw] rounded-full bg-brandGold/[0.08] blur-[150px]"></div>
+    <div class="orb-2 absolute top-1/4 -right-32 w-[55vw] h-[55vw] rounded-full bg-brandBronze/[0.08] blur-[160px]"></div>
+    <div class="orb-3 absolute -bottom-40 left-1/3 w-[65vw] h-[65vw] rounded-full bg-[#1b263b]/40 blur-[180px]"></div>
+  </div>
 
   <!-- Intro screen -->
   <section id="splashScreen" class="fixed inset-0 z-50 flex items-center justify-center bg-brandDark p-5 transition-opacity duration-700" aria-label="صفحه ورود">
-    <div class="glass-panel relative w-full max-w-lg overflow-hidden rounded-[2rem] p-7 text-center shadow-2xl sm:p-10 fade-in">
-      <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brandGold to-transparent"></div>
+    <div class="glass-panel relative w-full max-w-lg overflow-hidden rounded-[2.5rem] p-8 text-center shadow-2xl sm:p-12 fade-in">
+      <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-brandGold to-transparent"></div>
       <div dir="ltr" class="mb-6 flex items-baseline justify-center gap-1">
         <span class="font-serif text-6xl font-light tracking-tighter text-gray-100">A</span>
         <span class="gold-gradient-text font-serif text-6xl font-light italic tracking-tighter">S</span>
       </div>
-      <p dir="ltr" class="gold-gradient-text mb-2 font-serif text-2xl font-semibold tracking-[.2em] sm:text-3xl">ARAM SABA</p>
-      <p dir="ltr" class="mb-5 font-serif text-sm font-medium tracking-[.28em] text-brandBronze">SANAT IRANIAN</p>
-      <div class="mx-auto mb-5 h-px w-20 bg-brandGold/40"></div>
-      <p dir="ltr" class="mb-9 text-[10px] uppercase tracking-[.35em] text-gray-400">Exquisite Office Architecture</p>
-      <button id="enterButton" type="button" class="gold-button w-full rounded-xl px-7 py-4 text-xs font-bold transition hover:scale-[1.01] active:scale-[.99]">
+      <p dir="ltr" class="gold-gradient-text mb-2 font-serif text-2xl font-semibold tracking-[.25em] sm:text-3xl">ARAM SABA</p>
+      <p dir="ltr" class="mb-6 font-serif text-sm font-medium tracking-[.3em] text-brandBronze">SANAT IRANIAN</p>
+      <div class="mx-auto mb-6 h-px w-24 bg-gradient-to-r from-transparent via-brandGold/60 to-transparent"></div>
+      <p dir="ltr" class="mb-10 text-[10px] uppercase tracking-[.4em] text-gray-400">Exquisite Office Architecture</p>
+      <button id="enterButton" type="button" class="gold-button w-full rounded-2xl px-8 py-4 text-xs font-bold transition hover:scale-[1.01] active:scale-[.99]">
         ورود به کاتالوگ دیجیتال <i class="fa-solid fa-arrow-left mr-2"></i>
       </button>
     </div>
@@ -110,32 +126,32 @@
 
   <!-- Main application -->
   <div id="mainApp" class="relative z-10 flex min-h-screen w-full flex-1 flex-col opacity-0 transition-opacity duration-700">
-    <header class="sticky top-0 z-30 flex items-center justify-between border-b border-brandGold/10 bg-[#06090f]/85 px-4 py-3 backdrop-blur-2xl sm:px-7 sm:py-4">
-      <a href="#" class="group flex min-w-0 items-center gap-3 no-underline" aria-label="صفحه اصلی">
+    <header class="sticky top-0 z-30 flex items-center justify-between border-b border-brandGold/15 bg-[#04060a]/90 px-4 py-3.5 backdrop-blur-2xl sm:px-8 sm:py-5">
+      <a href="#" class="group flex min-w-0 items-center gap-3.5 no-underline" aria-label="صفحه اصلی">
         <span dir="ltr" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-gradient-to-br from-brandBronze to-brandGold font-serif text-lg font-bold text-brandDark shadow-lg transition group-hover:scale-105">AS</span>
         <span class="min-w-0">
           <span class="block truncate text-xs font-bold tracking-wide text-gray-100 transition group-hover:text-brandGold sm:text-sm">آرام صبا صنعت ایرانیان</span>
-          <span class="mt-1 block text-[10px] uppercase tracking-wider text-brandGold/80">Executive Collection</span>
+          <span class="mt-1 block text-[10px] uppercase tracking-wider text-brandGold/90">Executive Collection</span>
         </span>
       </a>
-      <button id="openAdminButton" type="button" class="rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-xs font-medium text-brandGold transition hover:border-brandGold/40 hover:bg-white/10 sm:px-4">
+      <button id="openAdminButton" type="button" class="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-medium text-brandGold transition hover:border-brandGold/50 hover:bg-white/10">
         <i class="fa-solid fa-sliders ml-1.5"></i><span class="hidden sm:inline">مدیریت کاتالوگ</span><span class="sm:hidden">مدیریت</span>
       </button>
     </header>
 
-    <section class="relative px-5 pb-4 pt-14 sm:px-10 sm:pt-20">
+    <section class="relative px-5 pb-4 pt-16 sm:px-10 sm:pt-24">
       <div class="relative z-10 mx-auto mb-10 max-w-4xl text-center">
         <span class="mb-4 block text-[10px] font-medium uppercase tracking-[.3em] text-brandGold/80 fade-up">Bespoke Office Solutions</span>
-        <h1 class="mb-5 text-3xl font-bold leading-[1.7] text-white fade-up sm:text-5xl">
+        <h1 class="mb-6 text-3xl font-bold leading-[1.7] text-white fade-up sm:text-5xl">
           مبلمان اداری و فضاهای<br><span class="gold-gradient-text">مدیریتی لوکس</span>
         </h1>
-        <p class="mx-auto max-w-2xl text-xs font-light leading-8 text-gray-400 fade-up sm:text-sm">
+        <p class="mx-auto max-w-2xl text-xs font-light leading-8 text-gray-300 fade-up sm:text-sm">
           تلفیق ارگونومی پیشرفته، متریال ممتاز و طراحی سفارشی برای خلق فضاهای کاری متمایز.
         </p>
       </div>
 
       <div class="relative z-20 mx-auto max-w-3xl fade-up">
-        <div class="flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/[.045] p-2 shadow-2xl backdrop-blur-xl transition focus-within:border-brandGold/40 sm:flex-row sm:items-center">
+        <div class="flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/[.04] p-2.5 shadow-2xl backdrop-blur-2xl transition focus-within:border-brandGold/50 sm:flex-row sm:items-center">
           <label for="searchInput" class="flex min-w-0 flex-1 items-center gap-3 px-3">
             <i class="fa-solid fa-magnifying-glass text-brandGold"></i>
             <input id="searchInput" type="search" autocomplete="off" placeholder="جستجو در نام یا مشخصات محصولات..." class="w-full min-w-0 bg-transparent py-3 text-xs text-gray-100 outline-none placeholder:text-gray-500 sm:text-sm">
@@ -150,22 +166,22 @@
       <nav id="categoryTabs" class="no-scrollbar relative z-10 mt-10 flex justify-start gap-2.5 overflow-x-auto pb-3 sm:justify-center" aria-label="فیلتر دسته‌بندی‌ها"></nav>
     </section>
 
-    <main class="mx-auto w-full max-w-[1400px] flex-1 px-5 pb-16 pt-4 sm:px-10">
-      <div class="mb-6 flex items-center justify-between gap-3 border-b border-white/5 pb-4">
+    <main class="mx-auto w-full max-w-[1400px] flex-1 px-5 pb-20 pt-4 sm:px-10">
+      <div class="mb-6 flex items-center justify-between gap-3 border-b border-white/10 pb-4">
         <div>
           <h2 class="text-sm font-bold text-gray-100">منتخب کلکسیون</h2>
-          <p id="resultCount" class="mt-1 text-[10px] text-gray-500"></p>
+          <p id="resultCount" class="mt-1 text-[10px] text-gray-400"></p>
         </div>
-        <span class="hidden text-[10px] tracking-widest text-brandGold/70 sm:inline">ARAM SABA COLLECTION</span>
+        <span class="hidden text-[10px] tracking-widest text-brandGold/80 sm:inline">ARAM SABA COLLECTION</span>
       </div>
       <div id="productGrid" class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3"></div>
     </main>
 
-    <footer class="relative z-10 border-t border-white/5 bg-[#06090f] px-6 py-9 text-center text-xs text-gray-500">
+    <footer class="relative z-10 border-t border-white/10 bg-[#04060a] px-6 py-10 text-center text-xs text-gray-400">
       <div class="mb-3 flex items-center justify-center gap-3">
-        <span dir="ltr" class="font-serif text-lg font-bold text-gray-400">AS</span>
+        <span dir="ltr" class="font-serif text-lg font-bold text-gray-300">AS</span>
         <span class="h-1 w-1 rounded-full bg-brandGold"></span>
-        <span class="font-light tracking-wide text-gray-400">آرام صبا صنعت ایرانیان</span>
+        <span class="font-light tracking-wide text-gray-300">آرام صبا صنعت ایرانیان</span>
       </div>
       <p class="text-[10px] font-light tracking-widest">© <span id="year"></span> تمامی حقوق محفوظ است.</p>
     </footer>
@@ -173,13 +189,13 @@
 
   <!-- Admin modal -->
   <div id="adminModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-3 backdrop-blur-xl sm:p-5" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
-    <div class="modal-scroll flex max-h-[94vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-brandGold/25 bg-brandSurface shadow-2xl">
-      <div class="flex items-center justify-between border-b border-white/5 bg-black/20 p-4 sm:p-6">
+    <div class="modal-scroll flex max-h-[94vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-brandGold/30 bg-brandSurface shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/10 bg-black/30 p-4 sm:p-6">
         <div class="flex items-center gap-3">
-          <span class="flex h-9 w-9 items-center justify-center rounded-xl border border-brandGold/20 bg-brandGold/10 text-brandGold"><i class="fa-solid fa-sliders text-sm"></i></span>
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl border border-brandGold/30 bg-brandGold/10 text-brandGold"><i class="fa-solid fa-sliders text-sm"></i></span>
           <div>
             <h2 id="adminTitle" class="text-sm font-bold text-white">مدیریت کاتالوگ</h2>
-            <p class="mt-1 text-[10px] text-gray-500">مدیریت محصولات و دسته‌بندی‌ها</p>
+            <p class="mt-1 text-[10px] text-gray-400">مدیریت محصولات و دسته‌بندی‌ها</p>
           </div>
         </div>
         <div class="flex items-center gap-2">
@@ -189,7 +205,7 @@
       </div>
 
       <div class="modal-scroll flex-1 space-y-7 overflow-y-auto p-4 text-right sm:p-7">
-        <section class="rounded-2xl border border-white/5 bg-black/25 p-4 sm:p-6">
+        <section class="rounded-2xl border border-white/5 bg-black/30 p-4 sm:p-6">
           <h3 class="mb-4 flex items-center gap-2 text-xs font-bold text-brandGold"><i class="fa-solid fa-tags"></i> مدیریت دسته‌بندی‌ها</h3>
           <form id="categoryForm" class="mb-4 flex flex-col gap-2 sm:flex-row">
             <label for="newCategoryName" class="sr-only">نام دسته‌بندی جدید</label>
@@ -199,27 +215,27 @@
           <div id="adminCategoryList" class="flex flex-wrap gap-2"></div>
         </section>
 
-        <section class="rounded-2xl border border-white/5 bg-black/25 p-4 sm:p-6">
+        <section class="rounded-2xl border border-white/5 bg-black/30 p-4 sm:p-6">
           <h3 id="formTitle" class="mb-5 flex items-center gap-2 text-xs font-bold text-brandGold"><i class="fa-solid fa-plus-circle"></i> ثبت محصول جدید</h3>
           <form id="productForm" class="space-y-4">
             <input type="hidden" id="editIndex" value="-1">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
-                <label for="prodName" class="mb-2 block text-[11px] text-gray-400">نام محصول</label>
+                <label for="prodName" class="mb-2 block text-[11px] text-gray-300">نام محصول</label>
                 <input id="prodName" type="text" maxlength="100" required placeholder="مثال: میز مدیریت امپریال" class="admin-input">
               </div>
               <div>
-                <label for="prodCategory" class="mb-2 block text-[11px] text-gray-400">دسته‌بندی</label>
+                <label for="prodCategory" class="mb-2 block text-[11px] text-gray-300">دسته‌بندی</label>
                 <select id="prodCategory" required class="admin-input"></select>
               </div>
             </div>
             <div>
-              <label for="prodImage" class="mb-2 block text-[11px] text-gray-400">مسیر یا لینک تصویر</label>
+              <label for="prodImage" class="mb-2 block text-[11px] text-gray-300">مسیر یا لینک تصویر</label>
               <input id="prodImage" type="text" maxlength="500" required dir="ltr" placeholder="https://example.com/image.jpg یا ./images/desk.jpg" class="admin-input text-left">
-              <p class="mt-1.5 text-[10px] text-gray-500">لینک تصویر باید معتبر یا مسیر نسبی فایل باشد.</p>
+              <p class="mt-1.5 text-[10px] text-gray-400">لینک تصویر باید معتبر یا مسیر نسبی فایل باشد.</p>
             </div>
             <div>
-              <label for="prodInfo" class="mb-2 block text-[11px] text-gray-400">مشخصات فنی و توضیحات</label>
+              <label for="prodInfo" class="mb-2 block text-[11px] text-gray-300">مشخصات فنی و توضیحات</label>
               <textarea id="prodInfo" rows="3" maxlength="1000" required placeholder="توضیحات محصول..." class="admin-input leading-7"></textarea>
             </div>
             <div class="flex flex-wrap gap-2 pt-1">
@@ -230,9 +246,9 @@
         </section>
 
         <section>
-          <div class="mb-4 flex items-center justify-between border-b border-white/5 pb-3">
-            <h3 class="text-[11px] font-bold tracking-wider text-gray-400">مدیریت موجودی</h3>
-            <span id="adminProductCount" class="text-[10px] text-gray-500"></span>
+          <div class="mb-4 flex items-center justify-between border-b border-white/10 pb-3">
+            <h3 class="text-[11px] font-bold tracking-wider text-gray-300">مدیریت موجودی</h3>
+            <span id="adminProductCount" class="text-[10px] text-gray-400"></span>
           </div>
           <div id="adminProductList" class="max-h-80 space-y-2 overflow-y-auto pl-1"></div>
         </section>
@@ -246,22 +262,22 @@
       <div class="mb-6 flex items-center justify-between">
         <div>
           <h2 id="adminLoginTitle" class="text-base font-bold text-white">ورود مدیر کاتالوگ</h2>
-          <p class="mt-2 text-xs text-gray-400">برای مدیریت محصولات، با حساب مدیر وارد شوید.</p>
+          <p class="mt-2 text-xs text-gray-300">برای مدیریت محصولات، با حساب مدیر وارد شوید.</p>
         </div>
         <button id="closeAdminLoginButton" type="button" class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-gray-400 hover:text-white" aria-label="بستن"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <form id="adminLoginForm" class="space-y-4">
         <div>
-          <label for="adminEmail" class="mb-2 block text-xs text-gray-400">ایمیل مدیر</label>
+          <label for="adminEmail" class="mb-2 block text-xs text-gray-300">ایمیل مدیر</label>
           <input id="adminEmail" type="email" autocomplete="username" required class="admin-input text-left" dir="ltr" placeholder="admin@example.com">
         </div>
         <div>
-          <label for="adminPassword" class="mb-2 block text-xs text-gray-400">رمز عبور</label>
+          <label for="adminPassword" class="mb-2 block text-xs text-gray-300">رمز عبور</label>
           <input id="adminPassword" type="password" autocomplete="current-password" required class="admin-input text-left" dir="ltr" placeholder="رمز عبور حساب مدیر">
         </div>
         <button id="adminLoginSubmit" type="submit" class="gold-button w-full rounded-xl px-6 py-3 text-xs font-bold transition">ورود امن</button>
       </form>
-      <p class="mt-4 text-[10px] leading-6 text-gray-500">حساب مدیر باید از قبل در بخش Authentication پروژه Supabase ساخته شده باشد.</p>
+      <p class="mt-4 text-[10px] leading-6 text-gray-400">حساب مدیر باید از قبل در بخش Authentication پروژه Supabase ساخته شده باشد.</p>
     </div>
   </div>
 
@@ -273,12 +289,12 @@
 
   <style>
     .admin-input {
-      width: 100%; border: 1px solid rgba(255,255,255,.1); border-radius: .75rem;
-      background: #06090f; padding: .8rem 1rem; color: #e5e7eb; font-size: .75rem;
+      width: 100%; border: 1px solid rgba(255,255,255,.12); border-radius: .75rem;
+      background: #04060a; padding: .8rem 1rem; color: #f3f4f6; font-size: .75rem;
       outline: none; transition: border-color .2s ease;
     }
-    .admin-input:focus { border-color: rgba(212,175,55,.55); }
-    .admin-input::placeholder { color: #6b7280; }
+    .admin-input:focus { border-color: rgba(212,175,55,.6); }
+    .admin-input::placeholder { color: #9ca3af; }
   </style>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -288,8 +304,6 @@
 
     // =========================================================
     // SUPABASE CONFIGURATION
-    // Paste your EXISTING project URL and public anon/publishable
-    // key here. Do not use a service_role or sb_secret key.
     // =========================================================
     const SUPABASE_URL = 'https://gsefloewufawbrwlwoij.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_IjINafPfpd1BkY57hWcvwA_sQ0uYslh';
@@ -304,8 +318,6 @@
       'apikey': SUPABASE_ANON_KEY
     };
 
-    // Supabase Auth keeps the admin session in this browser. The publishable
-    // key identifies the project; the signed-in user's JWT controls permissions.
     const supabaseClient = SUPABASE_CONFIGURED && window.supabase?.createClient
       ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
           auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
@@ -405,12 +417,6 @@
       return `${table}?${params.toString()}`;
     }
 
-    // =========================================================
-    // LOAD SHARED DATA FROM SUPABASE (not localStorage)
-    // Tables expected by the original project:
-    // categories: name (or title)
-    // products: id, name, category, image, info (or description)
-    // =========================================================
     async function loadFromSupabase({ quiet = false } = {}) {
       const loadId = ++activeLoadId;
 
@@ -430,7 +436,6 @@
           supabaseRequest('products?select=*')
         ]);
 
-        // Ignore older requests if a newer refresh has already completed.
         if (loadId !== activeLoadId) return false;
 
         categories = Array.isArray(catData)
@@ -468,9 +473,6 @@
       return await loadFromSupabase({ quiet });
     }
 
-    // =========================================================
-    // SUPABASE CREATE / UPDATE / DELETE OPERATIONS
-    // =========================================================
     async function addCategoryToSupabase(categoryName) {
       const duplicate = categories.some(item => normalizeText(item) === normalizeText(categoryName));
       if (duplicate) {
@@ -557,10 +559,6 @@
       }
     }
 
-    // =========================================================
-    // IMAGE PATHS: support URLs and local relative paths.
-    // Only javascript: URLs are rejected, as in the original code.
-    // =========================================================
     function isSafeImagePath(value) {
       const path = String(value || '').trim();
       return path.length > 0 && !/^javascript\s*:/i.test(path);
@@ -601,8 +599,8 @@
     function categoryButtonClass(active) {
       const base = 'shrink-0 whitespace-nowrap rounded-xl border px-5 py-2.5 text-xs font-medium backdrop-blur-md transition';
       return base + (active
-        ? ' border-brandGold/40 bg-white/10 text-brandGold shadow-[0_0_15px_rgba(212,175,55,.12)]'
-        : ' border-white/5 bg-transparent text-gray-400 hover:border-white/20 hover:text-gray-200');
+        ? ' border-brandGold/40 bg-white/15 text-brandGold shadow-[0_0_20px_rgba(212,175,55,.18)]'
+        : ' border-white/10 bg-black/40 text-gray-300 hover:border-white/25 hover:text-white');
     }
 
     function renderCategorySelect() {
@@ -634,7 +632,7 @@
       list.replaceChildren();
 
       if (!categories.length) {
-        list.appendChild(createElement('p', 'text-xs text-gray-500', 'هنوز دسته‌بندی‌ای ثبت نشده است.'));
+        list.appendChild(createElement('p', 'text-xs text-gray-400', 'هنوز دسته‌بندی‌ای ثبت نشده است.'));
         return;
       }
 
@@ -673,28 +671,28 @@
       $('resultCount').textContent = `${filtered.length.toLocaleString('fa-IR')} محصول`;
 
       if (!filtered.length) {
-        const empty = createElement('div', 'col-span-full rounded-3xl border border-white/5 bg-white/[.025] py-20 text-center fade-in');
-        empty.appendChild(createElement('div', 'mb-4 text-3xl text-brandGold/60', '◇'));
-        empty.appendChild(createElement('p', 'text-sm text-gray-400', products.length ? 'محصولی با این مشخصات پیدا نشد.' : 'هنوز محصولی در کاتالوگ ثبت نشده است.'));
-        empty.appendChild(createElement('p', 'mt-2 text-xs text-gray-600', products.length ? 'عبارت جستجو یا دسته‌بندی انتخاب‌شده را تغییر دهید.' : 'با ورود به بخش مدیریت، محصولات خود را اضافه کنید.'));
+        const empty = createElement('div', 'col-span-full rounded-3xl border border-white/10 bg-black/40 py-20 text-center fade-in');
+        empty.appendChild(createElement('div', 'mb-4 text-3xl text-brandGold/70', '◇'));
+        empty.appendChild(createElement('p', 'text-sm text-gray-300', products.length ? 'محصولی با این مشخصات پیدا نشد.' : 'هنوز محصولی در کاتالوگ ثبت نشده است.'));
+        empty.appendChild(createElement('p', 'mt-2 text-xs text-gray-500', products.length ? 'عبارت جستجو یا دسته‌بندی انتخاب‌شده را تغییر دهید.' : 'با ورود به بخش مدیریت، محصولات خود را اضافه کنید.'));
         grid.appendChild(empty);
         return;
       }
 
       filtered.forEach(({ product, index }, displayIndex) => {
-        const card = createElement('article', 'product-card group relative flex flex-col overflow-hidden rounded-3xl border border-white/5 bg-brandNavy shadow-[0_15px_40px_rgba(0,0,0,.35)] fade-up');
+        const card = createElement('article', 'product-card group relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-brandNavy shadow-[0_20px_50px_rgba(0,0,0,.45)] fade-up');
         card.style.animationDelay = `${displayIndex * 70}ms`;
 
-        const media = createElement('div', 'relative h-64 overflow-hidden bg-[#080d15] sm:h-72');
-        const image = createElement('img', 'product-image h-full w-full object-cover opacity-80 group-hover:opacity-100');
+        const media = createElement('div', 'relative h-64 overflow-hidden bg-[#04060a] sm:h-72');
+        const image = createElement('img', 'product-image h-full w-full object-cover opacity-85 group-hover:opacity-100');
         image.alt = product.name;
         image.loading = 'lazy';
         setImageSource(image, product.image);
         media.appendChild(image);
 
-        const overlay = createElement('div', 'pointer-events-none absolute inset-0 bg-gradient-to-t from-brandNavy via-brandNavy/10 to-transparent');
+        const overlay = createElement('div', 'pointer-events-none absolute inset-0 bg-gradient-to-t from-brandNavy via-brandNavy/20 to-transparent');
         media.appendChild(overlay);
-        const categoryLabel = createElement('span', 'absolute right-4 top-4 rounded-full border border-brandGold/20 bg-black/55 px-4 py-2 text-[10px] text-brandGold backdrop-blur-md', product.category);
+        const categoryLabel = createElement('span', 'absolute right-4 top-4 rounded-full border border-brandGold/30 bg-black/70 px-4 py-2 text-[10px] text-brandGold backdrop-blur-md', product.category);
         media.appendChild(categoryLabel);
         card.appendChild(media);
 
@@ -704,16 +702,16 @@
         emblem.appendChild(gem);
         content.appendChild(emblem);
         content.appendChild(createElement('h3', 'mb-3 mt-3 text-base font-bold text-white transition group-hover:text-brandGold sm:text-lg', product.name));
-        content.appendChild(createElement('p', 'mb-7 flex-1 text-justify text-xs font-light leading-8 text-gray-400', product.info));
+        content.appendChild(createElement('p', 'mb-7 flex-1 text-justify text-xs font-light leading-8 text-gray-300', product.info));
 
-        const footer = createElement('div', 'flex items-center justify-between border-t border-white/5 pt-5');
-        const share = createElement('button', 'flex items-center gap-2 rounded-xl border border-brandGold/20 bg-white/5 px-4 py-2.5 text-xs font-medium text-brandGold transition hover:bg-brandGold hover:text-brandDark');
+        const footer = createElement('div', 'flex items-center justify-between border-t border-white/10 pt-5');
+        const share = createElement('button', 'flex items-center gap-2 rounded-xl border border-brandGold/30 bg-white/5 px-4 py-2.5 text-xs font-medium text-brandGold transition hover:bg-brandGold hover:text-brandDark');
         share.type = 'button';
         share.appendChild(createElement('i', 'fa-solid fa-share-nodes text-[11px]'));
         share.appendChild(document.createTextNode('اشتراک‌گذاری'));
         share.addEventListener('click', () => shareProduct(index));
         footer.appendChild(share);
-        footer.appendChild(createElement('span', 'text-[10px] tracking-widest text-gray-600', 'AS COLLECTION'));
+        footer.appendChild(createElement('span', 'text-[10px] tracking-widest text-gray-500', 'AS COLLECTION'));
         content.appendChild(footer);
         card.appendChild(content);
         grid.appendChild(card);
@@ -726,34 +724,34 @@
       $('adminProductCount').textContent = `${products.length.toLocaleString('fa-IR')} محصول`;
 
       if (!products.length) {
-        list.appendChild(createElement('p', 'rounded-xl border border-white/5 bg-black/20 p-5 text-center text-xs text-gray-500', 'هنوز محصولی ثبت نشده است.'));
+        list.appendChild(createElement('p', 'rounded-xl border border-white/5 bg-black/30 p-5 text-center text-xs text-gray-400', 'هنوز محصولی ثبت نشده است.'));
         return;
       }
 
       products.forEach((product, index) => {
-        const row = createElement('div', 'flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-black/20 p-3 transition hover:border-brandGold/20 hover:bg-white/[.03]');
+        const row = createElement('div', 'flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-black/30 p-3 transition hover:border-brandGold/30 hover:bg-white/[.04]');
         const details = createElement('div', 'flex min-w-0 flex-1 items-center gap-3');
-        const thumb = createElement('img', 'h-12 w-12 shrink-0 rounded-lg border border-white/10 bg-black/30 object-cover');
+        const thumb = createElement('img', 'h-12 w-12 shrink-0 rounded-lg border border-white/10 bg-black/40 object-cover');
         thumb.alt = '';
         thumb.loading = 'lazy';
         setImageSource(thumb, product.image);
         details.appendChild(thumb);
 
         const textWrap = createElement('div', 'min-w-0');
-        textWrap.appendChild(createElement('p', 'truncate text-xs font-bold text-gray-200', product.name));
+        textWrap.appendChild(createElement('p', 'truncate text-xs font-bold text-gray-100', product.name));
         textWrap.appendChild(createElement('p', 'mt-1 truncate text-[10px] text-brandGold', product.category));
         details.appendChild(textWrap);
         row.appendChild(details);
 
         const actions = createElement('div', 'flex shrink-0 items-center gap-1.5');
-        const edit = createElement('button', 'flex h-9 w-9 items-center justify-center rounded-lg border border-white/5 bg-white/5 text-brandGold transition hover:bg-white/10');
+        const edit = createElement('button', 'flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-brandGold transition hover:bg-white/10');
         edit.type = 'button';
         edit.title = 'ویرایش محصول';
         edit.setAttribute('aria-label', `ویرایش ${product.name}`);
         edit.innerHTML = '<i class="fa-solid fa-pen text-xs"></i>';
         edit.addEventListener('click', () => editProduct(index));
 
-        const remove = createElement('button', 'flex h-9 w-9 items-center justify-center rounded-lg border border-red-900/30 bg-red-950/20 text-red-400 transition hover:bg-red-900/40');
+        const remove = createElement('button', 'flex h-9 w-9 items-center justify-center rounded-lg border border-red-950 bg-red-950/40 text-red-400 transition hover:bg-red-900/50');
         remove.type = 'button';
         remove.title = 'حذف محصول';
         remove.setAttribute('aria-label', `حذف ${product.name}`);
@@ -1015,8 +1013,6 @@
 
     function startAutoSync() {
       if (syncTimer) clearInterval(syncTimer);
-      // REST polling keeps already-open devices reasonably up to date.
-      // All clients read the same records from the shared Supabase tables.
       syncTimer = setInterval(() => {
         if (document.visibilityState === 'visible') refreshCatalog(true);
       }, 15000);
@@ -1028,7 +1024,6 @@
     function initializeApp() {
       $('year').textContent = new Date().getFullYear().toLocaleString('fa-IR');
 
-      // Bind UI immediately; slow or blocked network requests must not disable buttons.
       $('enterButton').addEventListener('click', enterCatalog);
       $('openAdminButton').addEventListener('click', openAdminModal);
       $('closeAdminButton').addEventListener('click', closeAdminModal);
