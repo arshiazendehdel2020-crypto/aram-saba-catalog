@@ -7,55 +7,101 @@
   <meta name="description" content="کاتالوگ دیجیتال مبلمان اداری لوکس آرام صبا صنعت ایرانیان">
   <title>آرام صبا صنعت ایرانیان | مبلمان اداری لوکس</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brandNavy: '#0a111c',
-            brandSurface: '#0f1826',
-            brandBronze: '#a2825e',
-            brandGold: '#d4af37',
-            brandDark: '#06090f'
-          },
-          fontFamily: {
-            sans: ['Vazirmatn', 'Inter', 'sans-serif'],
-            serif: ['Playfair Display', 'Vazirmatn', 'serif']
+    window.tailwind = {
+      config: {
+        theme: {
+          extend: {
+            colors: {
+              brandNavy: '#0a111c',
+              brandSurface: '#0f1826',
+              brandBronze: '#a2825e',
+              brandGold: '#d4af37',
+              brandDark: '#06090f'
+            },
+            fontFamily: {
+              sans: ['Vazirmatn', 'Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'Vazirmatn', 'serif']
+            }
           }
         }
       }
     };
   </script>
+  <script src="https://cdn.tailwindcss.com" async></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
   <style>
     :root { color-scheme: dark; }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; height: 100%; }
     body {
-      min-height: 100%;
+      min-height: 100vh;
       margin: 0;
       overflow-x: hidden;
       background: #06090f;
       color: #e5e7eb;
-      font-family: 'Vazirmatn', 'Inter', sans-serif;
+      font-family: 'Vazirmatn', 'Inter', Tahoma, sans-serif;
+      display: flex;
+      flex-direction: column;
     }
-    h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', 'Vazirmatn', serif; }
+    h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', 'Vazirmatn', serif; margin: 0; }
+    p { margin: 0; }
     button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; border: none; background: none; }
     button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
       outline: 2px solid #d4af37;
       outline-offset: 3px;
+    }
+
+    .hidden { display: none !important; }
+    .flex { display: flex; }
+    .grid { display: grid; }
+    .relative { position: relative; }
+    .fixed { position: fixed; }
+    .sticky { position: sticky; }
+    .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+    .z-10 { z-index: 10; }
+    .z-30 { z-index: 30; }
+    .z-50 { z-index: 50; }
+    .w-full { width: 100%; }
+    .min-h-screen { min-height: 100vh; }
+    .flex-1 { flex: 1 1 0%; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    .opacity-0 { opacity: 0; }
+    .pointer-events-none { pointer-events: none; }
+    .transition-opacity { transition: opacity 0.7s ease; }
+
+    #splashScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #06090f;
+      padding: 1.25rem;
+      transition: opacity 0.7s ease;
     }
     .glass-panel {
       background: rgba(15, 24, 38, .88);
       border: 1px solid rgba(212, 175, 55, .2);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
+      border-radius: 2rem;
+      padding: 2.25rem 2rem;
+      max-width: 32rem;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+      position: relative;
+      overflow: hidden;
     }
     .gold-gradient-text {
       background: linear-gradient(135deg, #fff 0%, #d4af37 100%);
@@ -66,886 +112,60 @@
     .gold-button {
       color: #06090f;
       background: linear-gradient(110deg, #a2825e, #c5a059, #d4af37);
+      border-radius: 0.75rem;
+      padding: 1rem 1.75rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
     }
     .gold-button:hover { filter: brightness(1.08); box-shadow: 0 10px 28px rgba(212,175,55,.18); }
+
+    #mainApp {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+      flex: 1;
+      flex-direction: column;
+      transition: opacity 0.7s ease;
+    }
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+      background: rgba(6, 9, 15, 0.88);
+      padding: 0.9rem 1.5rem;
+      backdrop-filter: blur(20px);
+    }
+    #productGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
     .fade-in { animation: fadeIn .65s ease both; }
     .fade-up { animation: fadeUp .65s cubic-bezier(.22,1,.36,1) both; }
     @keyframes fadeIn { from { opacity: 0; transform: scale(.985); } to { opacity: 1; transform: scale(1); } }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-    .product-card { transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
+    .product-card {
+      background: #0a111c;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 1.5rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+      box-shadow: 0 15px 40px rgba(0,0,0,.35);
+    }
     .product-card:hover { transform: translateY(-6px); border-color: rgba(212,175,55,.38); box-shadow: 0 22px 55px rgba(0,0,0,.42); }
-    .product-image { transition: transform 1s cubic-bezier(.2,.8,.2,1); }
-    .product-card:hover .product-image { transform: scale(1.055); }
-    .modal-scroll { overscroll-behavior: contain; }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
-    }
-  </style>
-</head>
-
-<body class="min-h-screen flex flex-col selection:bg-brandGold selection:text-brandDark">
-  <!-- Ambient background -->
-  <div aria-hidden="true" class="fixed -top-48 -left-40 w-[65vw] h-[65vw] rounded-full bg-brandGold/[.045] blur-[120px] pointer-events-none"></div>
-  <div aria-hidden="true" class="fixed -bottom-40 -right-40 w-[55vw] h-[55vw] rounded-full bg-brandBronze/[.05] blur-[110px] pointer-events-none"></div>
-
-  <!-- Intro screen -->
-  <section id="splashScreen" class="fixed inset-0 z-50 flex items-center justify-center bg-brandDark p-5 transition-opacity duration-700" aria-label="صفحه ورود">
-    <div class="glass-panel relative w-full max-w-lg overflow-hidden rounded-[2rem] p-7 text-center shadow-2xl sm:p-10 fade-in">
-      <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brandGold to-transparent"></div>
-      <div dir="ltr" class="mb-6 flex items-baseline justify-center gap-1">
-        <span class="font-serif text-6xl font-light tracking-tighter text-gray-100">A</span>
-        <span class="gold-gradient-text font-serif text-6xl font-light italic tracking-tighter">S</span>
-      </div>
-      <p dir="ltr" class="gold-gradient-text mb-2 font-serif text-2xl font-semibold tracking-[.2em] sm:text-3xl">ARAM SABA</p>
-      <p dir="ltr" class="mb-5 font-serif text-sm font-medium tracking-[.28em] text-brandBronze">SANAT IRANIAN</p>
-      <div class="mx-auto mb-5 h-px w-20 bg-brandGold/40"></div>
-      <p dir="ltr" class="mb-9 text-[10px] uppercase tracking-[.35em] text-gray-400">Exquisite Office Architecture</p>
-      <button id="enterButton" type="button" class="gold-button w-full rounded-xl px-7 py-4 text-xs font-bold transition hover:scale-[1.01] active:scale-[.99]">
-        ورود به کاتالوگ دیجیتال <i class="fa-solid fa-arrow-left mr-2"></i>
-      </button>
-    </div>
-  </section>
-
-  <!-- Main application -->
-  <div id="mainApp" class="relative z-10 flex min-h-screen w-full flex-1 flex-col opacity-0 transition-opacity duration-700">
-    <header class="sticky top-0 z-30 flex items-center justify-between border-b border-brandGold/10 bg-[#06090f]/85 px-4 py-3 backdrop-blur-2xl sm:px-7 sm:py-4">
-      <a href="#" class="group flex min-w-0 items-center gap-3 no-underline" aria-label="صفحه اصلی">
-        <span dir="ltr" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-gradient-to-br from-brandBronze to-brandGold font-serif text-lg font-bold text-brandDark shadow-lg transition group-hover:scale-105">AS</span>
-        <span class="min-w-0">
-          <span class="block truncate text-xs font-bold tracking-wide text-gray-100 transition group-hover:text-brandGold sm:text-sm">آرام صبا صنعت ایرانیان</span>
-          <span class="mt-1 block text-[10px] uppercase tracking-wider text-brandGold/80">Executive Collection</span>
-        </span>
-      </a>
-      <button id="openAdminButton" type="button" class="rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-xs font-medium text-brandGold transition hover:border-brandGold/40 hover:bg-white/10 sm:px-4">
-        <i class="fa-solid fa-sliders ml-1.5"></i><span class="hidden sm:inline">مدیریت کاتالوگ</span><span class="sm:hidden">مدیریت</span>
-      </button>
-    </header>
-
-    <section class="relative px-5 pb-4 pt-14 sm:px-10 sm:pt-20">
-      <div class="relative z-10 mx-auto mb-10 max-w-4xl text-center">
-        <span class="mb-4 block text-[10px] font-medium uppercase tracking-[.3em] text-brandGold/80 fade-up">Bespoke Office Solutions</span>
-        <h1 class="mb-5 text-3xl font-bold leading-[1.7] text-white fade-up sm:text-5xl">
-          مبلمان اداری و فضاهای<br><span class="gold-gradient-text">مدیریتی لوکس</span>
-        </h1>
-        <p class="mx-auto max-w-2xl text-xs font-light leading-8 text-gray-400 fade-up sm:text-sm">
-          تلفیق ارگونومی پیشرفته، متریال ممتاز و طراحی سفارشی برای خلق فضاهای کاری متمایز.
-        </p>
-      </div>
-
-      <div class="relative z-20 mx-auto max-w-3xl fade-up">
-        <div class="flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/[.045] p-2 shadow-2xl backdrop-blur-xl transition focus-within:border-brandGold/40 sm:flex-row sm:items-center">
-          <label for="searchInput" class="flex min-w-0 flex-1 items-center gap-3 px-3">
-            <i class="fa-solid fa-magnifying-glass text-brandGold"></i>
-            <input id="searchInput" type="search" autocomplete="off" placeholder="جستجو در نام یا مشخصات محصولات..." class="w-full min-w-0 bg-transparent py-3 text-xs text-gray-100 outline-none placeholder:text-gray-500 sm:text-sm">
-          </label>
-          <button id="aiButton" type="button" class="gold-button shrink-0 rounded-xl px-5 py-3 text-[11px] font-bold transition">
-            <i class="fa-solid fa-wand-magic-sparkles ml-1"></i> مشاوره هوشمند
-          </button>
-        </div>
-        <div id="aiResponseBox" class="mt-4 hidden rounded-2xl border border-brandGold/30 bg-[#0a111c]/95 p-5 text-xs leading-8 text-gray-300 shadow-xl" aria-live="polite"></div>
-      </div>
-
-      <nav id="categoryTabs" class="no-scrollbar relative z-10 mt-10 flex justify-start gap-2.5 overflow-x-auto pb-3 sm:justify-center" aria-label="فیلتر دسته‌بندی‌ها"></nav>
-    </section>
-
-    <main class="mx-auto w-full max-w-[1400px] flex-1 px-5 pb-16 pt-4 sm:px-10">
-      <div class="mb-6 flex items-center justify-between gap-3 border-b border-white/5 pb-4">
-        <div>
-          <h2 class="text-sm font-bold text-gray-100">منتخب کلکسیون</h2>
-          <p id="resultCount" class="mt-1 text-[10px] text-gray-500"></p>
-        </div>
-        <span class="hidden text-[10px] tracking-widest text-brandGold/70 sm:inline">ARAM SABA COLLECTION</span>
-      </div>
-      <div id="productGrid" class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3"></div>
-    </main>
-
-    <footer class="relative z-10 border-t border-white/5 bg-[#06090f] px-6 py-9 text-center text-xs text-gray-500">
-      <div class="mb-3 flex items-center justify-center gap-3">
-        <span dir="ltr" class="font-serif text-lg font-bold text-gray-400">AS</span>
-        <span class="h-1 w-1 rounded-full bg-brandGold"></span>
-        <span class="font-light tracking-wide text-gray-400">آرام صبا صنعت ایرانیان</span>
-      </div>
-      <p class="text-[10px] font-light tracking-widest">© <span id="year"></span> تمامی حقوق محفوظ است.</p>
-    </footer>
-  </div>
-
-  <!-- Admin modal -->
-  <div id="adminModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-3 backdrop-blur-xl sm:p-5" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
-    <div class="modal-scroll flex max-h-[94vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-brandGold/25 bg-brandSurface shadow-2xl">
-      <div class="flex items-center justify-between border-b border-white/5 bg-black/20 p-4 sm:p-6">
-        <div class="flex items-center gap-3">
-          <span class="flex h-9 w-9 items-center justify-center rounded-xl border border-brandGold/20 bg-brandGold/10 text-brandGold"><i class="fa-solid fa-sliders text-sm"></i></span>
-          <div>
-            <h2 id="adminTitle" class="text-sm font-bold text-white">مدیریت کاتالوگ</h2>
-            <p class="mt-1 text-[10px] text-gray-500">مدیریت محصولات و دسته‌بندی‌ها</p>
-          </div>
-        </div>
-        <button id="closeAdminButton" type="button" class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-gray-400 transition hover:bg-white/10 hover:text-white" aria-label="بستن پنجره"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-
-      <div class="modal-scroll flex-1 space-y-7 overflow-y-auto p-4 text-right sm:p-7">
-        <section class="rounded-2xl border border-white/5 bg-black/25 p-4 sm:p-6">
-          <h3 class="mb-4 flex items-center gap-2 text-xs font-bold text-brandGold"><i class="fa-solid fa-tags"></i> مدیریت دسته‌بندی‌ها</h3>
-          <form id="categoryForm" class="mb-4 flex flex-col gap-2 sm:flex-row">
-            <label for="newCategoryName" class="sr-only">نام دسته‌بندی جدید</label>
-            <input id="newCategoryName" type="text" maxlength="50" placeholder="نام دسته‌بندی جدید..." class="min-w-0 flex-1 rounded-xl border border-white/10 bg-[#06090f] px-4 py-3 text-xs text-gray-200 outline-none transition focus:border-brandGold/50">
-            <button type="submit" class="gold-button rounded-xl px-6 py-3 text-xs font-bold transition">افزودن دسته‌بندی</button>
-          </form>
-          <div id="adminCategoryList" class="flex flex-wrap gap-2"></div>
-        </section>
-
-        <section class="rounded-2xl border border-white/5 bg-black/25 p-4 sm:p-6">
-          <h3 id="formTitle" class="mb-5 flex items-center gap-2 text-xs font-bold text-brandGold"><i class="fa-solid fa-plus-circle"></i> ثبت محصول جدید</h3>
-          <form id="productForm" class="space-y-4">
-            <input type="hidden" id="editIndex" value="-1">
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div>
-                <label for="prodName" class="mb-2 block text-[11px] text-gray-400">نام محصول</label>
-                <input id="prodName" type="text" maxlength="100" required placeholder="مثال: میز مدیریت امپریال" class="admin-input">
-              </div>
-              <div>
-                <label for="prodCategory" class="mb-2 block text-[11px] text-gray-400">دسته‌بندی</label>
-                <select id="prodCategory" required class="admin-input"></select>
-              </div>
-            </div>
-            <div>
-              <label for="prodImage" class="mb-2 block text-[11px] text-gray-400">مسیر یا لینک تصویر</label>
-              <input id="prodImage" type="text" maxlength="500" required dir="ltr" placeholder="https://example.com/image.jpg یا ./images/desk.jpg" class="admin-input text-left">
-              <p class="mt-1.5 text-[10px] text-gray-500">لینک تصویر باید معتبر یا مسیر نسبی فایل باشد.</p>
-            </div>
-            <div>
-              <label for="prodInfo" class="mb-2 block text-[11px] text-gray-400">مشخصات فنی و توضیحات</label>
-              <textarea id="prodInfo" rows="3" maxlength="1000" required placeholder="توضیحات محصول..." class="admin-input leading-7"></textarea>
-            </div>
-            <div class="flex flex-wrap gap-2 pt-1">
-              <button type="submit" class="gold-button rounded-xl px-6 py-3 text-xs font-bold transition"><i class="fa-solid fa-floppy-disk ml-1"></i> ذخیره اطلاعات</button>
-              <button id="cancelEditButton" type="button" class="rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-xs text-gray-300 transition hover:bg-white/10">پاک‌کردن فرم</button>
-            </div>
-          </form>
-        </section>
-
-        <section>
-          <div class="mb-4 flex items-center justify-between border-b border-white/5 pb-3">
-            <h3 class="text-[11px] font-bold tracking-wider text-gray-400">مدیریت موجودی</h3>
-            <span id="adminProductCount" class="text-[10px] text-gray-500"></span>
-          </div>
-          <div id="adminProductList" class="max-h-80 space-y-2 overflow-y-auto pl-1"></div>
-        </section>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast -->
-  <div id="toast" class="pointer-events-none fixed bottom-5 left-5 z-[60] flex max-w-[calc(100vw-2.5rem)] translate-y-5 items-center gap-3 rounded-2xl border border-brandGold/30 bg-[#0a111c]/95 px-5 py-3.5 text-xs font-medium text-white opacity-0 shadow-2xl transition-all duration-300" role="status" aria-live="polite">
-    <i id="toastIcon" class="fa-solid fa-circle-check text-brandGold"></i>
-    <span id="toastMessage"></span>
-  </div>
-
-  <style>
-    .admin-input {
-      width: 100%; border: 1px solid rgba(255,255,255,.1); border-radius: .75rem;
-      background: #06090f; padding: .8rem 1rem; color: #e5e7eb; font-size: .75rem;
-      outline: none; transition: border-color .2s ease;
-    }
-    .admin-input:focus { border-color: rgba(212,175,55,.55); }
-    .admin-input::placeholder { color: #6b7280; }
-  </style>
-
-  <script>
-    'use strict';
-
-    // =========================================================
-    // SUPABASE CONFIGURATION
-    // Paste your EXISTING project URL and public anon/publishable
-    // key here. Do not use a service_role or sb_secret key.
-    // =========================================================
-    const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
-    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_OR_PUBLISHABLE_KEY';
-
-    const SUPABASE_CONFIGURED =
-      /^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(SUPABASE_URL.trim()) &&
-      SUPABASE_ANON_KEY.trim().length > 20 &&
-      !SUPABASE_ANON_KEY.includes('YOUR_SUPABASE');
-
-    const supabaseHeaders = {
-      'Content-Type': 'application/json',
-      'apikey': SUPABASE_ANON_KEY,
-      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-    };
-
-    let categories = [];
-    let products = [];
-    let currentCategory = 'all';
-    let toastTimer = null;
-    let lastFocusedElement = null;
-    let activeLoadId = 0;
-    let syncTimer = null;
-    let isSaving = false;
-
-    const $ = id => document.getElementById(id);
-    const supabaseBaseUrl = SUPABASE_URL.trim().replace(/\/$/, '');
-
-    function normalizeText(value) {
-      return String(value ?? '')
-        .toLocaleLowerCase('fa')
-        .replace(/[يى]/g, 'ی')
-        .replace(/ك/g, 'ک')
-        .trim();
-    }
-
-    function createElement(tag, className, text) {
-      const element = document.createElement(tag);
-      if (className) element.className = className;
-      if (text !== undefined) element.textContent = text;
-      return element;
-    }
-
-    function showToast(message, type = 'success') {
-      const toast = $('toast');
-      if (!toast) return;
-      $('toastMessage').textContent = message;
-      $('toastIcon').className = type === 'error'
-        ? 'fa-solid fa-circle-exclamation text-red-400'
-        : 'fa-solid fa-circle-check text-brandGold';
-      toast.classList.remove('translate-y-5', 'opacity-0');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
-        toast.classList.add('translate-y-5', 'opacity-0');
-      }, 3800);
-    }
-
-    function getSupabaseErrorMessage(rawText, status) {
-      let detail = '';
-      try {
-        const parsed = JSON.parse(rawText);
-        detail = parsed.message || parsed.details || parsed.hint || parsed.error_description || parsed.error || '';
-      } catch (_) {
-        detail = rawText;
-      }
-      const prefix = `Supabase request failed (${status})`;
-      return detail ? `${prefix}: ${detail}` : prefix;
-    }
-
-    async function supabaseRequest(resource, options = {}) {
-      if (!SUPABASE_CONFIGURED) {
-        throw new Error('آدرس پروژه یا کلید عمومی Supabase هنوز در بخش تنظیمات وارد نشده است.');
-      }
-
-      const { method = 'GET', body, prefer = 'return=minimal' } = options;
-      const headers = { ...supabaseHeaders };
-      if (prefer) headers.Prefer = prefer;
-
-      const response = await fetch(`${supabaseBaseUrl}/rest/v1/${resource}`, {
-        method,
-        headers,
-        body: body === undefined ? undefined : JSON.stringify(body),
-        cache: 'no-store'
-      });
-
-      if (!response.ok) {
-        const rawText = await response.text().catch(() => '');
-        throw new Error(getSupabaseErrorMessage(rawText, response.status));
-      }
-
-      if (response.status === 204) return null;
-      const responseText = await response.text();
-      if (!responseText) return null;
-      try { return JSON.parse(responseText); }
-      catch (_) { return responseText; }
-    }
-
-    function buildFilterResource(table, column, value) {
-      const params = new URLSearchParams();
-      params.set('select', '*');
-      params.set(column, `eq.${String(value)}`);
-      return `${table}?${params.toString()}`;
-    }
-
-    // =========================================================
-    // LOAD SHARED DATA FROM SUPABASE (not localStorage)
-    // Tables expected by the original project:
-    // categories: name (or title)
-    // products: id, name, category, image, info (or description)
-    // =========================================================
-    async function loadFromSupabase({ quiet = false } = {}) {
-      const loadId = ++activeLoadId;
-
-      if (!SUPABASE_CONFIGURED) {
-        categories = [];
-        products = [];
-        renderCategories();
-        renderProducts();
-        renderAdminList();
-        if (!quiet) showToast('آدرس پروژه و کلید عمومی Supabase را در ابتدای کد وارد کنید.', 'error');
-        return false;
-      }
-
-      try {
-        const [catData, productData] = await Promise.all([
-          supabaseRequest('categories?select=*'),
-          supabaseRequest('products?select=*')
-        ]);
-
-        // Ignore older requests if a newer refresh has already completed.
-        if (loadId !== activeLoadId) return false;
-
-        categories = Array.isArray(catData)
-          ? [...new Set(catData
-              .map(item => String(item?.name ?? item?.title ?? '').trim())
-              .filter(Boolean))]
-          : [];
-
-        products = Array.isArray(productData)
-          ? productData.map(item => ({
-              id: item.id,
-              name: String(item.name ?? ''),
-              category: String(item.category ?? ''),
-              image: String(item.image ?? ''),
-              info: String(item.info ?? item.description ?? '')
-            })).filter(item => item.name)
-          : [];
-
-        if (currentCategory !== 'all' && !categories.includes(currentCategory)) {
-          currentCategory = 'all';
-        }
-
-        renderCategories();
-        renderProducts();
-        renderAdminList();
-        return true;
-      } catch (error) {
-        console.error('خطا در دریافت اطلاعات از Supabase:', error);
-        if (!quiet) showToast('ارتباط با پایگاه داده برقرار نشد. تنظیمات، اینترنت و دسترسی جدول‌ها را بررسی کنید.', 'error');
-        return false;
-      }
-    }
-
-    async function refreshCatalog(quiet = false) {
-      return await loadFromSupabase({ quiet });
-    }
-
-    // =========================================================
-    // SUPABASE CREATE / UPDATE / DELETE OPERATIONS
-    // =========================================================
-    async function addCategoryToSupabase(categoryName) {
-      const duplicate = categories.some(item => normalizeText(item) === normalizeText(categoryName));
-      if (duplicate) {
-        showToast('این دسته‌بندی از قبل وجود دارد.', 'error');
-        return false;
-      }
-      try {
-        await supabaseRequest('categories', {
-          method: 'POST',
-          body: { name: categoryName },
-          prefer: 'return=minimal'
-        });
-        await refreshCatalog(true);
-        showToast('دسته‌بندی در پایگاه داده ثبت شد.');
-        return true;
-      } catch (error) {
-        console.error('خطا در ثبت دسته‌بندی:', error);
-        showToast(`ثبت دسته‌بندی انجام نشد: ${error.message}`, 'error');
-        return false;
-      }
-    }
-
-    async function deleteCategoryFromSupabase(categoryName) {
-      const associatedProducts = products.filter(product => product.category === categoryName);
-      if (associatedProducts.length) {
-        showToast('ابتدا محصولات این دسته را به دسته دیگری منتقل یا حذف کنید.', 'error');
-        return false;
-      }
-
-      try {
-        const resource = buildFilterResource('categories', 'name', categoryName).replace('?select=*&', '?');
-        await supabaseRequest(resource, { method: 'DELETE' });
-        if (currentCategory === categoryName) currentCategory = 'all';
-        await refreshCatalog(true);
-        showToast('دسته‌بندی از پایگاه داده حذف شد.');
-        return true;
-      } catch (error) {
-        console.error('خطا در حذف دسته‌بندی:', error);
-        showToast(`حذف دسته‌بندی انجام نشد: ${error.message}`, 'error');
-        return false;
-      }
-    }
-
-    async function saveProductToSupabase(productData, editId = null) {
-      try {
-        if (editId !== null && editId !== undefined && editId !== '') {
-          const params = new URLSearchParams();
-          params.set('id', `eq.${String(editId)}`);
-          await supabaseRequest(`products?${params.toString()}`, {
-            method: 'PATCH',
-            body: productData
-          });
-          await refreshCatalog(true);
-          showToast('اطلاعات محصول در پایگاه داده به‌روزرسانی شد.');
-        } else {
-          await supabaseRequest('products', {
-            method: 'POST',
-            body: productData
-          });
-          await refreshCatalog(true);
-          showToast('محصول جدید در پایگاه داده ثبت شد.');
-        }
-        return true;
-      } catch (error) {
-        console.error('خطا در ذخیره محصول:', error);
-        showToast(`ذخیره محصول انجام نشد: ${error.message}`, 'error');
-        return false;
-      }
-    }
-
-    async function deleteProductFromSupabase(id) {
-      if (id === null || id === undefined || id === '') return false;
-      try {
-        const params = new URLSearchParams();
-        params.set('id', `eq.${String(id)}`);
-        await supabaseRequest(`products?${params.toString()}`, { method: 'DELETE' });
-        await refreshCatalog(true);
-        showToast('محصول از پایگاه داده حذف شد.');
-        return true;
-      } catch (error) {
-        console.error('خطا در حذف محصول:', error);
-        showToast(`حذف محصول انجام نشد: ${error.message}`, 'error');
-        return false;
-      }
-    }
-
-    // =========================================================
-    // IMAGE PATHS: support URLs and local relative paths.
-    // Only javascript: URLs are rejected, as in the original code.
-    // =========================================================
-    function isSafeImagePath(value) {
-      const path = String(value || '').trim();
-      return path.length > 0 && !/^javascript\s*:/i.test(path);
-    }
-
-    function setImageSource(img, source) {
-      if (!isSafeImagePath(source)) {
-        img.classList.add('hidden');
-        return;
-      }
-      img.src = source;
-      img.onerror = () => {
-        img.onerror = null;
-        img.classList.add('hidden');
-      };
-    }
-
-    function renderCategories() {
-      const tabs = $('categoryTabs');
-      tabs.replaceChildren();
-
-      const allButton = createElement('button', categoryButtonClass(currentCategory === 'all'), 'تمامی کلکسیون‌ها');
-      allButton.type = 'button';
-      allButton.addEventListener('click', () => setCategory('all'));
-      tabs.appendChild(allButton);
-
-      categories.forEach(category => {
-        const button = createElement('button', categoryButtonClass(currentCategory === category), category);
-        button.type = 'button';
-        button.addEventListener('click', () => setCategory(category));
-        tabs.appendChild(button);
-      });
-
-      renderCategorySelect();
-      renderAdminCategories();
-    }
-
-    function categoryButtonClass(active) {
-      const base = 'shrink-0 whitespace-nowrap rounded-xl border px-5 py-2.5 text-xs font-medium backdrop-blur-md transition';
-      return base + (active
-        ? ' border-brandGold/40 bg-white/10 text-brandGold shadow-[0_0_15px_rgba(212,175,55,.12)]'
-        : ' border-white/5 bg-transparent text-gray-400 hover:border-white/20 hover:text-gray-200');
-    }
-
-    function renderCategorySelect() {
-      const select = $('prodCategory');
-      const previousValue = select.value;
-      select.replaceChildren();
-
-      if (!categories.length) {
-        const option = document.createElement('option');
-        option.value = '';
-        option.textContent = 'ابتدا یک دسته‌بندی ایجاد کنید';
-        select.appendChild(option);
-        return;
-      }
-
-      categories.forEach(category => {
-        const option = document.createElement('option');
-        option.value = category;
-        option.textContent = category;
-        select.appendChild(option);
-      });
-
-      if (categories.includes(previousValue)) select.value = previousValue;
-      else select.value = categories[0];
-    }
-
-    function renderAdminCategories() {
-      const list = $('adminCategoryList');
-      list.replaceChildren();
-
-      if (!categories.length) {
-        list.appendChild(createElement('p', 'text-xs text-gray-500', 'هنوز دسته‌بندی‌ای ثبت نشده است.'));
-        return;
-      }
-
-      categories.forEach(category => {
-        const chip = createElement('div', 'flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-brandGold');
-        chip.appendChild(createElement('span', '', category));
-        const remove = createElement('button', 'border-r border-white/10 pr-2 text-red-400 transition hover:text-red-300', '×');
-        remove.type = 'button';
-        remove.title = 'حذف دسته‌بندی';
-        remove.setAttribute('aria-label', `حذف دسته‌بندی ${category}`);
-        remove.addEventListener('click', () => deleteCategory(category));
-        chip.appendChild(remove);
-        list.appendChild(chip);
-      });
-    }
-
-    function setCategory(category) {
-      currentCategory = category;
-      renderCategories();
-      renderProducts();
-    }
-
-    function renderProducts() {
-      const grid = $('productGrid');
-      const term = normalizeText($('searchInput').value);
-      grid.replaceChildren();
-
-      const filtered = products
-        .map((product, index) => ({ product, index }))
-        .filter(({ product }) => {
-          const matchesCategory = currentCategory === 'all' || product.category === currentCategory;
-          const searchable = normalizeText(`${product.name} ${product.info} ${product.category}`);
-          return matchesCategory && (!term || searchable.includes(term));
-        });
-
-      $('resultCount').textContent = `${filtered.length.toLocaleString('fa-IR')} محصول`;
-
-      if (!filtered.length) {
-        const empty = createElement('div', 'col-span-full rounded-3xl border border-white/5 bg-white/[.025] py-20 text-center fade-in');
-        empty.appendChild(createElement('div', 'mb-4 text-3xl text-brandGold/60', '◇'));
-        empty.appendChild(createElement('p', 'text-sm text-gray-400', products.length ? 'محصولی با این مشخصات پیدا نشد.' : 'هنوز محصولی در کاتالوگ ثبت نشده است.'));
-        empty.appendChild(createElement('p', 'mt-2 text-xs text-gray-600', products.length ? 'عبارت جستجو یا دسته‌بندی انتخاب‌شده را تغییر دهید.' : 'با ورود به بخش مدیریت، محصولات خود را اضافه کنید.'));
-        grid.appendChild(empty);
-        return;
-      }
-
-      filtered.forEach(({ product, index }, displayIndex) => {
-        const card = createElement('article', 'product-card group relative flex flex-col overflow-hidden rounded-3xl border border-white/5 bg-brandNavy shadow-[0_15px_40px_rgba(0,0,0,.35)] fade-up');
-        card.style.animationDelay = `${displayIndex * 70}ms`;
-
-        const media = createElement('div', 'relative h-64 overflow-hidden bg-[#080d15] sm:h-72');
-        const image = createElement('img', 'product-image h-full w-full object-cover opacity-80 group-hover:opacity-100');
-        image.alt = product.name;
-        image.loading = 'lazy';
-        setImageSource(image, product.image);
-        media.appendChild(image);
-
-        const overlay = createElement('div', 'pointer-events-none absolute inset-0 bg-gradient-to-t from-brandNavy via-brandNavy/10 to-transparent');
-        media.appendChild(overlay);
-        const categoryLabel = createElement('span', 'absolute right-4 top-4 rounded-full border border-brandGold/20 bg-black/55 px-4 py-2 text-[10px] text-brandGold backdrop-blur-md', product.category);
-        media.appendChild(categoryLabel);
-        card.appendChild(media);
-
-        const content = createElement('div', 'relative flex flex-1 flex-col bg-gradient-to-b from-brandNavy to-[#0a111c] p-6 text-right sm:p-8');
-        const emblem = createElement('div', 'absolute -top-6 right-8 flex h-12 w-12 rotate-45 items-center justify-center rounded-xl border border-brandGold/30 bg-brandSurface shadow-lg transition duration-500 group-hover:rotate-[135deg]');
-        const gem = createElement('i', 'fa-solid fa-gem -rotate-45 text-brandGold transition duration-500 group-hover:-rotate-[135deg]');
-        emblem.appendChild(gem);
-        content.appendChild(emblem);
-        content.appendChild(createElement('h3', 'mb-3 mt-3 text-base font-bold text-white transition group-hover:text-brandGold sm:text-lg', product.name));
-        content.appendChild(createElement('p', 'mb-7 flex-1 text-justify text-xs font-light leading-8 text-gray-400', product.info));
-
-        const footer = createElement('div', 'flex items-center justify-between border-t border-white/5 pt-5');
-        const share = createElement('button', 'flex items-center gap-2 rounded-xl border border-brandGold/20 bg-white/5 px-4 py-2.5 text-xs font-medium text-brandGold transition hover:bg-brandGold hover:text-brandDark');
-        share.type = 'button';
-        share.appendChild(createElement('i', 'fa-solid fa-share-nodes text-[11px]'));
-        share.appendChild(document.createTextNode('اشتراک‌گذاری'));
-        share.addEventListener('click', () => shareProduct(index));
-        footer.appendChild(share);
-        footer.appendChild(createElement('span', 'text-[10px] tracking-widest text-gray-600', 'AS COLLECTION'));
-        content.appendChild(footer);
-        card.appendChild(content);
-        grid.appendChild(card);
-      });
-    }
-
-    function renderAdminList() {
-      const list = $('adminProductList');
-      list.replaceChildren();
-      $('adminProductCount').textContent = `${products.length.toLocaleString('fa-IR')} محصول`;
-
-      if (!products.length) {
-        list.appendChild(createElement('p', 'rounded-xl border border-white/5 bg-black/20 p-5 text-center text-xs text-gray-500', 'هنوز محصولی ثبت نشده است.'));
-        return;
-      }
-
-      products.forEach((product, index) => {
-        const row = createElement('div', 'flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-black/20 p-3 transition hover:border-brandGold/20 hover:bg-white/[.03]');
-        const details = createElement('div', 'flex min-w-0 flex-1 items-center gap-3');
-        const thumb = createElement('img', 'h-12 w-12 shrink-0 rounded-lg border border-white/10 bg-black/30 object-cover');
-        thumb.alt = '';
-        thumb.loading = 'lazy';
-        setImageSource(thumb, product.image);
-        details.appendChild(thumb);
-
-        const textWrap = createElement('div', 'min-w-0');
-        textWrap.appendChild(createElement('p', 'truncate text-xs font-bold text-gray-200', product.name));
-        textWrap.appendChild(createElement('p', 'mt-1 truncate text-[10px] text-brandGold', product.category));
-        details.appendChild(textWrap);
-        row.appendChild(details);
-
-        const actions = createElement('div', 'flex shrink-0 items-center gap-1.5');
-        const edit = createElement('button', 'flex h-9 w-9 items-center justify-center rounded-lg border border-white/5 bg-white/5 text-brandGold transition hover:bg-white/10');
-        edit.type = 'button';
-        edit.title = 'ویرایش محصول';
-        edit.setAttribute('aria-label', `ویرایش ${product.name}`);
-        edit.innerHTML = '<i class="fa-solid fa-pen text-xs"></i>';
-        edit.addEventListener('click', () => editProduct(index));
-
-        const remove = createElement('button', 'flex h-9 w-9 items-center justify-center rounded-lg border border-red-900/30 bg-red-950/20 text-red-400 transition hover:bg-red-900/40');
-        remove.type = 'button';
-        remove.title = 'حذف محصول';
-        remove.setAttribute('aria-label', `حذف ${product.name}`);
-        remove.innerHTML = '<i class="fa-solid fa-trash text-xs"></i>';
-        remove.addEventListener('click', () => deleteProduct(index));
-
-        actions.append(edit, remove);
-        row.appendChild(actions);
-        list.appendChild(row);
-      });
-    }
-
-    async function addCategory(event) {
-      event.preventDefault();
-      const input = $('newCategoryName');
-      const value = input.value.trim();
-      if (!value) {
-        showToast('نام دسته‌بندی را وارد کنید.', 'error');
-        input.focus();
-        return;
-      }
-      const added = await addCategoryToSupabase(value);
-      if (added) input.value = '';
-    }
-
-    async function deleteCategory(category) {
-      if (!window.confirm(`دسته‌بندی «${category}» حذف شود؟`)) return;
-      await deleteCategoryFromSupabase(category);
-    }
-
-    async function handleProductSubmit(event) {
-      event.preventDefault();
-      if (isSaving) return;
-
-      const editIndex = Number.parseInt($('editIndex').value, 10);
-      const name = $('prodName').value.trim();
-      const category = $('prodCategory').value;
-      const image = $('prodImage').value.trim();
-      const info = $('prodInfo').value.trim();
-
-      if (!name || !category || !image || !info) {
-        showToast('لطفاً تمام فیلدها را تکمیل کنید.', 'error');
-        return;
-      }
-      if (!isSafeImagePath(image)) {
-        showToast('مسیر تصویر معتبر نیست.', 'error');
-        $('prodImage').focus();
-        return;
-      }
-      if (!categories.includes(category)) {
-        showToast('ابتدا یک دسته‌بندی معتبر ایجاد یا انتخاب کنید.', 'error');
-        return;
-      }
-
-      const productPayload = { name, category, image, info };
-      const editId = Number.isInteger(editIndex) && editIndex >= 0 && editIndex < products.length
-        ? products[editIndex].id
-        : null;
-
-      isSaving = true;
-      const submitButton = $('productForm').querySelector('button[type="submit"]');
-      if (submitButton) submitButton.disabled = true;
-      const saved = await saveProductToSupabase(productPayload, editId);
-      isSaving = false;
-      if (submitButton) submitButton.disabled = false;
-      if (saved) resetForm();
-    }
-
-    function editProduct(index) {
-      const product = products[index];
-      if (!product) return;
-      $('editIndex').value = String(index);
-      $('prodName').value = product.name;
-      $('prodCategory').value = product.category;
-      $('prodImage').value = product.image;
-      $('prodInfo').value = product.info;
-      $('formTitle').innerHTML = '<i class="fa-solid fa-pen"></i> ویرایش محصول';
-      $('prodName').focus();
-      $('productForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    async function deleteProduct(index) {
-      const product = products[index];
-      if (!product || !window.confirm(`محصول «${product.name}» حذف شود؟`)) return;
-      const deleted = await deleteProductFromSupabase(product.id);
-      if (deleted) resetForm();
-    }
-
-    function resetForm() {
-      $('productForm').reset();
-      $('editIndex').value = '-1';
-      $('formTitle').innerHTML = '<i class="fa-solid fa-plus-circle"></i> ثبت محصول جدید';
-      renderCategorySelect();
-    }
-
-    function openAdminModal() {
-      lastFocusedElement = document.activeElement;
-      $('adminModal').classList.remove('hidden');
-      $('adminModal').classList.add('flex');
-      document.body.style.overflow = 'hidden';
-      renderCategories();
-      renderAdminList();
-      $('closeAdminButton').focus();
-      refreshCatalog(true);
-    }
-
-    function closeAdminModal() {
-      $('adminModal').classList.add('hidden');
-      $('adminModal').classList.remove('flex');
-      document.body.style.overflow = '';
-      resetForm();
-      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') lastFocusedElement.focus();
-    }
-
-    async function shareProduct(index) {
-      const product = products[index];
-      if (!product) return;
-      const shareText = `آرام صبا صنعت ایرانیان\n${product.name}\n${product.category}\n${product.info}`;
-      try {
-        if (navigator.share) {
-          await navigator.share({ title: product.name, text: shareText, url: window.location.href });
-          showToast('پنجره اشتراک‌گذاری باز شد.');
-          return;
-        }
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(shareText);
-          showToast('مشخصات محصول کپی شد.');
-          return;
-        }
-        const temporary = document.createElement('textarea');
-        temporary.value = shareText;
-        temporary.style.position = 'fixed';
-        temporary.style.opacity = '0';
-        document.body.appendChild(temporary);
-        temporary.select();
-        const copied = document.execCommand('copy');
-        temporary.remove();
-        if (copied) showToast('مشخصات محصول کپی شد.');
-        else throw new Error('Copy command failed');
-      } catch (error) {
-        if (error?.name === 'AbortError') return;
-        console.error('اشتراک‌گذاری انجام نشد:', error);
-        showToast('اشتراک‌گذاری در این مرورگر پشتیبانی نشد.', 'error');
-      }
-    }
-
-    function askGeminiAI() {
-      const query = $('searchInput').value.trim();
-      const box = $('aiResponseBox');
-      box.classList.remove('hidden');
-      box.replaceChildren();
-      if (!query) {
-        box.textContent = 'برای دریافت پیشنهاد، ابتدا نوع فضای موردنظر یا نیاز خود را در کادر جستجو بنویسید.';
-        return;
-      }
-
-      const loading = createElement('p', 'text-brandGold');
-      loading.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin ml-2"></i> مشاور در حال آماده‌سازی پیشنهاد...';
-      box.appendChild(loading);
-
-      window.setTimeout(() => {
-        const matching = products.filter(product =>
-          normalizeText(`${product.name} ${product.category} ${product.info}`).includes(normalizeText(query))
-        );
-        box.replaceChildren();
-        const heading = createElement('p', 'mb-2 font-bold text-brandGold');
-        heading.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles ml-1"></i> مشاور هوشمند آرام صبا';
-        box.appendChild(heading);
-        const answer = matching.length
-          ? `برای عبارت «${query}»، این محصولات از کلکسیون فعلی می‌توانند نقطه شروع مناسبی باشند: ${matching.slice(0, 3).map(item => item.name).join('، ')}.`
-          : `برای درخواست «${query}»، پیشنهاد می‌کنیم ابتدا سبک کلی فضا، ابعاد محیط و تعداد کاربران را مشخص کنید. ترکیب یک میز مدیریتی متناسب با فضا و صندلی ارگونومیک می‌تواند نقطه شروع خوبی باشد.`;
-        box.appendChild(createElement('p', 'text-justify leading-8 text-gray-300', answer));
-        box.appendChild(createElement('p', 'mt-3 border-t border-white/5 pt-3 text-[10px] text-gray-500', 'توجه: این مشاور نمایشی است و از سرویس هوش مصنوعی یا API خارجی استفاده نمی‌کند.'));
-      }, 650);
-    }
-
-    function enterCatalog() {
-      const splash = $('splashScreen');
-      const app = $('mainApp');
-      if (splash) {
-        splash.style.opacity = '0';
-        splash.style.pointerEvents = 'none';
-        window.setTimeout(() => splash.remove(), 750);
-      }
-      if (app) {
-        app.classList.remove('hidden');
-        requestAnimationFrame(() => app.classList.remove('opacity-0'));
-      }
-    }
-
-    function startAutoSync() {
-      if (syncTimer) clearInterval(syncTimer);
-      // REST polling keeps already-open devices reasonably up to date.
-      // All clients read the same records from the shared Supabase tables.
-      syncTimer = setInterval(() => {
-        if (document.visibilityState === 'visible') refreshCatalog(true);
-      }, 15000);
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') refreshCatalog(true);
-      });
-    }
-
-    function initializeApp() {
-      $('year').textContent = new Date().getFullYear().toLocaleString('fa-IR');
-
-      // Bind UI immediately; slow or blocked network requests must not disable buttons.
-      $('enterButton').addEventListener('click', enterCatalog);
-      $('openAdminButton').addEventListener('click', openAdminModal);
-      $('closeAdminButton').addEventListener('click', closeAdminModal);
-      $('adminModal').addEventListener('click', event => {
-        if (event.target === $('adminModal')) closeAdminModal();
-      });
-      $('categoryForm').addEventListener('submit', addCategory);
-      $('productForm').addEventListener('submit', handleProductSubmit);
-      $('cancelEditButton').addEventListener('click', resetForm);
-      $('searchInput').addEventListener('input', renderProducts);
-      $('aiButton').addEventListener('click', askGeminiAI);
-
-      document.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && !$('adminModal').classList.contains('hidden')) closeAdminModal();
-      });
-
-      renderCategories();
-      renderProducts();
-      renderAdminList();
-
-      refreshCatalog(false).then(() => startAutoSync());
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initializeApp, { once: true });
-    } else {
-      initializeApp();
-    }
-  </script>
-</body>
-</html>
+    .product-image { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-
