@@ -859,6 +859,48 @@
       background: var(--brand-gold);
       color: var(--brand-dark);
     }
+    .advisor-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(var(--accent-rgb), .38);
+      background: rgba(var(--accent-rgb), .12);
+      padding: .18rem .6rem;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--brand-gold);
+    }
+    .advisor-reply {
+      color: var(--text-main);
+      line-height: 2;
+      white-space: pre-line;
+    }
+    .advisor-tip {
+      margin-top: .75rem;
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      border-radius: .75rem;
+      border: 1px solid rgba(var(--accent-rgb), .2);
+      background: rgba(var(--accent-rgb), .06);
+      padding: .65rem .85rem;
+      font-size: 11px;
+      line-height: 1.85;
+      color: var(--text-soft);
+    }
+    .advisor-tip .tip-ico {
+      color: var(--brand-gold);
+      margin-top: .25rem;
+    }
+    .advisor-loading {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      padding: .35rem 0;
+      color: var(--brand-gold);
+      font-size: .78rem;
+    }
 
     /* Category Tabs */
     #categoryTabs {
@@ -2415,7 +2457,7 @@
           <ul class="footer-list">
             <li>
               <i data-lucide="phone-call" class="icon-md gold-ico"></i>
-              <a id="footerPhoneLink" href="tel:+982100000000" dir="ltr">021-0000-0000</a>
+              <a id="footerPhoneLink" href="tel:+989121403116" dir="ltr">09121403116</a>
             </li>
             <li>
               <i data-lucide="clock" class="icon-md gold-ico"></i>
@@ -2503,7 +2545,7 @@
               <i data-lucide="share-2" class="icon-sm"></i>
               <span>اشتراک‌گذاری لینک</span>
             </button>
-            <a id="detailCallButton" href="tel:+982100000000" class="btn-outline-dark">
+            <a id="detailCallButton" href="tel:+989121403116" class="btn-outline-dark">
               <i data-lucide="phone-call" class="icon-sm gold-ico"></i>
               <span>تماس مستقیم</span>
             </a>
@@ -2755,14 +2797,31 @@
     'use strict';
 
     // =========================================================
-    // BUSINESS CONTACT SETTINGS (Update with your real info)
+    // BUSINESS CONTACT SETTINGS
     // =========================================================
     const BUSINESS_CONTACT = {
-      whatsappNumber: '989120000000', // International format without '+' (e.g. 989121234567)
-      phoneDisplay: '021-0000-0000',
-      phoneHref: 'tel:+982100000000',
+      whatsappNumber: '989121403116',
+      phoneDisplay: '09121403116',
+      phoneHref: 'tel:+989121403116',
       instagramUrl: 'https://instagram.com/',
       hours: 'شنبه تا چهارشنبه ۹ الی ۱۸ | پنج‌شنبه‌ها ۹ الی ۱۴'
+    };
+
+    // =========================================================
+    // AI ADVISOR SETTINGS
+    // Temporary testing mode ('direct'): API key placed below.
+    // Later for production: clear apiKey, rotate it, change mode to 'proxy', and deploy /api/advisor.js
+    // =========================================================
+    const AI_ADVISOR_CONFIG = {
+      mode: 'direct',               // 'direct' (key in this file for testing) | 'proxy' (secure /api/advisor later)
+      provider: 'gemini',           // 'gemini' (Google AI Studio / Vertex Express) | 'openai' (OpenRouter, AvalAI, Groq, OpenAI)
+      apiKey: 'AQ.Ab8RN6JTQkdj3hnUbeZx8VTJLdDuVnyP6dzQudG8PIgndiIENw',
+      geminiModel: 'gemini-2.5-flash',
+      openaiBaseUrl: 'https://openrouter.ai/api/v1/chat/completions',
+      openaiModel: 'google/gemini-2.5-flash',
+      endpoint: '/api/advisor',     // Used automatically when mode is switched to 'proxy'
+      timeoutMs: 18000,
+      maxProductsSent: 60
     };
 
     // =========================================================
@@ -2949,6 +3008,7 @@
     let lastCatalogSignature = '';
     let scrollTicking = false;
     let particlesPaused = false;
+    let advisorAbortController = null;
 
     const $ = id => document.getElementById(id);
     const prefersReducedMotion = () =>
@@ -4480,39 +4540,78 @@
       }
     }
 
-    function runSpaceAdvisor(forcedQuery = null) {
-      const input = $('searchInput');
-      if (forcedQuery !== null) {
-        input.value = forcedQuery;
-        renderProducts();
+    // Smart local Persian furniture synonym matcher (automatic fallback when offline or in Preview)
+    const PERSIAN_INTENT_GROUPS = [
+      { keywords: ['مدیریت', 'مدیر', 'رئیس', 'اجرایی', 'لوکس', 'لاکچری', 'executive', 'vip'], boost: ['مدیریت', 'مدیریتی', 'امپریال', 'لوکس', 'ریاست', 'چرم', 'چوب'] },
+      { keywords: ['کنفرانس', 'جلسه', 'میتینگ', 'همایش', 'مذاکره', 'گروهی'], boost: ['کنفرانس', 'جلسه', 'مذاکره', 'نفره'] },
+      { keywords: ['ارگونومیک', 'کمر', 'کمردرد', 'طبی', 'طولانی', 'راحت', 'نشستن', 'پشتی'], boost: ['ارگونومیک', 'طبی', 'توری', 'مش', 'صندلی', 'تنظیم'] },
+      { keywords: ['کارمندی', 'پرسنلی', 'کارشناسی', 'گروه کاری', 'استیشن', 'تیمی'], boost: ['کارمندی', 'کارشناسی', 'ایستگاه', 'پرسنلی', 'اداری'] },
+      { keywords: ['مدرن', 'مینیمال', 'ساده', 'شیک', 'جدید', 'اسپرت'], boost: ['مدرن', 'مینیمال', 'فلز', 'ساده', 'شیشه'] },
+      { keywords: ['چوب', 'چوبی', 'گردو', 'بلوط', 'کلاسیک', 'گرم'], boost: ['چوب', 'بلوط', 'گردو', 'روکش', 'کلاسیک', 'راش'] },
+      { keywords: ['پذیرش', 'لابی', 'انتظار', 'کانتر', 'منشی', 'مبل', 'نیم‌ست'], boost: ['انتظار', 'لابی', 'پذیرش', 'مبل', 'کانتر', 'نیم ست', 'کاناپه'] }
+    ];
+
+    function buildLocalSmartAdvice(query) {
+      const normalized = normalizeText(query);
+      const tokens = normalized.split(/\s+/).filter(t => t.length >= 2);
+      const expandedTerms = new Set(tokens);
+
+      PERSIAN_INTENT_GROUPS.forEach(group => {
+        if (group.keywords.some(k => normalized.includes(normalizeText(k)))) {
+          group.boost.forEach(b => expandedTerms.add(normalizeText(b)));
+        }
+      });
+
+      const scored = products
+        .map(product => {
+          const hay = normalizeText(`${product.name} ${product.category} ${product.info}`);
+          let score = 0;
+          if (hay.includes(normalized)) score += 10;
+          tokens.forEach(t => {
+            if (normalizeText(product.name).includes(t)) score += 5;
+            else if (normalizeText(product.category).includes(t)) score += 4;
+            else if (hay.includes(t)) score += 2;
+          });
+          expandedTerms.forEach(t => {
+            if (hay.includes(t)) score += 1.5;
+          });
+          return { product, score };
+        })
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 4)
+        .map(item => item.product);
+
+      if (scored.length) {
+        return {
+          reply: `بر اساس نیاز شما برای «${query}»، ${scored.length.toLocaleString('fa-IR')} گزینه متناسب از کلکسیون آرام صبا انتخاب شد. برای بررسی جزئیات فنی و ابعاد، روی هر محصول کلیک کنید:`,
+          items: scored,
+          designTip: 'امکان سفارشی‌سازی ابعاد، رنگ چوب و نوع چرم تمامی مدل‌ها متناسب با دکوراسیون فضای شما وجود دارد.',
+          isLiveAi: false
+        };
       }
 
-      const query = input.value.trim();
-      const box = $('advisorResponseBox');
-      box.classList.remove('hidden');
+      return {
+        reply: `برای درخواست «${query}» مدل مستقیمی در لیست فعلی یافت نشد؛ اما تیم طراحی آرام صبا می‌تواند محصول اختصاصی متناسب با پلان و متریال فضای شما تولید کند.`,
+        items: [],
+        designTip: 'می‌توانید ابعاد فضا یا تصویر محیط کاری خود را در واتساپ ارسال کنید تا مشاوران ما چیدمان پیشنهادی ارائه دهند.',
+        isLiveAi: false
+      };
+    }
+
+    function renderAdvisorResult(box, query, { reply, items = [], designTip = '', isLiveAi = false }) {
       box.replaceChildren();
-
-      if (!query) {
-        const msg = createElement('div', 'advisor-head');
-        msg.style.marginBottom = '0';
-        msg.appendChild(createElement('span', '', 'برای دریافت پیشنهاد، نوع فضا یا محصول موردنظر خود را در کادر جستجو وارد کنید.'));
-        const close = createElement('button', 'clear-search-btn');
-        close.type = 'button';
-        close.appendChild(createSvgIcon('x', 'icon-md'));
-        close.addEventListener('click', () => box.classList.add('hidden'));
-        msg.appendChild(close);
-        box.appendChild(msg);
-        return;
-      }
-
-      const normalizedQuery = normalizeText(query);
-      const matching = products.filter(product =>
-        normalizeText(`${product.name} ${product.category} ${product.info}`).includes(normalizedQuery)
-      );
 
       const header = createElement('div', 'advisor-head');
       const heading = createElement('p', 'advisor-title');
-      heading.append(createSvgIcon('sparkles', 'icon-md'), document.createTextNode('پیشنهاد مشاور چیدمان آرام صبا'));
+      heading.append(
+        createSvgIcon('sparkles', 'icon-md'),
+        document.createTextNode('پیشنهاد مشاور چیدمان آرام صبا')
+      );
+      if (isLiveAi) {
+        const badge = createElement('span', 'advisor-badge', 'هوش مصنوعی فعال');
+        heading.appendChild(badge);
+      }
 
       const closeBtn = createElement('button', 'clear-search-btn');
       closeBtn.type = 'button';
@@ -4522,28 +4621,286 @@
       header.append(heading, closeBtn);
       box.appendChild(header);
 
-      if (matching.length) {
-        box.appendChild(createElement('p', '', `بر اساس نیاز شما برای «${query}»، ${matching.length.toLocaleString('fa-IR')} گزینه متناسب در کلکسیون یافت شد:`));
+      box.appendChild(createElement('p', 'advisor-reply', reply));
 
-        const chipsWrap = createElement('div', 'advisor-chips');
-        matching.slice(0, 4).forEach(item => {
+      if (designTip) {
+        const tipBox = createElement('div', 'advisor-tip');
+        tipBox.append(
+          createSvgIcon('gem', 'icon-sm tip-ico'),
+          createElement('span', '', designTip)
+        );
+        box.appendChild(tipBox);
+      }
+
+      const chipsWrap = createElement('div', 'advisor-chips');
+      items.slice(0, 4).forEach(item => {
+        const btn = createElement('button', 'advisor-chip');
+        btn.type = 'button';
+        btn.append(createSvgIcon('arrow-up-left', 'icon-sm'), document.createTextNode(item.name));
+        btn.addEventListener('click', () => openProductDetail(item));
+        chipsWrap.appendChild(btn);
+      });
+
+      const waLink = createElement('a', 'advisor-chip');
+      waLink.href = buildWhatsappUrl(`سلام، برای «${query}» نیاز به مشاوره تخصصی چیدمان و استعلام قیمت دارم.`);
+      waLink.target = '_blank';
+      waLink.rel = 'noopener noreferrer';
+      waLink.append(
+        createSvgIcon('message-circle', 'icon-sm'),
+        document.createTextNode(items.length ? 'مشاوره و استعلام در واتساپ' : 'درخواست طراحی سفارشی در واتساپ')
+      );
+      chipsWrap.appendChild(waLink);
+      box.appendChild(chipsWrap);
+    }
+
+    function buildAdvisorSystemPrompt() {
+      return [
+        'تو مشاور ارشد دکوراسیون اداری لوکس برای برند «آرام صبا صنعت ایرانیان» هستی.',
+        'پاسخ را حتماً به زبان فارسی رسمی، محترمانه و مختصر (۲ تا ۳ جمله) بنویس.',
+        'فقط از بین محصولات موجود در لیست JSON ورودی، حداکثر ۳ تا ۴ محصول مرتبط را انتخاب کن و شناسه دقیق (id) آن‌ها را در recommendedIds قرار بده.',
+        'اگر محصول مرتبطی نبود، آرایه recommendedIds را خالی بگذار و ساخت سفارشی را پیشنهاد بده.',
+        'خروجی باید صرفاً یک آبجکت JSON معتبر با این ساختار دقیق باشد و هیچ متن اضافه‌ای خارج از JSON ننویس:',
+        '{"reply":"متن مشاوره کوتاه فارسی","recommendedIds":["id1","id2"],"designTip":"یک نکته طراحی کوتاه و کاربردی"}'
+      ].join('\n');
+    }
+
+    function parseAiJsonResponse(rawText) {
+      const text = String(rawText || '').trim();
+      if (!text) return null;
+
+      try {
+        const direct = JSON.parse(text);
+        if (direct && typeof direct.reply === 'string') return direct;
+      } catch (_) {}
+
+      const firstBrace = text.indexOf('{');
+      const lastBrace = text.lastIndexOf('}');
+      if (firstBrace !== -1 && lastBrace > firstBrace) {
+        try {
+          const sliced = JSON.parse(text.slice(firstBrace, lastBrace + 1));
+          if (sliced && typeof sliced.reply === 'string') return sliced;
+        } catch (_) {}
+      }
+
+      // If the model returned plain Persian text instead of JSON, still show it cleanly
+      return { reply: text, recommendedIds: [], designTip: '' };
+    }
+
+    async function requestAiAdvisor(query, compactCatalog, signal) {
+      // Production proxy mode (/api/advisor)
+      if (AI_ADVISOR_CONFIG.mode === 'proxy') {
+        const response = await fetch(AI_ADVISOR_CONFIG.endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query,
+            brand: 'آرام صبا صنعت ایرانیان',
+            products: compactCatalog
+          }),
+          signal
+        });
+        if (!response.ok) throw new Error(`Proxy HTTP ${response.status}`);
+        return await response.json();
+      }
+
+      // Temporary direct browser mode (API key stored in AI_ADVISOR_CONFIG.apiKey)
+      const apiKey = String(AI_ADVISOR_CONFIG.apiKey || '').trim();
+      if (!apiKey) {
+        throw new Error('NO_API_KEY');
+      }
+
+      const systemPrompt = buildAdvisorSystemPrompt();
+      const userPrompt = `درخواست مشتری: ${query}\n\nلیست محصولات موجود (JSON):\n${JSON.stringify(compactCatalog)}`;
+      let rawText = '';
+
+      if (AI_ADVISOR_CONFIG.provider === 'gemini') {
+        const model = encodeURIComponent(AI_ADVISOR_CONFIG.geminiModel || 'gemini-2.5-flash');
+        const requestBody = JSON.stringify({
+          systemInstruction: { parts: [{ text: systemPrompt }] },
+          contents: [{ role: 'user', parts: [{ text: userPrompt }] }],
+          generationConfig: {
+            temperature: 0.4,
+            responseMimeType: 'application/json'
+          }
+        });
+
+        // Google issues AQ.* keys for both AI Studio and Vertex AI Express Mode.
+        // Try AI Studio endpoint first; if an AQ.* key returns 401/403, automatically try Vertex AI Express.
+        const endpoints = [
+          `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`
+        ];
+        if (apiKey.startsWith('AQ.')) {
+          endpoints.push(
+            `https://aiplatform.googleapis.com/v1/publishers/google/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`
+          );
+        }
+
+        let payload = null;
+        let lastError = null;
+        for (let i = 0; i < endpoints.length; i++) {
+          const response = await fetch(endpoints[i], {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: requestBody,
+            signal
+          });
+
+          if (response.ok) {
+            payload = await response.json();
+            break;
+          }
+
+          const errText = await response.text().catch(() => '');
+          lastError = new Error(`Gemini HTTP ${response.status}: ${errText.slice(0, 160)}`);
+          if (response.status !== 401 && response.status !== 403) {
+            throw lastError;
+          }
+        }
+
+        if (!payload) {
+          throw lastError || new Error('Gemini API request failed');
+        }
+        rawText = payload?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      } else {
+        // OpenAI-compatible endpoint (OpenRouter, AvalAI, Groq, OpenAI, etc.)
+        const response = await fetch(AI_ADVISOR_CONFIG.openaiBaseUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            model: AI_ADVISOR_CONFIG.openaiModel,
+            temperature: 0.4,
+            messages: [
+              { role: 'system', content: systemPrompt },
+              { role: 'user', content: userPrompt }
+            ]
+          }),
+          signal
+        });
+
+        if (!response.ok) {
+          const errText = await response.text().catch(() => '');
+          throw new Error(`AI API HTTP ${response.status}: ${errText.slice(0, 160)}`);
+        }
+
+        const payload = await response.json();
+        rawText = payload?.choices?.[0]?.message?.content || '';
+      }
+
+      const parsed = parseAiJsonResponse(rawText);
+      if (!parsed || typeof parsed.reply !== 'string' || !parsed.reply.trim()) {
+        throw new Error('Invalid AI payload');
+      }
+      return parsed;
+    }
+
+    async function runSpaceAdvisor(forcedQuery = null) {
+      const input = $('searchInput');
+      if (forcedQuery !== null) {
+        input.value = forcedQuery;
+        renderProducts();
+      }
+
+      const query = input.value.trim();
+      const box = $('advisorResponseBox');
+      box.classList.remove('hidden');
+
+      if (!query) {
+        box.replaceChildren();
+        const header = createElement('div', 'advisor-head');
+        const heading = createElement('p', 'advisor-title');
+        heading.append(createSvgIcon('sparkles', 'icon-md'), document.createTextNode('مشاور هوشمند انتخاب فضا'));
+        const close = createElement('button', 'clear-search-btn');
+        close.type = 'button';
+        close.setAttribute('aria-label', 'بستن');
+        close.appendChild(createSvgIcon('x', 'icon-md'));
+        close.addEventListener('click', () => box.classList.add('hidden'));
+        header.append(heading, close);
+        box.appendChild(header);
+
+        box.appendChild(createElement('p', 'advisor-reply', 'نیاز یا سبک فضای اداری خود را بنویسید (مثلاً «اتاق مدیریت مدرن با چوب گردو» یا «صندلی طبی برای کار طولانی») یا یکی از موارد زیر را امتحان کنید:'));
+        const examples = createElement('div', 'advisor-chips');
+        ['اتاق مدیریت لوکس', 'صندلی ارگونومیک کار طولانی', 'اتاق کنفرانس رسمی'].forEach(sample => {
           const btn = createElement('button', 'advisor-chip');
           btn.type = 'button';
-          btn.append(createSvgIcon('arrow-up-left', 'icon-sm'), document.createTextNode(item.name));
-          btn.addEventListener('click', () => openProductDetail(item));
-          chipsWrap.appendChild(btn);
+          btn.append(createSvgIcon('sparkles', 'icon-xs'), document.createTextNode(sample));
+          btn.addEventListener('click', () => runSpaceAdvisor(sample));
+          examples.appendChild(btn);
         });
-        box.appendChild(chipsWrap);
-      } else {
-        box.appendChild(createElement('p', '', `برای عبارت «${query}» محصول مستقیمی ثبت نشده است؛ اما تیم طراحی ما امکان تولید سفارشی متناسب با ابعاد و سبک فضای شما را دارد.`));
-        const waWrap = createElement('div', 'advisor-chips');
-        const waLink = createElement('a', 'advisor-chip');
-        waLink.href = buildWhatsappUrl(`سلام، برای طراحی و سفارش «${query}» نیاز به مشاوره دارم.`);
-        waLink.target = '_blank';
-        waLink.rel = 'noopener noreferrer';
-        waLink.append(createSvgIcon('message-circle', 'icon-sm'), document.createTextNode('درخواست مشاوره سفارشی در واتساپ'));
-        waWrap.appendChild(waLink);
-        box.appendChild(waWrap);
+        box.appendChild(examples);
+        input.focus();
+        return;
+      }
+
+      // Cancel any previous in-flight AI request
+      if (advisorAbortController) {
+        advisorAbortController.abort();
+      }
+      const controller = new AbortController();
+      advisorAbortController = controller;
+      const timeoutId = setTimeout(() => controller.abort(), AI_ADVISOR_CONFIG.timeoutMs);
+
+      const advisorBtn = $('advisorButton');
+      advisorBtn.disabled = true;
+      advisorBtn.replaceChildren(
+        createSvgIcon('loader-2', 'icon-sm spin'),
+        createElement('span', '', 'در حال تحلیل...')
+      );
+
+      box.replaceChildren();
+      const loadingRow = createElement('div', 'advisor-loading');
+      loadingRow.append(
+        createSvgIcon('loader-2', 'icon-md spin'),
+        createElement('span', '', 'مشاور هوشمند آرام صبا در حال بررسی کلکسیون و تحلیل فضای شماست...')
+      );
+      box.appendChild(loadingRow);
+
+      try {
+        const compactCatalog = products.slice(0, AI_ADVISOR_CONFIG.maxProductsSent).map(p => ({
+          id: String(p.id ?? ''),
+          name: p.name,
+          category: p.category,
+          info: String(p.info || '').slice(0, 260)
+        }));
+
+        const data = await requestAiAdvisor(query, compactCatalog, controller.signal);
+        clearTimeout(timeoutId);
+
+        if (!data || typeof data.reply !== 'string' || !data.reply.trim()) {
+          throw new Error('Invalid AI payload');
+        }
+
+        const idSet = new Set((Array.isArray(data.recommendedIds) ? data.recommendedIds : []).map(id => String(id)));
+        const matchedItems = products.filter(p => idSet.has(String(p.id)));
+
+        renderAdvisorResult(box, query, {
+          reply: data.reply.trim(),
+          items: matchedItems,
+          designTip: typeof data.designTip === 'string' ? data.designTip.trim() : '',
+          isLiveAi: true
+        });
+      } catch (error) {
+        clearTimeout(timeoutId);
+        if (error?.name === 'AbortError' && advisorAbortController !== controller) {
+          return; // Superseded by a newer request
+        }
+        if (error?.message && error.message !== 'NO_API_KEY') {
+          console.warn('AI Advisor fell back to local smart matcher:', error.message);
+        }
+        // Gracefully fall back to the built-in smart Persian recommender (e.g. empty key, Preview, or offline)
+        const fallback = buildLocalSmartAdvice(query);
+        renderAdvisorResult(box, query, fallback);
+      } finally {
+        if (advisorAbortController === controller) {
+          advisorAbortController = null;
+          advisorBtn.disabled = false;
+          advisorBtn.replaceChildren(
+            createSvgIcon('sparkles', 'icon-sm'),
+            createElement('span', '', 'مشاور انتخاب فضا')
+          );
+        }
       }
     }
 
@@ -4622,6 +4979,12 @@
 
       // Search & Space Advisor
       $('searchInput').addEventListener('input', debounce(renderProducts, 120));
+      $('searchInput').addEventListener('keydown', event => {
+        if (event.key === 'Enter' && $('searchInput').value.trim()) {
+          event.preventDefault();
+          runSpaceAdvisor();
+        }
+      });
       $('clearSearchButton').addEventListener('click', () => {
         $('searchInput').value = '';
         $('advisorResponseBox').classList.add('hidden');
