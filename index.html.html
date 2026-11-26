@@ -1288,7 +1288,7 @@
       z-index: 10;
       border-top: 1px solid rgba(var(--accent-rgb), .2);
       background: var(--footer-bg);
-      padding: 3.5rem 1.5rem 2.5rem;
+      padding: 3.5rem 1.5rem 5.5rem;
       font-size: .78rem;
       color: var(--text-muted);
     }
@@ -1430,8 +1430,8 @@
        ========================================= */
     #scrollToTopBtn {
       position: fixed;
-      right: 1.5rem;
-      bottom: 1.5rem;
+      right: 1.25rem;
+      bottom: 5.25rem;
       z-index: 40;
       display: flex;
       align-items: center;
@@ -2212,6 +2212,54 @@
     .login-sub { margin-top: .45rem; font-size: .78rem; color: var(--text-soft); }
     .login-note { margin-top: 1rem; font-size: 10px; line-height: 1.7; color: var(--text-muted); }
 
+    .password-field-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .password-field-wrap .admin-input {
+      padding-right: 2.75rem;
+    }
+    .password-toggle-btn {
+      position: absolute;
+      right: .65rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: .5rem;
+      color: var(--text-muted);
+      transition: color .2s ease;
+    }
+    .password-toggle-btn:hover { color: var(--brand-gold); }
+
+    .login-error-box {
+      border-radius: .75rem;
+      border: 1px solid rgba(239, 68, 68, .4);
+      background: rgba(127, 29, 29, .38);
+      padding: .65rem .85rem;
+      font-size: 11px;
+      line-height: 1.75;
+      color: #fecaca;
+      text-align: right;
+    }
+    .forgot-pass-row {
+      margin-top: .75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+    .forgot-pass-btn {
+      font-size: 11px;
+      color: var(--brand-gold);
+      text-decoration: underline;
+      transition: color .2s ease;
+    }
+    .forgot-pass-btn:hover { color: var(--accent-highlight); }
+
     /* Built-in Luxury Dialog Modal */
     .dialog-box {
       width: 100%;
@@ -2286,9 +2334,9 @@
        ========================================= */
     #toast {
       position: fixed;
-      bottom: 1.25rem;
+      bottom: 5.25rem;
       left: 1.25rem;
-      z-index: 80;
+      z-index: 85;
       display: flex;
       align-items: center;
       gap: .75rem;
@@ -2312,6 +2360,322 @@
     }
     .toast-icon { display: flex; align-items: center; color: var(--brand-gold); }
     .toast-icon.error { color: #f87171; }
+
+    /* =========================================
+       LUXURY AI CONSULTANT STUDIO & FLOATING LAUNCHER
+       ========================================= */
+    #floatingAiBtn {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.5rem;
+      z-index: 42;
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      border-radius: 9999px;
+      padding: .75rem 1.15rem;
+      font-size: .78rem;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .55), 0 0 22px rgba(var(--accent-rgb), .32);
+    }
+    #floatingAiBtn .ai-pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 9999px;
+      background: var(--brand-dark);
+      box-shadow: 0 0 0 3px rgba(4, 6, 10, .2);
+    }
+
+    #aiFilterBanner {
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(var(--accent-rgb), .42);
+      background: rgba(var(--accent-rgb), .1);
+      padding: .85rem 1.1rem;
+      font-size: .78rem;
+      color: var(--text-main);
+    }
+    .ai-filter-info {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      color: var(--brand-gold);
+      font-weight: 600;
+    }
+
+    .ai-modal-dialog {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 46rem;
+      height: 86vh;
+      max-height: 780px;
+      overflow: hidden;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(var(--accent-rgb), .42);
+      background: var(--brand-surface);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, .8), 0 0 40px rgba(var(--accent-rgb), .12);
+    }
+
+    .ai-chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid rgba(var(--accent-rgb), .18);
+      background: rgba(0, 0, 0, .35);
+    }
+    .ai-chat-brand {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      min-width: 0;
+    }
+    .ai-avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      flex-shrink: 0;
+      border-radius: .85rem;
+      background: var(--badge-bg);
+      color: var(--brand-dark);
+      box-shadow: 0 0 18px rgba(var(--accent-rgb), .32);
+    }
+    .ai-chat-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .45rem;
+    }
+    .ai-chat-title {
+      font-size: .92rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .ai-chat-sub {
+      margin-top: .2rem;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+    .ai-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(var(--accent-rgb), .35);
+      background: rgba(var(--accent-rgb), .12);
+      padding: .15rem .55rem;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--brand-gold);
+    }
+    .ai-status-pill.live {
+      border-color: rgba(52, 211, 153, .45);
+      background: rgba(16, 185, 129, .14);
+      color: #6ee7b7;
+    }
+    .ai-status-pill.offline {
+      border-color: rgba(251, 191, 36, .4);
+      background: rgba(245, 158, 11, .12);
+      color: #fde68a;
+    }
+
+    .ai-diagnostic-bar {
+      border-bottom: 1px solid rgba(251, 191, 36, .2);
+      background: rgba(245, 158, 11, .08);
+      padding: .55rem 1.25rem;
+      font-size: 11px;
+      line-height: 1.7;
+      color: #fde68a;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .ai-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: linear-gradient(to bottom, var(--brand-navy-deep), var(--brand-dark));
+    }
+
+    .ai-msg {
+      display: flex;
+      flex-direction: column;
+      gap: .65rem;
+      max-width: 92%;
+      animation: cardEnter .28s cubic-bezier(.22, 1, .36, 1) both;
+    }
+    .ai-msg.user {
+      align-self: flex-start;
+    }
+    .ai-msg.assistant {
+      align-self: stretch;
+      max-width: 100%;
+    }
+
+    .ai-bubble {
+      border-radius: 1.15rem;
+      padding: .9rem 1.1rem;
+      font-size: .82rem;
+      line-height: 1.95;
+      white-space: pre-line;
+    }
+    .ai-msg.user .ai-bubble {
+      border-top-right-radius: .3rem;
+      background: rgba(var(--accent-rgb), .18);
+      border: 1px solid rgba(var(--accent-rgb), .42);
+      color: #ffffff;
+      font-weight: 500;
+    }
+    .ai-msg.assistant .ai-bubble {
+      border-top-left-radius: .3rem;
+      background: var(--brand-navy);
+      border: 1px solid rgba(255, 255, 255, .09);
+      color: var(--text-main);
+    }
+
+    .ai-rec-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: .65rem;
+      margin-top: .25rem;
+    }
+    @media (min-width: 640px) {
+      .ai-rec-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    .ai-rec-card {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      border-radius: .95rem;
+      border: 1px solid rgba(var(--accent-rgb), .26);
+      background: var(--brand-surface);
+      padding: .65rem;
+      text-align: right;
+      cursor: pointer;
+      transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+    }
+    .ai-rec-card:hover {
+      border-color: rgba(var(--accent-rgb), .7);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .4);
+    }
+    .ai-rec-thumb {
+      width: 4rem;
+      height: 4rem;
+      flex-shrink: 0;
+      overflow: hidden;
+      border-radius: .65rem;
+      border: 1px solid rgba(255, 255, 255, .1);
+      background: var(--brand-dark);
+    }
+    .ai-rec-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .ai-rec-meta {
+      min-width: 0;
+      flex: 1;
+    }
+    .ai-rec-cat {
+      font-size: 9.5px;
+      color: var(--brand-gold);
+      margin-bottom: .15rem;
+    }
+    .ai-rec-name {
+      font-size: .8rem;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ai-rec-reason {
+      margin-top: .25rem;
+      font-size: 10.5px;
+      line-height: 1.55;
+      color: var(--text-muted);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .ai-msg-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+      margin-top: .2rem;
+    }
+
+    .ai-followups {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+    }
+    .ai-followup-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .04);
+      padding: .42rem .8rem;
+      font-size: 11px;
+      color: var(--text-soft);
+      transition: border-color .2s ease, color .2s ease, background .2s ease;
+    }
+    .ai-followup-btn:hover {
+      border-color: rgba(var(--accent-rgb), .55);
+      background: rgba(var(--accent-rgb), .12);
+      color: var(--brand-gold);
+    }
+
+    .ai-typing {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(var(--accent-rgb), .28);
+      background: var(--brand-navy);
+      padding: .75rem 1rem;
+      font-size: .78rem;
+      color: var(--brand-gold);
+      align-self: flex-end;
+    }
+
+    .ai-composer {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .9rem 1.1rem;
+      border-top: 1px solid rgba(var(--accent-rgb), .18);
+      background: rgba(0, 0, 0, .4);
+    }
+    .ai-composer .admin-input {
+      flex: 1;
+      padding: .78rem 1rem;
+      font-size: .82rem;
+    }
+    .ai-send-btn {
+      flex-shrink: 0;
+      border-radius: .8rem;
+      padding: .78rem 1.15rem;
+      font-size: .78rem;
+    }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -2407,7 +2771,7 @@
           </label>
           <button id="advisorButton" type="button" class="gold-button advisor-btn">
             <i data-lucide="sparkles" class="icon-sm"></i>
-            <span>مشاور انتخاب فضا</span>
+            <span>مشاور هوشمند AI</span>
           </button>
         </div>
 
@@ -2430,6 +2794,19 @@
         </div>
         <span class="collection-tag">ARAM SABA COLLECTION</span>
       </div>
+
+      <!-- Active AI Curated Filter Banner -->
+      <div id="aiFilterBanner" class="hidden">
+        <div class="ai-filter-info">
+          <i data-lucide="sparkles" class="icon-sm"></i>
+          <span id="aiFilterLabel">نمایش محصولات پیشنهادی مشاور هوش مصنوعی</span>
+        </div>
+        <button id="clearAiFilterBtn" type="button" class="small-pill-btn">
+          <i data-lucide="x" class="icon-xs"></i>
+          <span>نمایش همه محصولات</span>
+        </button>
+      </div>
+
       <div id="productGrid"></div>
     </main>
 
@@ -2502,6 +2879,13 @@
   <!-- Floating Back-to-Top Button -->
   <button id="scrollToTopBtn" type="button" aria-label="بازگشت به بالای صفحه">
     <i data-lucide="arrow-up" class="icon-md"></i>
+  </button>
+
+  <!-- Floating Luxury AI Consultant Launcher -->
+  <button id="floatingAiBtn" type="button" class="gold-button" aria-label="گفتگو با مشاور هوشمند چیدمان">
+    <span class="ai-pulse-dot" aria-hidden="true"></span>
+    <i data-lucide="sparkles" class="icon-sm"></i>
+    <span>مشاور هوشمند</span>
   </button>
 
   <!-- Product Detail Modal -->
@@ -2733,6 +3117,32 @@
           </div>
           <div id="adminProductList" class="inventory-list"></div>
         </section>
+
+        <!-- Change Admin Password -->
+        <section id="changePasswordSection" class="admin-section">
+          <h3 class="admin-section-title">
+            <i data-lucide="key-round" class="icon-sm"></i>
+            <span>تغییر رمز عبور مدیر</span>
+          </h3>
+          <form id="changePasswordForm" class="admin-form">
+            <div class="form-grid-2">
+              <div>
+                <label for="newAdminPassword" class="field-label">رمز عبور جدید (حداقل ۶ کاراکتر)</label>
+                <input id="newAdminPassword" type="password" minlength="6" autocomplete="new-password" required class="admin-input ltr-input" placeholder="رمز عبور جدید">
+              </div>
+              <div>
+                <label for="confirmAdminPassword" class="field-label">تکرار رمز عبور جدید</label>
+                <input id="confirmAdminPassword" type="password" minlength="6" autocomplete="new-password" required class="admin-input ltr-input" placeholder="تکرار رمز عبور جدید">
+              </div>
+            </div>
+            <div>
+              <button id="changePasswordSubmit" type="submit" class="gold-button form-submit-btn">
+                <i data-lucide="shield-check" class="icon-sm"></i>
+                <span>به‌روزرسانی رمز عبور</span>
+              </button>
+            </div>
+          </form>
+        </section>
       </div>
     </div>
   </div>
@@ -2759,14 +3169,23 @@
         </div>
         <div>
           <label for="adminPassword" class="field-label">رمز عبور</label>
-          <input id="adminPassword" type="password" autocomplete="current-password" required class="admin-input ltr-input" placeholder="رمز عبور حساب مدیر">
+          <div class="password-field-wrap">
+            <input id="adminPassword" type="password" autocomplete="current-password" required class="admin-input ltr-input" placeholder="رمز عبور حساب مدیر">
+            <button id="toggleAdminPasswordBtn" type="button" class="password-toggle-btn" aria-label="نمایش یا مخفی کردن رمز عبور">
+              <i data-lucide="eye" class="icon-sm"></i>
+            </button>
+          </div>
         </div>
+        <div id="adminLoginError" class="login-error-box hidden" role="alert"></div>
         <button id="adminLoginSubmit" type="submit" class="gold-button form-submit-btn" style="width:100%;">
           <i data-lucide="key-round" class="icon-md"></i>
           <span>ورود امن</span>
         </button>
       </form>
-      <p class="login-note">حساب مدیر باید از قبل در بخش Authentication پروژه Supabase ساخته شده باشد.</p>
+      <div class="forgot-pass-row">
+        <button id="forgotPasswordButton" type="button" class="forgot-pass-btn">فراموشی رمز؟ ارسال لینک بازیابی به ایمیل</button>
+      </div>
+      <p class="login-note">حساب مدیر باید در Supabase → Authentication → Users ساخته و تایید (Auto Confirm) شده باشد.</p>
     </div>
   </div>
 
@@ -2782,6 +3201,45 @@
         <button id="luxuryDialogConfirm" type="button" class="gold-button dialog-btn-confirm">تأیید</button>
         <button id="luxuryDialogCancel" type="button" class="btn-outline-dark">انصراف</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Interactive AI Interior Design Consultant Modal -->
+  <div id="aiChatModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="aiChatTitle">
+    <div class="modal-pop ai-modal-dialog">
+      <div class="ai-chat-header">
+        <div class="ai-chat-brand">
+          <span class="ai-avatar"><i data-lucide="sparkles" class="icon-lg"></i></span>
+          <div>
+            <div class="ai-chat-title-row">
+              <h2 id="aiChatTitle" class="ai-chat-title">مشاور هوشمند چیدمان آرام صبا</h2>
+              <span id="aiStatusPill" class="ai-status-pill">آماده گفتگو</span>
+            </div>
+            <p class="ai-chat-sub">پیشنهاد ست کامل، هماهنگی رنگ و متریال، و انتخاب دقیق از کلکسیون زنده</p>
+          </div>
+        </div>
+        <div class="admin-header-actions">
+          <button id="aiChatResetBtn" type="button" class="icon-btn" title="شروع گفتگوی جدید" aria-label="شروع گفتگوی جدید">
+            <i data-lucide="rotate-ccw" class="icon-sm"></i>
+          </button>
+          <button id="closeAiChatBtn" type="button" class="icon-btn" aria-label="بستن مشاور هوشمند">
+            <i data-lucide="x" class="icon-md"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="aiDiagnosticBar" class="ai-diagnostic-bar hidden"></div>
+
+      <div id="aiChatMessages" class="modal-scroll ai-messages" aria-live="polite"></div>
+
+      <form id="aiChatForm" class="ai-composer">
+        <label for="aiChatInput" class="sr-only">سوال خود را از مشاور هوشمند بپرسید</label>
+        <input id="aiChatInput" type="text" autocomplete="off" maxlength="400" placeholder="مثلاً: برای اتاق مدیریت ۲۰ متری با نور کم چه میز و صندلی ست میشه؟" class="admin-input">
+        <button id="aiChatSendBtn" type="submit" class="gold-button ai-send-btn">
+          <i data-lucide="send" class="icon-sm"></i>
+          <span>ارسال</span>
+        </button>
+      </form>
     </div>
   </div>
 
@@ -2817,11 +3275,13 @@
       provider: 'gemini',           // 'gemini' (Google AI Studio / Vertex Express) | 'openai' (OpenRouter, AvalAI, Groq, OpenAI)
       apiKey: 'AQ.Ab8RN6JTQkdj3hnUbeZx8VTJLdDuVnyP6dzQudG8PIgndiIENw',
       geminiModel: 'gemini-2.5-flash',
+      geminiFallbackModels: ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.5-flash-lite'],
       openaiBaseUrl: 'https://openrouter.ai/api/v1/chat/completions',
       openaiModel: 'google/gemini-2.5-flash',
       endpoint: '/api/advisor',     // Used automatically when mode is switched to 'proxy'
-      timeoutMs: 18000,
-      maxProductsSent: 60
+      timeoutMs: 22000,
+      maxProductsSent: 80,
+      maxHistoryTurns: 8
     };
 
     // =========================================================
@@ -2933,6 +3393,7 @@
       'database': '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>',
       'download': '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>',
       'eye': '<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
+      'eye-off': '<path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/>',
       'file-spreadsheet': '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h2"/><path d="M14 13h2"/><path d="M8 17h2"/><path d="M14 17h2"/>',
       'file-text': '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>',
       'gem': '<path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/>',
@@ -3009,6 +3470,9 @@
     let scrollTicking = false;
     let particlesPaused = false;
     let advisorAbortController = null;
+    let aiChatHistory = [];
+    let aiFilterProductIds = null;
+    let aiModalOpenedOnce = false;
 
     const $ = id => document.getElementById(id);
     const prefersReducedMotion = () =>
@@ -3445,15 +3909,47 @@
       }
     }
 
-    async function supabaseRequest(resource, options = {}) {
-      if (!SUPABASE_CONFIGURED) {
-        throw new Error('آدرس پروژه یا کلید عمومی Supabase هنوز وارد نشده است.');
+    async function authRecoverPassword(email) {
+      const redirectTo = window.location.href.split('#')[0];
+      const res = await fetch(`${supabaseBaseUrl}/auth/v1/recover`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY
+        },
+        body: JSON.stringify({ email, redirect_to: redirectTo })
+      });
+      if (!res.ok) {
+        const rawText = await res.text().catch(() => '');
+        throw new Error(extractSupabaseError(rawText, res.status));
       }
+      return true;
+    }
 
-      const { method = 'GET', body, prefer = 'return=minimal' } = options;
+    async function authUpdatePassword(newPassword) {
+      const session = await getValidSession();
+      if (!session?.access_token) {
+        throw new Error('نشست مدیر منقضی شده است. لطفاً دوباره وارد شوید.');
+      }
+      const res = await fetch(`${supabaseBaseUrl}/auth/v1/user`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${session.access_token}`
+        },
+        body: JSON.stringify({ password: newPassword })
+      });
+      const rawText = await res.text().catch(() => '');
+      if (!res.ok) throw new Error(extractSupabaseError(rawText, res.status));
+      return true;
+    }
+
+    async function supabaseRequest(resource, options = {}) {
+      const { method = 'GET', body, prefer } = options;
       const headers = {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_ANON_KEY
+        'apikey': SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json'
       };
       if (prefer) headers.Prefer = prefer;
 
@@ -4094,6 +4590,7 @@
 
     function setCategory(category) {
       currentCategory = category;
+      aiFilterProductIds = null;
       renderCategories();
       renderProducts();
     }
@@ -4113,18 +4610,28 @@
       const filtered = products
         .map((product, index) => ({ product, index }))
         .filter(({ product }) => {
+          if (aiFilterProductIds && !aiFilterProductIds.has(String(product.id))) {
+            return false;
+          }
           const matchesCategory = currentCategory === 'all' || product.category === currentCategory;
           const searchable = normalizeText(`${product.name} ${product.info} ${product.category}`);
           return matchesCategory && (!term || searchable.includes(term));
         });
 
-      $('resultCount').textContent = `${filtered.length.toLocaleString('fa-IR')} محصول`;
+      const filterBanner = $('aiFilterBanner');
+      if (filterBanner) filterBanner.classList.toggle('hidden', !aiFilterProductIds);
+
+      $('resultCount').textContent = filtered.length
+        ? `نمایش ${filtered.length.toLocaleString('fa-IR')} محصول`
+        : 'محصولی مطابق با جستجو یافت نشد';
 
       if (!filtered.length) {
-        const empty = createElement('div', 'empty-state card-enter');
-        empty.appendChild(createElement('div', 'empty-diamond', '◇'));
-        empty.appendChild(createElement('p', 'empty-title', products.length ? 'محصولی با این مشخصات پیدا نشد.' : 'هنوز محصولی در کاتالوگ ثبت نشده است.'));
-        empty.appendChild(createElement('p', 'empty-sub', products.length ? 'عبارت جستجو یا دسته‌بندی انتخاب‌شده را تغییر دهید.' : 'در صورت بروز اختلال اینترنت، صفحه را مجدداً بارگذاری کنید.'));
+        const empty = createElement('div', 'empty-state');
+        empty.append(
+          createElement('p', 'empty-diamond', '❖'),
+          createElement('p', 'empty-title', products.length ? 'محصولی با این مشخصات یافت نشد.' : 'هنوز محصولی در کاتالوگ ثبت نشده است.'),
+          createElement('p', 'empty-sub', products.length ? 'عبارت جستجو یا دسته‌بندی را تغییر دهید.' : 'از پنل مدیریت پایین صفحه می‌توانید محصولات را اضافه کنید.')
+        );
         grid.appendChild(empty);
         return;
       }
@@ -4458,17 +4965,41 @@
 
     function closeAdminLoginModal() {
       $('adminLoginModal').classList.remove('open');
+      const errBox = $('adminLoginError');
+      if (errBox) {
+        errBox.textContent = '';
+        errBox.classList.add('hidden');
+      }
       if (!$('adminModal').classList.contains('open')) setBodyScrollLocked(false);
+    }
+
+    function setAdminLoginError(message = '') {
+      const box = $('adminLoginError');
+      if (!box) return;
+      if (!message) {
+        box.textContent = '';
+        box.classList.add('hidden');
+      } else {
+        box.textContent = message;
+        box.classList.remove('hidden');
+      }
     }
 
     async function handleAdminLogin(event) {
       event.preventDefault();
+      setAdminLoginError('');
       if (!SUPABASE_CONFIGURED) {
-        showToast('کلید عمومی Supabase وارد نشده است.', 'error');
+        setAdminLoginError('کلید عمومی Supabase وارد نشده است.');
         return;
       }
       const email = $('adminEmail').value.trim();
       const password = $('adminPassword').value;
+
+      if (/[^\x00-\x7F]/.test(email)) {
+        setAdminLoginError('ایمیل شامل حروف فارسی است. لطفاً کیبورد را روی انگلیسی بگذارید.');
+        return;
+      }
+
       const button = $('adminLoginSubmit');
       button.disabled = true;
       button.replaceChildren(createSvgIcon('loader-2', 'icon-md spin'), createElement('span', '', 'در حال ورود...'));
@@ -4481,10 +5012,76 @@
         showToast('ورود مدیر با موفقیت انجام شد.');
       } catch (error) {
         console.error('خطای ورود مدیر:', error);
-        showToast('ورود ناموفق بود. ایمیل و رمز عبور را بررسی کنید.', 'error');
+        const raw = String(error?.message || error || '');
+        let friendly = 'ورود ناموفق بود. ایمیل و رمز عبور را بررسی کنید.';
+        if (/invalid login credentials|invalid_grant/i.test(raw)) {
+          const hasPersianPass = /[^\x00-\x7F]/.test(password);
+          friendly = hasPersianPass
+            ? 'ایمیل یا رمز عبور اشتباه است (توجه: رمز واردشده شامل حروف فارسی است؛ روی آیکون چشم بزنید و کیبورد را انگلیسی کنید).'
+            : 'ایمیل یا رمز عبور اشتباه است. روی آیکون چشم بزنید تا رمز را بررسی کنید، یا از گزینه «فراموشی رمز» استفاده کنید.';
+        } else if (/email not confirmed/i.test(raw)) {
+          friendly = 'ایمیل این حساب در Supabase تایید نشده است. در Supabase → Authentication → Users کاربر را تایید (Confirm User) کنید.';
+        } else if (/failed to fetch|network/i.test(raw)) {
+          friendly = 'ارتباط با سرور Supabase برقرار نشد. اینترنت یا وضعیت فعال بودن پروژه Supabase را بررسی کنید.';
+        } else if (raw) {
+          friendly = `خطای ورود: ${raw}`;
+        }
+        setAdminLoginError(friendly);
+        showToast('ورود ناموفق بود.', 'error');
       } finally {
         button.disabled = false;
         button.replaceChildren(createSvgIcon('key-round', 'icon-md'), createElement('span', '', 'ورود امن'));
+      }
+    }
+
+    async function handleForgotPassword() {
+      setAdminLoginError('');
+      const email = $('adminEmail').value.trim();
+      if (!email || !email.includes('@')) {
+        setAdminLoginError('ابتدا ایمیل حساب مدیر را در کادر بالا وارد کنید و سپس روی «فراموشی رمز» بزنید.');
+        $('adminEmail').focus();
+        return;
+      }
+      const btn = $('forgotPasswordButton');
+      btn.disabled = true;
+      try {
+        await authRecoverPassword(email);
+        showToast('لینک تغییر رمز عبور به ایمیل شما ارسال شد. پوشه Inbox و Spam را بررسی کنید.');
+      } catch (error) {
+        console.error('خطای بازیابی رمز:', error);
+        setAdminLoginError(`ارسال ایمیل بازیابی انجام نشد: ${error.message}`);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function handleChangePassword(event) {
+      event.preventDefault();
+      const nextPass = $('newAdminPassword').value;
+      const confirmPass = $('confirmAdminPassword').value;
+
+      if (nextPass.length < 6) {
+        showToast('رمز عبور جدید باید حداقل ۶ کاراکتر باشد.', 'error');
+        return;
+      }
+      if (nextPass !== confirmPass) {
+        showToast('رمز عبور جدید و تکرار آن یکسان نیستند.', 'error');
+        return;
+      }
+
+      const btn = $('changePasswordSubmit');
+      btn.disabled = true;
+      btn.replaceChildren(createSvgIcon('loader-2', 'icon-sm spin'), createElement('span', '', 'در حال ذخیره...'));
+      try {
+        await authUpdatePassword(nextPass);
+        $('changePasswordForm').reset();
+        showToast('رمز عبور مدیر با موفقیت تغییر یافت.');
+      } catch (error) {
+        console.error('خطای تغییر رمز عبور:', error);
+        showToast(`تغییر رمز انجام نشد: ${error.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.replaceChildren(createSvgIcon('shield-check', 'icon-sm'), createElement('span', '', 'به‌روزرسانی رمز عبور'));
       }
     }
 
@@ -4542,23 +5139,58 @@
 
     // Smart local Persian furniture synonym matcher (automatic fallback when offline or in Preview)
     const PERSIAN_INTENT_GROUPS = [
-      { keywords: ['مدیریت', 'مدیر', 'رئیس', 'اجرایی', 'لوکس', 'لاکچری', 'executive', 'vip'], boost: ['مدیریت', 'مدیریتی', 'امپریال', 'لوکس', 'ریاست', 'چرم', 'چوب'] },
-      { keywords: ['کنفرانس', 'جلسه', 'میتینگ', 'همایش', 'مذاکره', 'گروهی'], boost: ['کنفرانس', 'جلسه', 'مذاکره', 'نفره'] },
-      { keywords: ['ارگونومیک', 'کمر', 'کمردرد', 'طبی', 'طولانی', 'راحت', 'نشستن', 'پشتی'], boost: ['ارگونومیک', 'طبی', 'توری', 'مش', 'صندلی', 'تنظیم'] },
-      { keywords: ['کارمندی', 'پرسنلی', 'کارشناسی', 'گروه کاری', 'استیشن', 'تیمی'], boost: ['کارمندی', 'کارشناسی', 'ایستگاه', 'پرسنلی', 'اداری'] },
-      { keywords: ['مدرن', 'مینیمال', 'ساده', 'شیک', 'جدید', 'اسپرت'], boost: ['مدرن', 'مینیمال', 'فلز', 'ساده', 'شیشه'] },
-      { keywords: ['چوب', 'چوبی', 'گردو', 'بلوط', 'کلاسیک', 'گرم'], boost: ['چوب', 'بلوط', 'گردو', 'روکش', 'کلاسیک', 'راش'] },
-      { keywords: ['پذیرش', 'لابی', 'انتظار', 'کانتر', 'منشی', 'مبل', 'نیم‌ست'], boost: ['انتظار', 'لابی', 'پذیرش', 'مبل', 'کانتر', 'نیم ست', 'کاناپه'] }
+      { keywords: ['مدیریت', 'مدیر', 'رئیس', 'اجرایی', 'لوکس', 'لاکچری', 'executive', 'vip'], boost: ['مدیریت', 'مدیریتی', 'امپریال', 'لوکس', 'ریاست', 'چرم', 'چوب'], advice: 'برای اتاق مدیریت، پیشنهاد اصلی انتخاب یک میز مدیریتی با روکش چوب طبیعی و داکت مدیریت کابل مخفی در کنار صندلی چرمی پشتی بلند است تا هم ارگونومی و هم وقار فضا حفظ شود.', tip: 'نورپردازی گرم (۳۰۰۰ کلوین) و حفظ حداقل ۱۲۰ سانتی‌متر فضای آزاد پشت میز مدیریت، حس اقتدار و آرامش محیط را دوچندان می‌کند.' },
+      { keywords: ['کنفرانس', 'جلسه', 'میتینگ', 'همایش', 'مذاکره', 'گروهی'], boost: ['کنفرانس', 'جلسه', 'مذاکره', 'نفره'], advice: 'برای اتاق کنفرانس، میز با ابعاد متناسب با تعداد نفرات (به ازای هر نفر حدود ۶۵ تا ۷۵ سانتی‌متر طول) و صندلی‌های راحت با چرخش روان بهترین تجربه جلسه را می‌سازد.', tip: 'حداقل ۱۱۰ سانتی‌متر فضای خالی دور تا دور میز کنفرانس برای رفت‌وآمد راحت مهمانان و تعبیه پریز توکار روی میز بسیار کاربردی است.' },
+      { keywords: ['ارگونومیک', 'کمر', 'کمردرد', 'طبی', 'طولانی', 'راحت', 'نشستن', 'پشتی', '۸ ساعت', 'کار طولانی'], boost: ['ارگونومیک', 'طبی', 'توری', 'مش', 'صندلی', 'تنظیم'], advice: 'برای کار روزانه بیش از ۶ ساعت، صندلی ارگونومیک با پشتی مش تنفس‌پذیر، تنظیم گودی کمر (Lumbar Support)، دسته‌های قابل تنظیم و مکانیزم سینکرون بهترین انتخاب است.', tip: 'هنگام نشستن، زاویه زانو باید حدود ۹۰ درجه و کف پا کاملاً روی زمین باشد تا فشار از مهره‌های کمری برداشته شود.' },
+      { keywords: ['کارمندی', 'پرسنلی', 'کارشناسی', 'گروه کاری', 'استیشن', 'تیمی'], boost: ['کارمندی', 'کارشناسی', 'ایستگاه', 'پرسنلی', 'اداری'], advice: 'در فضاهای کارشناسی و تیمی، میزهای ماژولار با پارتیشن آکوستیک و کشوهای فایل زیرمیز باعث نظم بالا و بهره‌وری بیشتر تیم می‌شود.', tip: 'استفاده از رنگ‌های روشن‌تر مثل بلوط روشن یا طوسی گرم در ایستگاه‌های کارمندی از خستگی چشم جلوگیری کرده و فضا را بزرگ‌تر نشان می‌دهد.' },
+      { keywords: ['مدرن', 'مینیمال', 'ساده', 'شیک', 'جدید', 'اسپرت', 'کوچک', 'کم‌جا', 'نور کم'], boost: ['مدرن', 'مینیمال', 'فلز', 'ساده', 'شیشه'], advice: 'برای فضاهای مدرن یا کم‌نور، انتخاب میز با پایه‌های فلزی ظریف و سطح چوب روشن یا طوسی گرم، بدون شلوغ کردن فضا جلوه‌ای بسیار شیک و امروزی ایجاد می‌کند.', tip: 'در اتاق‌های کم‌نور از چوب‌های خیلی تیره و براق پرهیز کنید؛ ترکیب بلوط عسلی با پایه مشکی مات و چرم کرم یا طوسی فضا را بازتر می‌کند.' },
+      { keywords: ['چوب', 'چوبی', 'گردو', 'بلوط', 'کلاسیک', 'گرم', 'رنگ', 'چرم'], boost: ['چوب', 'بلوط', 'گردو', 'روکش', 'کلاسیک', 'راش', 'چرم'], advice: 'برای ست کردن رنگ چوب و چرم: با چوب گردوی تیره، چرم زغالی، بژ گرم یا عسلی عالی هماهنگ می‌شود؛ و با چوب بلوط روشن، چرم قهوه‌ای شتری یا مشکی مات تضاد لوکسی می‌سازد.', tip: 'هماهنگ کردن رنگ یراق‌آلات (برنزی یا مشکی مات) بین میز، صندلی و کتابخانه یکپارچگی معماری فضا را تکمیل می‌کند.' },
+      { keywords: ['پذیرش', 'لابی', 'انتظار', 'کانتر', 'منشی', 'مبل', 'نیم‌ست'], boost: ['انتظار', 'لابی', 'پذیرش', 'مبل', 'کانتر', 'نیم ست', 'کاناپه'], advice: 'در فضای لابی و انتظار، نیم‌ست چرمی با فوم سرد بادوام در کنار میز جلو مبلی هم‌تراز، نخستین برداشت حرفه‌ای و لوکس برند شما را در ذهن مهمان ثبت می‌کند.', tip: 'فاصله استاندارد بین مبل انتظار و میز جلو مبلی حدود ۴۵ سانتی‌متر است تا هم دسترسی راحت باشد و هم مسیر تردد باز بماند.' }
     ];
 
     function buildLocalSmartAdvice(query) {
       const normalized = normalizeText(query);
       const tokens = normalized.split(/\s+/).filter(t => t.length >= 2);
       const expandedTerms = new Set(tokens);
+      const matchedAdvices = [];
+      let matchedTip = '';
+
+      // Handle greetings cleanly
+      if (/^(سلام|درود|خسته نباشید|وقت بخیر|hi|hello)\b/.test(normalized) && tokens.length <= 3) {
+        return {
+          reply: 'سلام و وقت بخیر! خوش آمدید به استودیو مشاوره آرام صبا. بفرمایید چه فضایی را می‌خواهید تجهیز کنید (مثلاً اتاق مدیریت، کنفرانس یا فضای کارمندی) و متراژ تقریبی اتاق چقدر است تا دقیق‌ترین ست مبلمان را پیشنهاد بدهم؟',
+          recommendations: products.slice(0, 2).map(product => ({
+            product,
+            reason: `از مدل‌های منتخب در دسته «${product.category}»`
+          })),
+          designTip: 'هرچه اطلاعات دقیق‌تری از متراژ، نور اتاق و سبک دلخواه (مدرن یا کلاسیک) بدهید، پیشنهاد چیدمان دقیق‌تر خواهد بود.',
+          followUps: ['ست کامل برای اتاق مدیریت ۲۰ متری', 'صندلی ارگونومیک برای کار طولانی', 'پیشنهاد رنگ چوب و چرم لوکس'],
+          isLiveAi: false
+        };
+      }
+
+      // Detect room area in square meters (e.g. "۲۰ متر", "15 متری")
+      const areaMatch = query.match(/([۰-۹0-9]+)\s*(متر|متری|m2)/i);
+      let areaNote = '';
+      if (areaMatch) {
+        const latinNum = Number(areaMatch[1].replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)));
+        if (latinNum > 0 && latinNum <= 14) {
+          areaNote = `برای متراژ حدود ${areaMatch[1]} متر، میز با طول ۱۶۰ تا ۱۸۰ سانتی‌متر و فرم مینیمال بهترین تناسب را دارد تا فضا بسته نشود. `;
+        } else if (latinNum > 14 && latinNum <= 28) {
+          areaNote = `متراژ ${areaMatch[1]} متر برای یک چیدمان مدیریتی کامل بسیار استاندارد است؛ می‌توانید میز ۲۰۰ تا ۲۲۰ سانتی‌متری را همراه با یک نیم‌ست پذیرایی ۲ نفره ست کنید. `;
+        } else if (latinNum > 28) {
+          areaNote = `در فضای بزرگ ${areaMatch[1]} متری، ترکیب میز مدیریتی بزرگ (۲۴۰ سانتی‌متر به بالا) در کنار میز کنفرانس کوچک یا نیم‌ست لوکس تعادل بصری فوق‌العاده‌ای ایجاد می‌کند. `;
+        }
+      }
+
+      // Detect price/custom questions
+      const asksPrice = /(قیمت|چنده|هزینه|تومان|لیست قیمت|سفارش|ابعاد)/.test(normalized);
 
       PERSIAN_INTENT_GROUPS.forEach(group => {
         if (group.keywords.some(k => normalized.includes(normalizeText(k)))) {
           group.boost.forEach(b => expandedTerms.add(normalizeText(b)));
+          if (group.advice && matchedAdvices.length < 2) matchedAdvices.push(group.advice);
+          if (!matchedTip && group.tip) matchedTip = group.tip;
         }
       });
 
@@ -4579,121 +5211,136 @@
         })
         .filter(item => item.score > 0)
         .sort((a, b) => b.score - a.score)
-        .slice(0, 4)
-        .map(item => item.product);
+        .slice(0, 4);
+
+      const priceNote = asksPrice
+        ? 'قیمت نهایی هر مدل بسته به ابعاد سفارشی، نوع روکش چوب و متریال چرم تعیین می‌شود؛ با دکمه واتساپ زیر می‌توانید استعلام فوری بگیرید. '
+        : '';
+
+      const coreAdvice = `${areaNote}${matchedAdvices.join(' ')} ${priceNote}`.trim();
 
       if (scored.length) {
+        const replyText = coreAdvice
+          ? `${coreAdvice}\n\nبر اساس درخواست شما، ${scored.length.toLocaleString('fa-IR')} مدل متناسب از کلکسیون زنده آرام صبا انتخاب شد:`
+          : `بر اساس نیاز شما برای «${query}»، ${scored.length.toLocaleString('fa-IR')} گزینه متناسب از کلکسیون آرام صبا انتخاب شد. روی هر کارت کلیک کنید تا ابعاد و جزئیات کامل را ببینید:`;
         return {
-          reply: `بر اساس نیاز شما برای «${query}»، ${scored.length.toLocaleString('fa-IR')} گزینه متناسب از کلکسیون آرام صبا انتخاب شد. برای بررسی جزئیات فنی و ابعاد، روی هر محصول کلیک کنید:`,
-          items: scored,
-          designTip: 'امکان سفارشی‌سازی ابعاد، رنگ چوب و نوع چرم تمامی مدل‌ها متناسب با دکوراسیون فضای شما وجود دارد.',
+          reply: replyText,
+          recommendations: scored.map(({ product }) => ({
+            product,
+            reason: `متناسب با درخواست شما در دسته «${product.category}»`
+          })),
+          designTip: matchedTip || 'امکان سفارشی‌سازی ابعاد، رنگ روکش چوب و نوع چرم تمامی مدل‌ها متناسب با پلان فضای شما وجود دارد.',
+          followUps: ['کدام مدل برای فضای کوچک‌تر مناسب‌تر است؟', 'پیشنهاد ست میز و صندلی هماهنگ', 'مشاوره رنگ چوب و چرم'],
           isLiveAi: false
         };
       }
 
+      const fallbackSample = products.slice(0, 2);
       return {
-        reply: `برای درخواست «${query}» مدل مستقیمی در لیست فعلی یافت نشد؛ اما تیم طراحی آرام صبا می‌تواند محصول اختصاصی متناسب با پلان و متریال فضای شما تولید کند.`,
-        items: [],
-        designTip: 'می‌توانید ابعاد فضا یا تصویر محیط کاری خود را در واتساپ ارسال کنید تا مشاوران ما چیدمان پیشنهادی ارائه دهند.',
+        reply: coreAdvice
+          ? `${coreAdvice}\n\nدر کاتالوگ فعلی می‌توانید مدل‌های زیر را بررسی کنید یا برای ساخت سفارشی دقیق مطابق پلان فضا در واتساپ پیام بدهید.`
+          : (fallbackSample.length
+            ? `برای درخواست «${query}» مدل کاملاً هم‌نامی در لیست فعلی نبود، اما می‌توانید این مدل‌های منتخب را بررسی کنید یا متراژ و سبک فضا (مدرن، چوبی یا کلاسیک) را بنویسید تا دقیق‌تر راهنمایی کنم.`
+            : `برای درخواست «${query}»، تیم طراحی آرام صبا می‌تواند مبلمان اختصاصی متناسب با پلان، ابعاد و متریال فضای شما تولید کند. متراژ اتاق و سبک دلخواهتان را بفرمایید تا چیدمان مناسب را پیشنهاد دهم.`),
+        recommendations: fallbackSample.map(product => ({
+          product,
+          reason: `از مدل‌های پرطرفدار در دسته «${product.category}»`
+        })),
+        designTip: matchedTip || 'ارسال متراژ اتاق یا عکس فضا در واتساپ کمک می‌کند مشاوران ما چیدمان دقیق و سفارشی پیشنهاد دهند.',
+        followUps: ['اتاق مدیریت لوکس ۲۰ متری', 'صندلی ارگونومیک برای کار طولانی', 'تجهیز اتاق کنفرانس رسمی'],
         isLiveAi: false
       };
     }
 
-    function renderAdvisorResult(box, query, { reply, items = [], designTip = '', isLiveAi = false }) {
-      box.replaceChildren();
-
-      const header = createElement('div', 'advisor-head');
-      const heading = createElement('p', 'advisor-title');
-      heading.append(
-        createSvgIcon('sparkles', 'icon-md'),
-        document.createTextNode('پیشنهاد مشاور چیدمان آرام صبا')
-      );
-      if (isLiveAi) {
-        const badge = createElement('span', 'advisor-badge', 'هوش مصنوعی فعال');
-        heading.appendChild(badge);
-      }
-
-      const closeBtn = createElement('button', 'clear-search-btn');
-      closeBtn.type = 'button';
-      closeBtn.setAttribute('aria-label', 'بستن مشاوره');
-      closeBtn.appendChild(createSvgIcon('x', 'icon-md'));
-      closeBtn.addEventListener('click', () => box.classList.add('hidden'));
-      header.append(heading, closeBtn);
-      box.appendChild(header);
-
-      box.appendChild(createElement('p', 'advisor-reply', reply));
-
-      if (designTip) {
-        const tipBox = createElement('div', 'advisor-tip');
-        tipBox.append(
-          createSvgIcon('gem', 'icon-sm tip-ico'),
-          createElement('span', '', designTip)
-        );
-        box.appendChild(tipBox);
-      }
-
-      const chipsWrap = createElement('div', 'advisor-chips');
-      items.slice(0, 4).forEach(item => {
-        const btn = createElement('button', 'advisor-chip');
-        btn.type = 'button';
-        btn.append(createSvgIcon('arrow-up-left', 'icon-sm'), document.createTextNode(item.name));
-        btn.addEventListener('click', () => openProductDetail(item));
-        chipsWrap.appendChild(btn);
-      });
-
-      const waLink = createElement('a', 'advisor-chip');
-      waLink.href = buildWhatsappUrl(`سلام، برای «${query}» نیاز به مشاوره تخصصی چیدمان و استعلام قیمت دارم.`);
-      waLink.target = '_blank';
-      waLink.rel = 'noopener noreferrer';
-      waLink.append(
-        createSvgIcon('message-circle', 'icon-sm'),
-        document.createTextNode(items.length ? 'مشاوره و استعلام در واتساپ' : 'درخواست طراحی سفارشی در واتساپ')
-      );
-      chipsWrap.appendChild(waLink);
-      box.appendChild(chipsWrap);
-    }
-
     function buildAdvisorSystemPrompt() {
       return [
-        'تو مشاور ارشد دکوراسیون اداری لوکس برای برند «آرام صبا صنعت ایرانیان» هستی.',
-        'پاسخ را حتماً به زبان فارسی رسمی، محترمانه و مختصر (۲ تا ۳ جمله) بنویس.',
-        'فقط از بین محصولات موجود در لیست JSON ورودی، حداکثر ۳ تا ۴ محصول مرتبط را انتخاب کن و شناسه دقیق (id) آن‌ها را در recommendedIds قرار بده.',
-        'اگر محصول مرتبطی نبود، آرایه recommendedIds را خالی بگذار و ساخت سفارشی را پیشنهاد بده.',
-        'خروجی باید صرفاً یک آبجکت JSON معتبر با این ساختار دقیق باشد و هیچ متن اضافه‌ای خارج از JSON ننویس:',
-        '{"reply":"متن مشاوره کوتاه فارسی","recommendedIds":["id1","id2"],"designTip":"یک نکته طراحی کوتاه و کاربردی"}'
+        'تو مشاور ارشد دکوراسیون اداری لوکس و طراح داخلی برای برند «آرام صبا صنعت ایرانیان» هستی.',
+        'وظیفه تو یک گفتگوی واقعی، گرم، متخصصانه و کمک‌کننده با مشتری به زبان فارسی است.',
+        'می‌توانی درباره متراژ اتاق، چیدمان، ترکیب رنگ چوب و چرم، نورپردازی، ارگونومی، مقایسه مدل‌ها، و ست کردن میز و صندلی مشاوره تخصصی بدهی.',
+        'پاسخ تو باید واضح، تخصصی و کاربردی باشد (۳ تا ۵ جمله خوانا و بدون کلی‌گویی). اگر اطلاعاتی مثل متراژ یا سبک فضا مشخص نیست، در انتهای پاسخ یا در followUps سوال هوشمندانه بپرس.',
+        'در هر پاسخ، از بین لیست محصولات موجود (JSON) مرتبط‌ترین مدل‌ها (۱ تا ۴ مورد) را در آرایه recommendations با شناسه دقیق id و یک دلیل کوتاه و اختصاصی (reason) قرار بده. هرگز id خیالی نساز.',
+        'اگر کاتالوگ خالی بود یا محصول مرتبطی وجود نداشت، recommendations را خالی بگذار، مشاوره طراحی حرفه‌ای بده و قابلیت تولید سفارشی آرام صبا را پیشنهاد کن.',
+        'خروجی باید صرفاً یک آبجکت JSON معتبر با این ساختار دقیق باشد (بدون هیچ متن یا markdown اضافه):',
+        '{"reply":"متن مشاوره تخصصی فارسی","recommendations":[{"id":"ID","reason":"دلیل کوتاه انتخاب این محصول برای کاربر"}],"designTip":"یک نکته حرفه‌ای و عملی چیدمان یا رنگ‌بندی","followUps":["سوال یا گزینه بعدی ۱","سوال یا گزینه بعدی ۲"]}'
       ].join('\n');
     }
 
     function parseAiJsonResponse(rawText) {
-      const text = String(rawText || '').trim();
+      const text = String(rawText || '')
+        .trim()
+        .replace(/^```(?:json)?\s*/i, '')
+        .replace(/\s*```$/i, '')
+        .trim();
       if (!text) return null;
 
+      let parsed = null;
       try {
-        const direct = JSON.parse(text);
-        if (direct && typeof direct.reply === 'string') return direct;
-      } catch (_) {}
-
-      const firstBrace = text.indexOf('{');
-      const lastBrace = text.lastIndexOf('}');
-      if (firstBrace !== -1 && lastBrace > firstBrace) {
-        try {
-          const sliced = JSON.parse(text.slice(firstBrace, lastBrace + 1));
-          if (sliced && typeof sliced.reply === 'string') return sliced;
-        } catch (_) {}
+        parsed = JSON.parse(text);
+      } catch (_) {
+        const firstBrace = text.indexOf('{');
+        const lastBrace = text.lastIndexOf('}');
+        if (firstBrace !== -1 && lastBrace > firstBrace) {
+          try {
+            parsed = JSON.parse(text.slice(firstBrace, lastBrace + 1));
+          } catch (_) {}
+        }
       }
 
-      // If the model returned plain Persian text instead of JSON, still show it cleanly
-      return { reply: text, recommendedIds: [], designTip: '' };
+      if (parsed && typeof parsed.reply === 'string' && parsed.reply.trim()) {
+        return parsed;
+      }
+
+      // If the model returned natural Persian prose instead of JSON, show it directly
+      return { reply: text, recommendations: [], designTip: '', followUps: [] };
     }
 
-    async function requestAiAdvisor(query, compactCatalog, signal) {
+    function normalizeAiRecommendations(data) {
+      const byId = new Map(products.map(p => [String(p.id), p]));
+      const results = [];
+      const seen = new Set();
+
+      if (Array.isArray(data?.recommendations)) {
+        data.recommendations.forEach(rec => {
+          const id = String(rec?.id ?? '').trim();
+          const prod = byId.get(id);
+          if (prod && !seen.has(id)) {
+            seen.add(id);
+            results.push({
+              product: prod,
+              reason: String(rec?.reason || '').trim() || `پیشنهاد اختصاصی در دسته «${prod.category}»`
+            });
+          }
+        });
+      }
+
+      // Backwards compatibility with recommendedIds (e.g. proxy mode)
+      if (!results.length && Array.isArray(data?.recommendedIds)) {
+        data.recommendedIds.forEach(rawId => {
+          const id = String(rawId ?? '').trim();
+          const prod = byId.get(id);
+          if (prod && !seen.has(id)) {
+            seen.add(id);
+            results.push({
+              product: prod,
+              reason: `پیشنهاد اختصاصی در دسته «${prod.category}»`
+            });
+          }
+        });
+      }
+
+      return results.slice(0, 4);
+    }
+
+    async function requestAiChat(historyTurns, compactCatalog, signal) {
       // Production proxy mode (/api/advisor)
       if (AI_ADVISOR_CONFIG.mode === 'proxy') {
+        const latestUserMsg = [...historyTurns].reverse().find(m => m.role === 'user')?.text || '';
         const response = await fetch(AI_ADVISOR_CONFIG.endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            query,
+            query: latestUserMsg,
+            history: historyTurns,
             brand: 'آرام صبا صنعت ایرانیان',
             products: compactCatalog
           }),
@@ -4703,47 +5350,83 @@
         return await response.json();
       }
 
-      // Temporary direct browser mode (API key stored in AI_ADVISOR_CONFIG.apiKey)
       const apiKey = String(AI_ADVISOR_CONFIG.apiKey || '').trim();
       if (!apiKey) {
         throw new Error('NO_API_KEY');
       }
 
       const systemPrompt = buildAdvisorSystemPrompt();
-      const userPrompt = `درخواست مشتری: ${query}\n\nلیست محصولات موجود (JSON):\n${JSON.stringify(compactCatalog)}`;
+      const catalogContext = compactCatalog.length
+        ? `لیست محصولات زنده کاتالوگ آرام صبا (JSON):\n${JSON.stringify(compactCatalog)}`
+        : 'کاتالوگ در حال حاضر خالی است؛ مشاوره تخصصی دکوراسیون و تولید سفارشی ارائه بده.';
+
       let rawText = '';
 
       if (AI_ADVISOR_CONFIG.provider === 'gemini') {
-        const model = encodeURIComponent(AI_ADVISOR_CONFIG.geminiModel || 'gemini-2.5-flash');
-        const requestBody = JSON.stringify({
+        const geminiContents = historyTurns.map((turn, idx) => {
+          const isLastUser = idx === historyTurns.length - 1 && turn.role === 'user';
+          const contentText = isLastUser
+            ? `${turn.text}\n\n${catalogContext}`
+            : turn.text;
+          return {
+            role: turn.role === 'assistant' ? 'model' : 'user',
+            parts: [{ text: contentText }]
+          };
+        });
+
+        const baseConfig = {
+          temperature: 0.65,
+          maxOutputTokens: 1600,
+          responseMimeType: 'application/json'
+        };
+
+        const requestBodyWithNoThinking = JSON.stringify({
           systemInstruction: { parts: [{ text: systemPrompt }] },
-          contents: [{ role: 'user', parts: [{ text: userPrompt }] }],
-          generationConfig: {
-            temperature: 0.4,
-            responseMimeType: 'application/json'
+          contents: geminiContents,
+          generationConfig: { ...baseConfig, thinkingConfig: { thinkingBudget: 0 } }
+        });
+        const requestBodyStandard = JSON.stringify({
+          systemInstruction: { parts: [{ text: systemPrompt }] },
+          contents: geminiContents,
+          generationConfig: baseConfig
+        });
+
+        const models = Array.isArray(AI_ADVISOR_CONFIG.geminiFallbackModels) && AI_ADVISOR_CONFIG.geminiFallbackModels.length
+          ? AI_ADVISOR_CONFIG.geminiFallbackModels
+          : [AI_ADVISOR_CONFIG.geminiModel || 'gemini-2.5-flash'];
+
+        // Try AI Studio and Vertex AI Express endpoints automatically (AQ.* keys can be bound to either surface)
+        const endpoints = [];
+        models.forEach(m => {
+          const encModel = encodeURIComponent(m);
+          if (apiKey.startsWith('AQ.')) {
+            endpoints.push(
+              { url: `https://aiplatform.googleapis.com/v1/publishers/google/models/${encModel}:generateContent?key=${encodeURIComponent(apiKey)}`, body: requestBodyStandard },
+              { url: `https://generativelanguage.googleapis.com/v1beta/models/${encModel}:generateContent?key=${encodeURIComponent(apiKey)}`, body: requestBodyWithNoThinking }
+            );
+          } else {
+            endpoints.push(
+              { url: `https://generativelanguage.googleapis.com/v1beta/models/${encModel}:generateContent?key=${encodeURIComponent(apiKey)}`, body: requestBodyWithNoThinking }
+            );
           }
         });
 
-        // Google issues AQ.* keys for both AI Studio and Vertex AI Express Mode.
-        // Try AI Studio endpoint first; if an AQ.* key returns 401/403, automatically try Vertex AI Express.
-        const endpoints = [
-          `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`
-        ];
-        if (apiKey.startsWith('AQ.')) {
-          endpoints.push(
-            `https://aiplatform.googleapis.com/v1/publishers/google/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`
-          );
-        }
-
         let payload = null;
         let lastError = null;
+
         for (let i = 0; i < endpoints.length; i++) {
-          const response = await fetch(endpoints[i], {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: requestBody,
-            signal
-          });
+          let response;
+          try {
+            response = await fetch(endpoints[i].url, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: endpoints[i].body,
+              signal
+            });
+          } catch (netErr) {
+            lastError = netErr;
+            continue;
+          }
 
           if (response.ok) {
             payload = await response.json();
@@ -4751,18 +5434,35 @@
           }
 
           const errText = await response.text().catch(() => '');
-          lastError = new Error(`Gemini HTTP ${response.status}: ${errText.slice(0, 160)}`);
-          if (response.status !== 401 && response.status !== 403) {
-            throw lastError;
+          lastError = new Error(`HTTP ${response.status}: ${errText.slice(0, 180)}`);
+          if (response.status === 429) {
+            throw new Error('QUOTA_EXCEEDED');
           }
         }
 
         if (!payload) {
-          throw lastError || new Error('Gemini API request failed');
+          throw lastError || new Error('NETWORK_BLOCKED');
         }
-        rawText = payload?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        // Extract non-thought text parts (prevents Gemini 2.5 Flash thinking parts from breaking JSON output)
+        const candidateParts = payload?.candidates?.[0]?.content?.parts || [];
+        rawText = candidateParts
+          .filter(part => !part.thought && typeof part.text === 'string')
+          .map(part => part.text)
+          .join('')
+          .trim();
+        if (!rawText && candidateParts[0]?.text) {
+          rawText = candidateParts[0].text;
+        }
       } else {
         // OpenAI-compatible endpoint (OpenRouter, AvalAI, Groq, OpenAI, etc.)
+        const messages = [
+          { role: 'system', content: `${systemPrompt}\n\n${catalogContext}` },
+          ...historyTurns.map(turn => ({
+            role: turn.role === 'assistant' ? 'assistant' : 'user',
+            content: turn.text
+          }))
+        ];
+
         const response = await fetch(AI_ADVISOR_CONFIG.openaiBaseUrl, {
           method: 'POST',
           headers: {
@@ -4771,18 +5471,15 @@
           },
           body: JSON.stringify({
             model: AI_ADVISOR_CONFIG.openaiModel,
-            temperature: 0.4,
-            messages: [
-              { role: 'system', content: systemPrompt },
-              { role: 'user', content: userPrompt }
-            ]
+            temperature: 0.6,
+            messages
           }),
           signal
         });
 
         if (!response.ok) {
           const errText = await response.text().catch(() => '');
-          throw new Error(`AI API HTTP ${response.status}: ${errText.slice(0, 160)}`);
+          throw new Error(`HTTP ${response.status}: ${errText.slice(0, 180)}`);
         }
 
         const payload = await response.json();
@@ -4791,50 +5488,246 @@
 
       const parsed = parseAiJsonResponse(rawText);
       if (!parsed || typeof parsed.reply !== 'string' || !parsed.reply.trim()) {
-        throw new Error('Invalid AI payload');
+        throw new Error('INVALID_AI_PAYLOAD');
       }
       return parsed;
     }
 
-    async function runSpaceAdvisor(forcedQuery = null) {
-      const input = $('searchInput');
-      if (forcedQuery !== null) {
-        input.value = forcedQuery;
-        renderProducts();
+    function updateAiStatusUi({ live = null, diagnostic = '' } = {}) {
+      const pill = $('aiStatusPill');
+      const diagBar = $('aiDiagnosticBar');
+      if (pill) {
+        if (live === true) {
+          pill.className = 'ai-status-pill live';
+          pill.textContent = 'هوش مصنوعی جمینای فعال';
+        } else if (live === false) {
+          pill.className = 'ai-status-pill offline';
+          pill.textContent = 'حالت هوشمند آفلاین';
+        } else {
+          pill.className = 'ai-status-pill';
+          pill.textContent = 'آماده گفتگو';
+        }
       }
+      if (diagBar) {
+        if (diagnostic) {
+          diagBar.replaceChildren(
+            createSvgIcon('alert-triangle', 'icon-sm'),
+            createElement('span', '', diagnostic)
+          );
+          diagBar.classList.remove('hidden');
+        } else {
+          diagBar.replaceChildren();
+          diagBar.classList.add('hidden');
+        }
+      }
+    }
 
-      const query = input.value.trim();
-      const box = $('advisorResponseBox');
-      box.classList.remove('hidden');
+    function explainAiError(error) {
+      const msg = String(error?.message || error || '');
+      if (msg === 'NO_API_KEY') return 'کلید API تنظیم نشده است؛ مشاور روی حالت هوشمند داخلی کار می‌کند.';
+      if (msg === 'QUOTA_EXCEEDED') return 'سقف درخواست رایگان API فعلاً پر شده است؛ پاسخ با مشاور هوشمند داخلی ارائه شد.';
+      if (/401|403|API_KEY_INVALID|PERMISSION_DENIED/i.test(msg)) {
+        return 'کلید API توسط سرور گوگل پذیرفته نشد (401/403). برای اتصال مستقیم از مرورگر از کلید AIza در Google AI Studio استفاده کنید یا کلید AQ را به سرور Vercel (/api/advisor) منتقل کنید.';
+      }
+      if (/Failed to fetch|NetworkError|TypeError|NETWORK_BLOCKED|AbortError/i.test(msg)) {
+        return 'دسترسی مستقیم مرورگر به سرور گوگل مسدود شد (محدودیت CORS یا نیاز به VPN). برای عملکرد بدون VPN در ایران، اتصال به Vercel (/api/advisor) توصیه می‌شود؛ فعلاً مشاور هوشمند داخلی پاسخ داد.';
+      }
+      return `ارتباط زنده با هوش مصنوعی برقرار نشد (${msg.slice(0, 90)})؛ پاسخ با مشاور هوشمند داخلی نمایش داده شد.`;
+    }
 
-      if (!query) {
-        box.replaceChildren();
-        const header = createElement('div', 'advisor-head');
-        const heading = createElement('p', 'advisor-title');
-        heading.append(createSvgIcon('sparkles', 'icon-md'), document.createTextNode('مشاور هوشمند انتخاب فضا'));
-        const close = createElement('button', 'clear-search-btn');
-        close.type = 'button';
-        close.setAttribute('aria-label', 'بستن');
-        close.appendChild(createSvgIcon('x', 'icon-md'));
-        close.addEventListener('click', () => box.classList.add('hidden'));
-        header.append(heading, close);
-        box.appendChild(header);
+    function appendWelcomeMessage() {
+      const container = $('aiChatMessages');
+      if (!container) return;
+      container.replaceChildren();
 
-        box.appendChild(createElement('p', 'advisor-reply', 'نیاز یا سبک فضای اداری خود را بنویسید (مثلاً «اتاق مدیریت مدرن با چوب گردو» یا «صندلی طبی برای کار طولانی») یا یکی از موارد زیر را امتحان کنید:'));
-        const examples = createElement('div', 'advisor-chips');
-        ['اتاق مدیریت لوکس', 'صندلی ارگونومیک کار طولانی', 'اتاق کنفرانس رسمی'].forEach(sample => {
-          const btn = createElement('button', 'advisor-chip');
-          btn.type = 'button';
-          btn.append(createSvgIcon('sparkles', 'icon-xs'), document.createTextNode(sample));
-          btn.addEventListener('click', () => runSpaceAdvisor(sample));
-          examples.appendChild(btn);
+      const msgWrap = createElement('div', 'ai-msg assistant');
+      const bubble = createElement(
+        'div',
+        'ai-bubble',
+        'سلام! من مشاور هوشمند دکوراسیون و مبلمان اداری آرام صبا هستم.\nمتراژ اتاق، سبک مورد نظر (مدرن، کلاسیک، چوبی) یا نیاز کاربری خود را بنویسید تا بهترین ترکیب میز، صندلی و چیدمان را از کلکسیون زنده برایتان انتخاب کنم.'
+      );
+      msgWrap.appendChild(bubble);
+
+      const starters = createElement('div', 'ai-followups');
+      [
+        'یک ست کامل برای اتاق مدیریت ۲۰ متری لوکس پیشنهاد بده',
+        'صندلی ارگونومیک برای ۸ ساعت کار روزانه چی خوبه؟',
+        'برای اتاق کنفرانس رسمی و مدرن چه مدلی پیشنهاد میدی؟',
+        'برای اتاق اداری کم‌نور چه رنگ چوب و چرمی بهتره؟'
+      ].forEach(promptText => {
+        const btn = createElement('button', 'ai-followup-btn');
+        btn.type = 'button';
+        btn.append(createSvgIcon('sparkles', 'icon-xs'), document.createTextNode(promptText));
+        btn.addEventListener('click', () => sendAiChatMessage(promptText));
+        starters.appendChild(btn);
+      });
+      msgWrap.appendChild(starters);
+
+      container.appendChild(msgWrap);
+    }
+
+    function appendUserChatBubble(text) {
+      const container = $('aiChatMessages');
+      if (!container) return;
+      const wrap = createElement('div', 'ai-msg user');
+      wrap.appendChild(createElement('div', 'ai-bubble', text));
+      container.appendChild(wrap);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function appendAssistantChatMessage({ reply, recommendations = [], designTip = '', followUps = [], query = '' }) {
+      const container = $('aiChatMessages');
+      if (!container) return;
+
+      const wrap = createElement('div', 'ai-msg assistant');
+      wrap.appendChild(createElement('div', 'ai-bubble', reply));
+
+      if (recommendations.length) {
+        const grid = createElement('div', 'ai-rec-grid');
+        recommendations.forEach(({ product, reason }) => {
+          const card = createElement('button', 'ai-rec-card');
+          card.type = 'button';
+          card.addEventListener('click', () => {
+            closeAiChatModal();
+            openProductDetail(product);
+          });
+
+          const thumb = createElement('div', 'ai-rec-thumb');
+          attachProductImage(thumb, product.image, product.name, '');
+
+          const meta = createElement('div', 'ai-rec-meta');
+          meta.appendChild(createElement('div', 'ai-rec-cat', product.category));
+          meta.appendChild(createElement('div', 'ai-rec-name', product.name));
+          if (reason) meta.appendChild(createElement('div', 'ai-rec-reason', reason));
+
+          card.append(thumb, meta);
+          grid.appendChild(card);
         });
-        box.appendChild(examples);
-        input.focus();
-        return;
+        wrap.appendChild(grid);
       }
 
-      // Cancel any previous in-flight AI request
+      if (designTip) {
+        const tipBox = createElement('div', 'advisor-tip');
+        tipBox.append(
+          createSvgIcon('gem', 'icon-sm tip-ico'),
+          createElement('span', '', designTip)
+        );
+        wrap.appendChild(tipBox);
+      }
+
+      // Action bar: Filter Catalog to these recommendations + WhatsApp inquiry for the whole curated set
+      const actions = createElement('div', 'ai-msg-actions');
+      if (recommendations.length) {
+        const filterBtn = createElement('button', 'advisor-chip');
+        filterBtn.type = 'button';
+        filterBtn.append(
+          createSvgIcon('layers', 'icon-sm'),
+          document.createTextNode(`نمایش این ${recommendations.length.toLocaleString('fa-IR')} مدل در کاتالوگ`)
+        );
+        filterBtn.addEventListener('click', () => {
+          aiFilterProductIds = new Set(recommendations.map(r => String(r.product.id)));
+          currentCategory = 'all';
+          $('searchInput').value = '';
+          $('aiFilterLabel').textContent = `نمایش ${recommendations.length.toLocaleString('fa-IR')} محصول پیشنهادی مشاور هوش مصنوعی`;
+          renderCategories();
+          renderProducts();
+          closeAiChatModal();
+          $('productGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        actions.appendChild(filterBtn);
+      }
+
+      const bundleNames = recommendations.map(r => r.product.name).join('، ');
+      const waText = bundleNames
+        ? `سلام، بر اساس مشاوره هوشمند کاتالوگ آرام صبا برای «${query}»، قصد استعلام قیمت و جزئیات این مدل‌ها را دارم:\n${bundleNames}`
+        : `سلام، برای «${query}» نیاز به مشاوره تخصصی چیدمان و طراحی سفارشی دارم.`;
+
+      const waLink = createElement('a', 'advisor-chip');
+      waLink.href = buildWhatsappUrl(waText);
+      waLink.target = '_blank';
+      waLink.rel = 'noopener noreferrer';
+      waLink.append(
+        createSvgIcon('message-circle', 'icon-sm'),
+        document.createTextNode(recommendations.length ? 'استعلام قیمت این ست در واتساپ' : 'مشاوره مستقیم در واتساپ')
+      );
+      actions.appendChild(waLink);
+      wrap.appendChild(actions);
+
+      if (Array.isArray(followUps) && followUps.length) {
+        const followWrap = createElement('div', 'ai-followups');
+        followUps.slice(0, 3).forEach(q => {
+          const text = String(q || '').trim();
+          if (!text) return;
+          const chip = createElement('button', 'ai-followup-btn');
+          chip.type = 'button';
+          chip.append(createSvgIcon('arrow-up-left', 'icon-xs'), document.createTextNode(text));
+          chip.addEventListener('click', () => sendAiChatMessage(text));
+          followWrap.appendChild(chip);
+        });
+        wrap.appendChild(followWrap);
+      }
+
+      container.appendChild(wrap);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function openAiChatModal(initialQuery = '') {
+      lastFocusedElement = document.activeElement;
+      if (!aiModalOpenedOnce) {
+        aiModalOpenedOnce = true;
+        appendWelcomeMessage();
+      }
+      $('aiChatModal').classList.add('open');
+      setBodyScrollLocked(true);
+
+      const trimmed = String(initialQuery || '').trim();
+      if (trimmed) {
+        // Clear long natural-language sentences from the keyword search input so the grid isn't left empty
+        if (trimmed.split(/\s+/).length >= 3) {
+          $('searchInput').value = '';
+          renderProducts();
+        }
+        sendAiChatMessage(trimmed);
+      } else {
+        $('aiChatInput').focus();
+      }
+    }
+
+    function closeAiChatModal() {
+      $('aiChatModal').classList.remove('open');
+      setBodyScrollLocked(false);
+      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus();
+      }
+    }
+
+    function resetAiChat() {
+      if (advisorAbortController) {
+        advisorAbortController.abort();
+        advisorAbortController = null;
+      }
+      aiChatHistory = [];
+      updateAiStatusUi({ live: null, diagnostic: '' });
+      appendWelcomeMessage();
+      $('aiChatInput').focus();
+    }
+
+    async function sendAiChatMessage(rawMessage) {
+      const message = String(rawMessage || '').trim();
+      if (!message) return;
+
+      const input = $('aiChatInput');
+      const sendBtn = $('aiChatSendBtn');
+      const container = $('aiChatMessages');
+
+      input.value = '';
+      appendUserChatBubble(message);
+
+      aiChatHistory.push({ role: 'user', text: message });
+      if (aiChatHistory.length > AI_ADVISOR_CONFIG.maxHistoryTurns * 2) {
+        aiChatHistory = aiChatHistory.slice(-AI_ADVISOR_CONFIG.maxHistoryTurns * 2);
+      }
+
       if (advisorAbortController) {
         advisorAbortController.abort();
       }
@@ -4842,20 +5735,16 @@
       advisorAbortController = controller;
       const timeoutId = setTimeout(() => controller.abort(), AI_ADVISOR_CONFIG.timeoutMs);
 
-      const advisorBtn = $('advisorButton');
-      advisorBtn.disabled = true;
-      advisorBtn.replaceChildren(
-        createSvgIcon('loader-2', 'icon-sm spin'),
-        createElement('span', '', 'در حال تحلیل...')
-      );
+      sendBtn.disabled = true;
+      sendBtn.replaceChildren(createSvgIcon('loader-2', 'icon-sm spin'), createElement('span', '', 'تحلیل...'));
 
-      box.replaceChildren();
-      const loadingRow = createElement('div', 'advisor-loading');
-      loadingRow.append(
-        createSvgIcon('loader-2', 'icon-md spin'),
-        createElement('span', '', 'مشاور هوشمند آرام صبا در حال بررسی کلکسیون و تحلیل فضای شماست...')
+      const typingEl = createElement('div', 'ai-typing');
+      typingEl.append(
+        createSvgIcon('loader-2', 'icon-sm spin'),
+        createElement('span', '', 'مشاور هوشمند در حال بررسی کلکسیون و طراحی پاسخ است...')
       );
-      box.appendChild(loadingRow);
+      container.appendChild(typingEl);
+      container.scrollTop = container.scrollHeight;
 
       try {
         const compactCatalog = products.slice(0, AI_ADVISOR_CONFIG.maxProductsSent).map(p => ({
@@ -4865,43 +5754,59 @@
           info: String(p.info || '').slice(0, 260)
         }));
 
-        const data = await requestAiAdvisor(query, compactCatalog, controller.signal);
+        const data = await requestAiChat(aiChatHistory, compactCatalog, controller.signal);
         clearTimeout(timeoutId);
+        typingEl.remove();
 
-        if (!data || typeof data.reply !== 'string' || !data.reply.trim()) {
-          throw new Error('Invalid AI payload');
-        }
+        const recommendations = normalizeAiRecommendations(data);
+        const replyText = String(data.reply || '').trim();
+        aiChatHistory.push({ role: 'assistant', text: replyText });
 
-        const idSet = new Set((Array.isArray(data.recommendedIds) ? data.recommendedIds : []).map(id => String(id)));
-        const matchedItems = products.filter(p => idSet.has(String(p.id)));
-
-        renderAdvisorResult(box, query, {
-          reply: data.reply.trim(),
-          items: matchedItems,
+        updateAiStatusUi({ live: true, diagnostic: '' });
+        appendAssistantChatMessage({
+          reply: replyText,
+          recommendations,
           designTip: typeof data.designTip === 'string' ? data.designTip.trim() : '',
-          isLiveAi: true
+          followUps: Array.isArray(data.followUps) ? data.followUps : [],
+          query: message
         });
       } catch (error) {
         clearTimeout(timeoutId);
+        typingEl.remove();
+
         if (error?.name === 'AbortError' && advisorAbortController !== controller) {
-          return; // Superseded by a newer request
+          return;
         }
-        if (error?.message && error.message !== 'NO_API_KEY') {
-          console.warn('AI Advisor fell back to local smart matcher:', error.message);
-        }
-        // Gracefully fall back to the built-in smart Persian recommender (e.g. empty key, Preview, or offline)
-        const fallback = buildLocalSmartAdvice(query);
-        renderAdvisorResult(box, query, fallback);
+
+        console.warn('AI Consultant fallback triggered:', error);
+        const fallback = buildLocalSmartAdvice(message);
+        aiChatHistory.push({ role: 'assistant', text: fallback.reply });
+
+        updateAiStatusUi({
+          live: false,
+          diagnostic: explainAiError(error)
+        });
+        appendAssistantChatMessage({
+          reply: fallback.reply,
+          recommendations: fallback.recommendations,
+          designTip: fallback.designTip,
+          followUps: fallback.followUps,
+          query: message
+        });
       } finally {
         if (advisorAbortController === controller) {
           advisorAbortController = null;
-          advisorBtn.disabled = false;
-          advisorBtn.replaceChildren(
-            createSvgIcon('sparkles', 'icon-sm'),
-            createElement('span', '', 'مشاور انتخاب فضا')
-          );
+          sendBtn.disabled = false;
+          sendBtn.replaceChildren(createSvgIcon('send', 'icon-sm'), createElement('span', '', 'ارسال'));
+          input.focus();
         }
       }
+    }
+
+    function runSpaceAdvisor(forcedQuery = null) {
+      const input = $('searchInput');
+      const query = forcedQuery !== null ? String(forcedQuery).trim() : input.value.trim();
+      openAiChatModal(query);
     }
 
     // =========================================================
@@ -4956,7 +5861,29 @@
 
       const urlParams = new URLSearchParams(window.location.search);
       pendingDeepLinkProductId = urlParams.get('product');
-      const wantsAdmin = window.location.hash === '#admin';
+      let wantsAdmin = window.location.hash === '#admin';
+      let isPasswordRecovery = false;
+
+      // Support Supabase password recovery email links (#access_token=...&type=recovery)
+      if (window.location.hash && window.location.hash.includes('access_token=')) {
+        try {
+          const hashParams = new URLSearchParams(window.location.hash.slice(1));
+          const accessToken = hashParams.get('access_token');
+          const refreshToken = hashParams.get('refresh_token');
+          const expiresIn = Number(hashParams.get('expires_in') || 3600);
+          if (accessToken) {
+            writeStoredSession({
+              access_token: accessToken,
+              refresh_token: refreshToken || '',
+              expires_at: Math.floor(Date.now() / 1000) + expiresIn
+            });
+            wantsAdmin = true;
+            isPasswordRecovery = hashParams.get('type') === 'recovery';
+            window.history.replaceState({}, '', window.location.pathname + window.location.search);
+          }
+        } catch (_) {}
+      }
+
       let alreadyEntered = false;
       try { alreadyEntered = sessionStorage.getItem(SESSION_SPLASH_KEY) === '1'; } catch (_) {}
 
@@ -4992,6 +5919,20 @@
         $('searchInput').focus();
       });
       $('advisorButton').addEventListener('click', () => runSpaceAdvisor());
+      $('floatingAiBtn').addEventListener('click', () => openAiChatModal());
+      $('closeAiChatBtn').addEventListener('click', closeAiChatModal);
+      $('aiChatResetBtn').addEventListener('click', resetAiChat);
+      $('aiChatModal').addEventListener('click', event => {
+        if (event.target === $('aiChatModal')) closeAiChatModal();
+      });
+      $('aiChatForm').addEventListener('submit', event => {
+        event.preventDefault();
+        sendAiChatMessage($('aiChatInput').value);
+      });
+      $('clearAiFilterBtn').addEventListener('click', () => {
+        aiFilterProductIds = null;
+        renderProducts();
+      });
 
       // Product Detail Modal
       $('closeDetailButton').addEventListener('click', closeProductDetail);
@@ -5021,6 +5962,15 @@
       $('closeAdminButton').addEventListener('click', closeAdminModal);
       $('adminLogoutButton').addEventListener('click', handleAdminLogout);
       $('adminLoginForm').addEventListener('submit', handleAdminLogin);
+      $('forgotPasswordButton').addEventListener('click', handleForgotPassword);
+      $('changePasswordForm').addEventListener('submit', handleChangePassword);
+      $('toggleAdminPasswordBtn').addEventListener('click', () => {
+        const input = $('adminPassword');
+        const showing = input.type === 'text';
+        input.type = showing ? 'password' : 'text';
+        $('toggleAdminPasswordBtn').replaceChildren(createSvgIcon(showing ? 'eye' : 'eye-off', 'icon-sm'));
+        input.focus();
+      });
       $('closeAdminLoginButton').addEventListener('click', closeAdminLoginModal);
       $('adminLoginModal').addEventListener('click', event => {
         if (event.target === $('adminLoginModal')) closeAdminLoginModal();
@@ -5074,7 +6024,8 @@
       document.addEventListener('keydown', event => {
         if (event.key === 'Escape') {
           if ($('luxuryDialogModal').classList.contains('open')) return;
-          if ($('productDetailModal').classList.contains('open')) closeProductDetail();
+          if ($('aiChatModal').classList.contains('open')) closeAiChatModal();
+          else if ($('productDetailModal').classList.contains('open')) closeProductDetail();
           else if ($('adminLoginModal').classList.contains('open')) closeAdminLoginModal();
           else if ($('adminModal').classList.contains('open')) closeAdminModal();
         } else if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'a') {
@@ -5090,7 +6041,15 @@
       renderLoadingSkeletons();
       refreshCatalog(false).then(() => {
         startAutoSync();
-        if (wantsAdmin) openAdminModal();
+        if (wantsAdmin) {
+          openAdminModal().then(() => {
+            if (isPasswordRecovery) {
+              showToast('لطفاً در بخش «تغییر رمز عبور مدیر» رمز جدید خود را ثبت کنید.');
+              $('changePasswordSection')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              $('newAdminPassword')?.focus();
+            }
+          });
+        }
       });
     }
 
